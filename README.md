@@ -1,2 +1,1 @@
-# Nurtr
-A prototype messaging app for people trying to stay productive! Built using Flutter + Firebase + graphQL
+This repo contains all my dot files and a shell script to symlink to these files
