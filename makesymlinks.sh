@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ############################
 # .make.sh
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
@@ -29,3 +29,5 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+ln -s $dir/bashrc ~/.bash_profile
