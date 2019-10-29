@@ -19,7 +19,6 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='colordiff'
-## Colorize the ls output ##
-alias ls='ls --color=auto' ## Use a long listing format ##
-alias ll='ls -la' ## Show hidden files ##
+# alias ls='ls --color=auto' 
+alias ll='ls -la'
 alias l.='ls -d .* --color=auto'
