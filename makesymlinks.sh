@@ -30,6 +30,10 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+<<<<<<< HEAD
 mv ~/.bash_profile $olddir
+=======
+mv ~/.bash_profile ~/dotfiles_old/
+>>>>>>> 4decc9b1fd41dd01b8b4531ba69864253dd14b7b
 ln -s $dir/bashrc ~/.bash_profile
 
