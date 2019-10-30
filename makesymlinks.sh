@@ -30,4 +30,6 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+mv ~/.bash_profile $olddir
 ln -s $dir/bashrc ~/.bash_profile
+
