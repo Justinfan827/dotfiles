@@ -1,4 +1,3 @@
-alias ssa='ssh -A'
 function cd() {
     new_directory="$*";
     if [ $# -eq 0 ]; then
@@ -6,9 +5,8 @@ function cd() {
     fi;
     builtin cd "${new_directory}" && ls
 }
-function fp() { ack &quot;proc\s+(flightaware_|fa_)?$*&quot; --type=tcl ; }
-function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
+alias ssa='ssh -A'
 alias cds='cd ~/src'
 alias cdv='cd /vhosts/fan/fa_web'
 alias g='git'
