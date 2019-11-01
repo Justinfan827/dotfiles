@@ -1,0 +1,5 @@
+--type-add=tcl=.rvt
+--type-set=cfg=.cfg
+--smart-case
+--context=1
+--pager=less -FRX
