@@ -18,3 +18,5 @@ alias grh='git reset HEAD'
 alias mk='make'
 alias smk='sudo make'
 alias ll='ls -al'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
