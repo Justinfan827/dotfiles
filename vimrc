@@ -11,6 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 if exists('g:loaded_sensible') || &compatible
@@ -26,7 +27,19 @@ if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
 
+" make managing split panes easier
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" remap escape character to kj
+inoremap kj  <ESC>
+
+set splitbelow
+set splitright
 " Use :help 'option' to see the documentation for the given option.
+
 
 set autoindent
 set backspace=indent,eol,start
