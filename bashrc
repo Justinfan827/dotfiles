@@ -18,5 +18,5 @@ alias grh='git reset HEAD'
 alias mk='make'
 alias smk='sudo make'
 alias ll='ls -al'
-
+alias tx='tmux'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
