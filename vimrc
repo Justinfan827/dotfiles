@@ -15,19 +15,47 @@ Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'drewtempelmeyer/palenight.vim'
 call plug#end()
 
-" make managing split panes easier
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" Palenight themeing
+set background=dark
+colorscheme palenight
+" italics for my favorite color scheme
+let g:palenight_terminal_italics=1
 
+" Enabling true colors  For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) <
+"https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+"" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+	  set termguicolors
+  endif
+
+" make managing split panes easier
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
+
+" Option 2 for managing splits 
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
+
+" Split window
+nmap ss :split<Return><C-w>w
+nmap sv :vsplit<Return><C-w>w
+
+" Shortcut for opening nerdtree
+map <C-o> :NERDTreeToggle<CR>
 " remap escape character to kj
 inoremap kj  <ESC>
 
 set splitbelow
 set splitright
+
 " Use :help 'option' to see the documentation for the given option.
 set autoindent
 set backspace=indent,eol,start
@@ -42,6 +70,9 @@ autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
 
 " Don't show since i'm using lightline.vim
 set noshowmode
+" show line numbers
+set number
+
 " No idea what this stuff below does
 
 if has('autocmd')
