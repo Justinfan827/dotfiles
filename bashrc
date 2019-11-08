@@ -6,6 +6,12 @@ function cd() {
     builtin cd "${new_directory}" && ls
 }
 
+function ide() {
+	tmux split-window -v -p 30
+	tmux split-window -h -p 66
+	tmux split-window -h -p 50
+}
+
 alias ssa='ssh -A'
 alias cds='cd ~/src'
 alias cdv='cd /vhosts/fan/fa_web'
@@ -19,4 +25,7 @@ alias mk='make'
 alias smk='sudo make'
 alias ll='ls -al'
 alias tx='tmux'
+
+
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

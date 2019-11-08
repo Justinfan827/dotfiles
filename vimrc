@@ -2,6 +2,7 @@
 " Maintainer:   Tim Pope <http://tpo.pe/>
 " Version:      1.2
 
+" Vimplug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -12,20 +13,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'itchyny/lightline.vim'
+Plug 'scrooloose/nerdtree'
 call plug#end()
-
-if exists('g:loaded_sensible') || &compatible
-  finish
-else
-  let g:loaded_sensible = 'yes'
-endif
-
-if has('autocmd')
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
 
 " make managing split panes easier
 nnoremap <C-J> <C-W><C-J>
@@ -39,8 +29,6 @@ inoremap kj  <ESC>
 set splitbelow
 set splitright
 " Use :help 'option' to see the documentation for the given option.
-
-
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
@@ -51,6 +39,24 @@ set tabstop=4
 set softtabstop=4
 autocmd BufNewFile,BufRead *.rvt set filetype=tcl
 autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
+
+" Don't show since i'm using lightline.vim
+set noshowmode
+" No idea what this stuff below does
+
+if has('autocmd')
+  filetype plugin indent on
+endif
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
+
+if exists('g:loaded_sensible') || &compatible
+  finish
+else
+  let g:loaded_sensible = 'yes'
+endif
 
 set nrformats-=octal
 
