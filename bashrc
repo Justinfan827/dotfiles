@@ -12,6 +12,7 @@ function ide() {
 	tmux split-window -h -p 50
 }
 
+alias grep='grep --color'
 alias ssa='ssh -A'
 alias cds='cd ~/src'
 alias cdv='cd /vhosts/fan/fa_web'
