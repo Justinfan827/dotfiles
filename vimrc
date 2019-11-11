@@ -8,13 +8,23 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif  
 
 call plug#begin('~/.vim/plugged')
+Plug 'mhinz/vim-grepper'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'fcpg/vim-osc52'
+" Modify * to also work with visual selections.
+Plug 'nelstrom/vim-visual-star-search'
+" Automatically clear search highlights after you move your cursor.
+Plug 'haya14busa/is.vim'
 call plug#end()
+" -- Functionality stuff --
+set tags+=tags;/
+filetype plugin on
 
 "-- UI stuff --
 " Palenight themeing
@@ -48,21 +58,37 @@ inoremap kj  <ESC>
 " Direction of opening windows
 set splitbelow
 set splitright
-" make <tab> jump you to the matching bracket in normal or visual modes
-nnoremap <tab> %
-vnoremap <tab> %
 " easier way to get to beginning end of line
 map H ^
 map L $
-
 " Open nerdtree
 let mapleader = ","
 nmap <leader>ne :NERDTree<cr>
+xmap <leader>y :call SendViaOSC52(getreg('"'))<cr>
 " show trailing spaces, tabs, and end of lines
 set listchars=tab:>-,trail:·,eol:$,nbsp:_
 nmap <silent> <leader>s :set nolist!<CR>
-" toggle line numbers (useful for manual copying code with multiple lines)
-map <Leader>r :set invnumber<CR>
+" Press * to search for the term under the cursor or a visual selection and
+" " then press a key below to replace all instances of it in the current file.
+nnoremap <Leader>r :%s///g<Left><Left>
+nnoremap <Leader>rc :%s///gc<Left><Left><Left>
+
+" The same as above but instead of acting on the whole file it will be
+" " restricted to the previously visually selected range. You can do that by
+" " pressing *, visually selecting the range you want it to apply to and then
+" " press a key below to replace all instances of it in the current selection.
+xnoremap <Leader>r :s///g<Left><Left>
+xnoremap <Leader>rc :s///gc<Left><Left><Left>
+" Type a replacement term and press . to repeat the replacement again. Useful
+" " for replacing a few instances of the term (comparable to multiple
+" cursors).
+nnoremap <silent> s* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> s* "sy:let @/=@s<CR>cgn
+" Press return to get out of highlighted search
+nnoremap <CR> :nohlsearch<CR><CR>
+" Use vim grepper to search
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
 " -------------- Spaces and indenting -------------- 
 " Allow scroll in vim  
 set ttymouse=xterm2
