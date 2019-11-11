@@ -1,7 +1,3 @@
-" sensible.vim - Defaults everyone can agree on
-" Maintainer:   Tim Pope <http://tpo.pe/>
-" Version:      1.2
-
 " Vimplug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -34,9 +30,6 @@ set number                         "show line numbers
 set numberwidth=5
 set hlsearch                       "highlight search keywords
 set noshowmode                     "Don't show bottom line since i'm using lightline.vim
-" show trailing spaces, tabs, and end of lines
-set listchars=tab:>-,trail:·,eol:$,nbsp:_
-nmap <silent> <leader>s :set nolist!<CR>
 
 " ------------------ MY MAPPINGS -----------------
 " Managing window splits
@@ -48,10 +41,6 @@ map sl <C-w>l
 " Split window
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
-
-" Open nerdtree
-let mapleader = ","
-nmap <leader>ne :NERDTree<cr>
 " remap escape character to kj
 inoremap kj  <ESC>
 " Direction of opening windows
@@ -64,6 +53,9 @@ vnoremap <tab> %
 map H ^
 map L $
 
+" Open nerdtree
+let mapleader = ","
+nmap <leader>ne :NERDTree<cr>
 " show trailing spaces, tabs, and end of lines
 set listchars=tab:>-,trail:·,eol:$,nbsp:_
 nmap <silent> <leader>s :set nolist!<CR>
