@@ -64,6 +64,10 @@ nmap <silent> <leader>s :set nolist!<CR>
 " toggle line numbers (useful for manual copying code with multiple lines)
 map <Leader>r :set invnumber<CR>
 " -------------- Spaces and indenting -------------- 
+" Allow scroll in vim  
+set ttymouse=xterm2
+set mouse=a
+" Use :help 'option' to see the documentation for the given option.
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
