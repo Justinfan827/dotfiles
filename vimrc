@@ -23,9 +23,10 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'haya14busa/is.vim'
 call plug#end()
 " -- Functionality stuff --
-set tags+=tags;/
+set tags+=./tags;
+set tags+=/vhosts/fan/fa_web/tags
 filetype plugin on
-
+set autochdir
 "-- UI stuff --
 " Palenight themeing
 set background=dark
@@ -64,7 +65,9 @@ map L $
 " Open nerdtree
 let mapleader = ","
 nmap <leader>ne :NERDTree<cr>
-xmap <leader>y :call SendViaOSC52(getreg('"'))<cr>
+" Copy using yank to system keyboard (WIP not working at the moment)
+xmap <leader> y:call SendViaOSC52(getreg('"'))<cr>
+
 " show trailing spaces, tabs, and end of lines
 set listchars=tab:>-,trail:·,eol:$,nbsp:_
 nmap <silent> <leader>s :set nolist!<CR>
@@ -77,7 +80,7 @@ nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 " " restricted to the previously visually selected range. You can do that by
 " " pressing *, visually selecting the range you want it to apply to and then
 " " press a key below to replace all instances of it in the current selection.
-xnoremap <Leader>r :s///g<Left><Left>
+noremap <Leader>r :s///g<Left><Left>
 xnoremap <Leader>rc :s///gc<Left><Left><Left>
 " Type a replacement term and press . to repeat the replacement again. Useful
 " " for replacing a few instances of the term (comparable to multiple
@@ -117,69 +120,69 @@ endif
 
 " No idea what this stuff below does
 
-if has('autocmd')
-  filetype plugin indent on
-endif
-if has('syntax') && !exists('g:syntax_on')
-  syntax enable
-endif
+"if has('autocmd')
+  "filetype plugin indent on
+"endif
+"if has('syntax') && !exists('g:syntax_on')
+  "syntax enable
+"endif
 
 
-if exists('g:loaded_sensible') || &compatible
-  finish
-else
-  let g:loaded_sensible = 'yes'
-endif
+"if exists('g:loaded_sensible') || &compatible
+  "finish
+"else
+  "let g:loaded_sensible = 'yes'
+"endif
 
-set nrformats-=octal
+"set nrformats-=octal
 
-if !has('nvim') && &ttimeoutlen == -1
-  set ttimeout
-  set ttimeoutlen=100
-endif
+"if !has('nvim') && &ttimeoutlen == -1
+  "set ttimeout
+  "set ttimeoutlen=100
+"endif
 
-if &synmaxcol == 3000
-  " Lowering this improves performance in files with long lines.
-  set synmaxcol=500
-endif
+"if &synmaxcol == 3000
+  "" Lowering this improves performance in files with long lines.
+  "set synmaxcol=500
+"endif
 
-set laststatus=2
-set ruler
-set wildmenu
+"set laststatus=2
+"set ruler
+"set wildmenu
 
-if !&scrolloff
-  set scrolloff=1
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
-set display+=lastline
+"if !&scrolloff
+  "set scrolloff=1
+"endif
+"if !&sidescrolloff
+  "set sidescrolloff=5
+"endif
+"set display+=lastline
 
-if &encoding ==# 'latin1' && has('gui_running')
-  set encoding=utf-8
-endif
+"if &encoding ==# 'latin1' && has('gui_running')
+  "set encoding=utf-8
+"endif
 
-if v:version > 703 || v:version == 703 && has("patch541")
-  set formatoptions+=j " Delete comment character when joining commented lines
-endif
+"if v:version > 703 || v:version == 703 && has("patch541")
+  "set formatoptions+=j " Delete comment character when joining commented lines
+"endif
 
-if has('path_extra')
-  setglobal tags-=./tags tags-=./tags; tags^=./tags;
-endif
+"if has('path_extra')
+  "setglobal tags-=./tags tags-=./tags; tags^=./tags;
+"endif
 
-if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
-  set shell=/usr/bin/env\ bash
-endif
+"if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+  "set shell=/usr/bin/env\ bash
+"endif
 
-set autoread
+"set autoread
 
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^Eterm'
-  set t_Co=16
-endif
+"" Allow color schemes to do bright colors without forcing bold.
+"if &t_Co == 8 && $TERM !~# '^Eterm'
+  "set t_Co=16
+"endif
 
-"Note: matchit.vim matches if statements, and various other matches. Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
+""Note: matchit.vim matches if statements, and various other matches. Load matchit.vim, but only if the user hasn't installed a newer version.
+"if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  "runtime! macros/matchit.vim
+"endif
 
