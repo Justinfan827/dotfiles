@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'mhinz/vim-grepper'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
@@ -43,7 +44,11 @@ set number                         "show line numbers
 set numberwidth=5
 set hlsearch                       "highlight search keywords
 set noshowmode                     "Don't show bottom line since i'm using lightline.vim
-
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+      \ }
+      \ }
 " ------------------ MY MAPPINGS -----------------
 " Managing window splits
 map sh <C-w>h
