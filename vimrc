@@ -12,6 +12,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-grepper'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
@@ -61,6 +62,8 @@ nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
 " remap escape character to kj
 inoremap kj  <ESC>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 " Direction of opening windows
 set splitbelow
 set splitright
