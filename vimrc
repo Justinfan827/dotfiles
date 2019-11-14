@@ -1,4 +1,5 @@
 scriptencoding utf-8
+
 set encoding=utf-8
 " Vimplug
 if empty(glob('~/.vim/autoload/plug.vim'))
