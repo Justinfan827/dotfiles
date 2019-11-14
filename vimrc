@@ -38,6 +38,7 @@ let g:palenight_terminal_italics=1
 set shortmess=atI                  " Don't show the intro message when starting vim
 set title                          " set the terminal title
 set ruler                          "show status line
+set relativenumber
 set rulerformat=%10(%l,%c%V%)
 set laststatus=2                   "always show status line
 set cursorline                     "highlight current line
