@@ -1,19 +1,20 @@
 scriptencoding utf-8
-
 set encoding=utf-8
 " Vimplug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif  
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'drewtempelmeyer/palenight.vim'
@@ -24,15 +25,23 @@ Plug 'nelstrom/vim-visual-star-search'
 " Automatically clear search highlights after you move your cursor.
 Plug 'haya14busa/is.vim'
 call plug#end()
+" Automatically install plugins on open
+autocmd VimEnter *
+  \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall | q
+  \| endif
 " -- Functionality stuff --
 set tags+=./tags;
 set tags+=/vhosts/fan/fa_web/tags
 filetype plugin on
 set autochdir
 "-- UI stuff --
-" Palenight themeing
+colorscheme gruvbox
 set background=dark
-colorscheme palenight
+set t_Co=256
+" So highlighting isnt all weird
+let g:gruvbox_invert_selection=0
+syntax on
 " italics for my favorite color scheme
 let g:palenight_terminal_italics=1
 set shortmess=atI                  " Don't show the intro message when starting vim
@@ -47,10 +56,10 @@ set numberwidth=5
 set hlsearch                       "highlight search keywords
 set noshowmode                     "Don't show bottom line since i'm using lightline.vim
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
-      \ }
-      \ }
+	  \ 'active': {
+	  \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
+	  \ }
+	  \ }
 " ------------------ MY MAPPINGS -----------------
 " Managing window splits
 map sh <C-w>h
@@ -108,12 +117,13 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
-set noexpandtab
+set expandtab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-autocmd BufNewFile,BufRead *.rvt set filetype=tcl
+autocmd BufNewFile,BufRead *.rvt, *.test set filetype=tcl
 autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
+command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
 
 "-- Search --
 set incsearch                      "dynamically search term as you type (incremental search)
@@ -192,4 +202,5 @@ endif
 "if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   "runtime! macros/matchit.vim
 "endif
-
+" Disable background color erase
+set t_ut=

@@ -32,4 +32,6 @@ done
 
 mv ~/.bash_profile $olddir
 ln -s $dir/bashrc ~/.bash_profile
+mv ~/.ssh/rc $olddir
+ln -s $dir/ssh  ~/.ssh/rc
 
