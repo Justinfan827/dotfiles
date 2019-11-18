@@ -33,7 +33,7 @@ function fixssh() {
 }
 alias grep='grep --color'
 alias ssa='ssh -A'
-alias gsb='git checkout $(git branch -v | fzf)'
+alias gsb='git checkout $(git branch | fzf)'
 alias cds='cd ~/src'
 alias cdv='cd /vhosts/fan/fa_web'
 alias g='git'
