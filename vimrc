@@ -9,6 +9,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
@@ -30,6 +31,7 @@ autocmd VimEnter *
   \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall | q
   \| endif
+
 " -- Functionality stuff --
 set tags+=./tags;
 set tags+=/vhosts/fan/fa_web/tags
@@ -41,6 +43,10 @@ set background=dark
 set t_Co=256
 " So highlighting isnt all weird
 let g:gruvbox_invert_selection=0
+" Git gutter configs
+let g:gitgutter_override_sign_column_highlight = 1
+highlight SignColumn guibg=bg
+highlight SignColumn ctermbg=bg
 syntax on
 " italics for my favorite color scheme
 let g:palenight_terminal_italics=1
@@ -117,7 +123,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
-set expandtab
+set noexpandtab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -129,11 +135,12 @@ command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)
 set incsearch                      "dynamically search term as you type (incremental search)
 set ignorecase                     "case-insensitive search
 set smartcase                      "unless there's an uppercase letter in the keyword
-" Use <C-L> to clear the highlighting of :set hlsearch.
+"  Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
-
+" ^^ isn't working? Trying this instead
+nnoremap <Leader><space> :noh<cr>
 
 " No idea what this stuff below does
 
