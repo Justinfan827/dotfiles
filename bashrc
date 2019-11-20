@@ -31,6 +31,7 @@ function fixssh() {
 		fi
 	done				
 }
+alias tagdir='/usr/local/bin/exctags -R --langmap=TCL:.tcl.rvt *' 
 alias grep='grep --color'
 alias ssa='ssh -A'
 alias gsb='git checkout $(git branch | fzf)'
