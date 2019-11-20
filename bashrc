@@ -53,3 +53,4 @@ alias sb='source ~/.bashrc'
 alias st='tmux source-file ~/.tmux/conf'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+set -o vi
