@@ -32,12 +32,14 @@ autocmd VimEnter *
   \|   PlugInstall | q
   \| endif
 
-" -- Functionality stuff --
+" --------------------- Functionality stuff -----------------------
+" where to search for tags
 set tags+=./tags;
 set tags+=/vhosts/fan/fa_web/tags
 filetype plugin on
+" change directory to open buffer?
 set autochdir
-"-- UI stuff --
+"---------------------------- UI stuff ----------------------------
 colorscheme gruvbox
 set background=dark
 set t_Co=256
@@ -49,7 +51,6 @@ highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
 syntax on
 " italics for my favorite color scheme
-let g:palenight_terminal_italics=1
 set shortmess=atI                  " Don't show the intro message when starting vim
 set title                          " set the terminal title
 set ruler                          "show status line
@@ -66,7 +67,7 @@ let g:lightline = {
 	  \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
 	  \ }
 	  \ }
-" ------------------ MY MAPPINGS -----------------
+" -------------------------- MY MAPPINGS ---------------------------------
 " Managing window splits
 map sh <C-w>h
 map sk <C-w>k
@@ -114,7 +115,7 @@ nnoremap <CR> :nohlsearch<CR><CR>
 " Use vim grepper to search
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
-" -------------- Spaces and indenting -------------- 
+" ------------------------ Spaces and indenting --------------------------- 
 " Allow scroll in vim  
 set ttymouse=xterm2
 set mouse=a
@@ -170,13 +171,13 @@ nnoremap <Leader><space> :noh<cr>
   "set synmaxcol=500
 "endif
 
-"set laststatus=2
-"set ruler
-"set wildmenu
+set laststatus=2
+set wildmenu
 
-"if !&scrolloff
-  "set scrolloff=1
-"endif
+"Have an extra line on top and below when scrolling
+if !&scrolloff
+  set scrolloff=1
+endif
 "if !&sidescrolloff
   "set sidescrolloff=5
 "endif
