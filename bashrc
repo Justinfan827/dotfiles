@@ -31,6 +31,7 @@ function fixssh() {
 		fi
 	done
 }
+alias tagdir='/usr/local/bin/exctags -R --langmap=TCL:.tcl.rvt *' 
 alias grep='grep --color'
 alias ssa='ssh -A'
 alias gsb='git checkout $(git branch | fzf)'
@@ -52,8 +53,7 @@ alias sb='source ~/.bashrc'
 alias st='tmux source-file ~/.tmux/conf'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
