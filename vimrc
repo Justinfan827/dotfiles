@@ -5,7 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif  
+endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -14,6 +14,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-surround'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
@@ -27,10 +29,10 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'haya14busa/is.vim'
 call plug#end()
 " Automatically install plugins on open
-autocmd VimEnter *
-  \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall | q
-  \| endif
+"autocmd VimEnter *
+  "\  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+  "\|   PlugInstall | q
+  "\| endif
 
 " --------------------- Functionality stuff -----------------------
 " where to search for tags
@@ -51,7 +53,7 @@ highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
 syntax on
 " italics for my favorite color scheme
-set shortmess=atI                  " Don't show the intro message when starting vim
+set shortmess=atI                 " Don't show the intro message when starting vim
 set title                          " set the terminal title
 set ruler                          "show status line
 set relativenumber
@@ -73,6 +75,22 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
+" .............................................................................
+" junegunn/fzf.vim
+" .............................................................................
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+
+" Launch fzf with CTRL+P.
+nnoremap <silent> <C-p> :FZF -m<CR>
+
+" Map a few common things to do with FZF.
+nnoremap <silent> <Leader><Enter> :Buffers<CR>
+nnoremap <silent> <Leader>l :Lines<CR>
+
+" Allow passing optional flags into the Rg command.
+"   Example: :Rg myterm -g '*.md'
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
 
 " Split window
 nmap ss :split<Return><C-w>w
@@ -87,7 +105,13 @@ map H ^
 map L $
 " Open nerdtree
 let mapleader = ","
-nmap <leader>ne :NERDTree<cr>
+
+let g:NERDTreeShowHidden=1
+let g:NERDTreeAutoDeleteBuffer=1
+
+" Open nerd tree at the current file or close nerd tree if pressed again.
+nnoremap <silent> <expr> <Leader>ne g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+
 " Copy using yank to system keyboard (WIP not working at the moment)
 xmap <leader> y:call SendViaOSC52(getreg('"'))<cr>
 
@@ -115,8 +139,8 @@ nnoremap <CR> :nohlsearch<CR><CR>
 " Use vim grepper to search
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
-" ------------------------ Spaces and indenting --------------------------- 
-" Allow scroll in vim  
+" ------------------------ Spaces and indenting ---------------------------
+" Allow scroll in vim
 set ttymouse=xterm2
 set mouse=a
 " Use :help 'option' to see the documentation for the given option.
