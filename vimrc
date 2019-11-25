@@ -89,6 +89,16 @@ map H ^
 map L $
 let mapleader = ","
 " .............................................................................
+" fugitive
+" .............................................................................
+nmap <Leader>gd :Gdiff<CR>
+nmap <Leader>gg :Gstatus<CR>
+nmap <Leader>gw :Gwrite<CR>
+nmap <Leader>gr :Gread<CR>
+
+
+
+" .............................................................................
 " junegunn/fzf.vim
 " .............................................................................
 
@@ -100,10 +110,11 @@ nnoremap <silent> <C-p> :GFiles <CR>
 " Map a few common things to do with FZF.
 nnoremap <silent> <Leader><Enter> :Buffers<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
+nmap <Leader>/ :Rg<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+"command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
 " .............................................................................
 " scrooloose/nerdtree
 " .............................................................................
