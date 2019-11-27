@@ -75,7 +75,6 @@ map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
-
 " Split window
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
@@ -147,8 +146,6 @@ xnoremap <Leader>rc :s///gc<Left><Left><Left>
 " cursors).
 nnoremap <silent> s* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent> s* "sy:let @/=@s<CR>cgn
-" Press return to get out of highlighted search
-nnoremap <CR> :nohlsearch<CR><CR>
 " Use vim grepper to search
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
