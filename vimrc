@@ -163,6 +163,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 autocmd BufNewFile,BufRead *.rvt, *.test set filetype=tcl
+autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
 autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
 command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
 
