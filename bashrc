@@ -49,7 +49,7 @@ alias ll='ls -al'
 alias tx='tmux'
 alias txa=$'tmux a -t $(tmux ls | awk \'{print $1}\' | sed \'s/.$//\' | fzf)'
 alias sb='source ~/.bashrc'
-alias st='tmux source-file ~/.tmux/conf'
+alias st='tmux source-file ~/.tmux.conf'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
