@@ -8,6 +8,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif  
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
@@ -70,7 +71,8 @@ let g:lightline = {
 	  \ }
 	  \ }
 " -------------------------- MY MAPPINGS ---------------------------------
-" Managing window splits
+nnoremap ; :
+"  Managing window splits
 map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
@@ -104,11 +106,10 @@ nmap <Leader>gr :Gread<CR>
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 " Launch fzf with CTRL+P.
-nnoremap <silent> <C-p> :GFiles <CR>
-
+nnoremap <C-p> :GFiles <CR>
 " Map a few common things to do with FZF.
-nnoremap <silent> <Leader><Enter> :Buffers<CR>
-nnoremap <silent> <Leader>l :Lines<CR>
+nnoremap <Leader><Enter> :Buffers<CR>
+nnoremap <Leader>l :Lines<CR>
 nmap <Leader>/ :Rg<CR>
 
 " Allow passing optional flags into the Rg command.
