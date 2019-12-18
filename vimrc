@@ -10,8 +10,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
+Plug 'rstacruz/vim-closer'
+Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
@@ -97,8 +98,6 @@ nmap <Leader>gg :Gstatus<CR>
 nmap <Leader>gw :Gwrite<CR>
 nmap <Leader>gr :Gread<CR>
 
-
-
 " .............................................................................
 " junegunn/fzf.vim
 " .............................................................................
@@ -163,7 +162,8 @@ set noexpandtab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-autocmd BufNewFile,BufRead *.rvt, *.test set filetype=tcl
+autocmd BufNewFile,BufRead *.rvt set filetype=tcl
+autocmd BufNewFile,BufRead *.test set filetype=tcl
 autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
 autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
 command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'

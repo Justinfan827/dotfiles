@@ -56,6 +56,7 @@ alias tx='tmux'
 alias txa=$'tmux a -t $(tmux ls | awk \'{print $1}\' | sed \'s/.$//\' | fzf)'
 alias vimb='vim ~/.bashrc'
 alias vimv='vim ~/.vimrc'
+alias tagify=' /usr/local/bin/exctags -R --langmap=TCL:.tcl.rvt *'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
