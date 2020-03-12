@@ -12,6 +12,7 @@ Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 Plug 'rstacruz/vim-closer'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'ervandew/supertab'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
@@ -24,17 +25,15 @@ Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'scrooloose/nerdcommenter'
+" Python autocomplete
+Plug 'davidhalter/jedi-vim'
+" For copy and pasting!
 Plug 'fcpg/vim-osc52'
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'
 " Automatically clear search highlights after you move your cursor.
 Plug 'haya14busa/is.vim'
 call plug#end()
-" Automatically install plugins on open
-autocmd VimEnter *
-  \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall | q
-  \| endif
 
 " --------------------- Functionality stuff -----------------------
 " where to search for tags
@@ -129,7 +128,7 @@ xmap <leader> y:call SendViaOSC52(getreg('"'))<cr>
 
 " show trailing spaces, tabs, and end of lines
 set listchars=tab:>-,trail:·,eol:$,nbsp:_
-nmap <silent> <leader>s :set nolist!<CR>
+nmap <silent> <leader>ss :set nolist!<CR>
 " Press * to search for the term under the cursor or a visual selection and
 " " then press a key below to replace all instances of it in the current file.
 nnoremap <Leader>r :%s///g<Left><Left>
