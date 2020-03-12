@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="tmux.conf vimrc bashrc ackrc"    # list of files/folders to symlink in homedir
+files="tmux.conf vimrc zshrc bashrc ackrc config.fish"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -27,7 +27,11 @@ for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
     mv ~/.$file ~/dotfiles_old/
     echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+	if [ "$file" == "config.fish" ]; then
+		ln -s $dir/$file ~/.config/fish/.$file
+	else
+		ln -s $dir/$file ~/.$file
+	fi
 done
 
 mv ~/.bash_profile $olddir

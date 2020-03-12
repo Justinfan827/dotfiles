@@ -7,13 +7,15 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif  
 call plug#begin('~/.vim/plugged')
+" Fzf for vim.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Allow vim to repeat commands from vim-surround!
 Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 Plug 'rstacruz/vim-closer'
 Plug 'tpope/vim-endwise'
+" Helpers for unix
 Plug 'tpope/vim-eunuch'
-Plug 'ervandew/supertab'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
@@ -25,6 +27,12 @@ Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'scrooloose/nerdcommenter'
+" Javascript syntax highlighting and autocomplete
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mattn/emmet-vim'
+Plug 'yuezk/vim-js'
+Plug 'w0rp/ale'
+Plug 'skywind3000/asyncrun.vim'
 " Python autocomplete
 Plug 'davidhalter/jedi-vim'
 " For copy and pasting!
@@ -36,10 +44,8 @@ Plug 'haya14busa/is.vim'
 call plug#end()
 
 " --------------------- Functionality stuff -----------------------
-" where to search for tags
-set tags+=./tags;
-set tags+=/vhosts/fan/fa_web/tags
 filetype plugin on
+set undodir=~/.vim/undodir
 " change directory to open buffer?
 set autochdir
 "---------------------------- UI stuff ----------------------------
@@ -148,7 +154,49 @@ xnoremap <silent> s* "sy:let @/=@s<CR>cgn
 " Use vim grepper to search
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
+" .............................................................................
+" ALE configs
+" .............................................................................
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_fixers = {
+  \    'javascript': ['eslint'],
+\}
+"let g:ale_sign_error = '❌'
+let g:ale_fix_on_save = 1
+"let g:ale_sign_warning = '⚠️'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+nmap <leader>d <Plug>(ale_fix)
+" .............................................................................
+" Emmet configs
+" .............................................................................
+let g:user_emmet_leader_key=','
+let g:user_emmet_settings = {
+  \  'javascript' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+" .............................................................................
+" Code formatting (Javascript/html/css)
+" .............................................................................
+au FileType javascript setlocal formatprg=prettier
+au FileType javascript.jsx setlocal formatprg=prettier
+au FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+au FileType html setlocal formatprg=js-beautify\ --type\ html
+au FileType scss setlocal formatprg=prettier\ --parser\ css
+au FileType css setlocal formatprg=prettier\ --parser\ css
 " ------------------------ Spaces and indenting --------------------------- 
+" python spacing
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set noexpandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
 " Allow scroll in vim  
 set ttymouse=xterm2
 set mouse=a
@@ -162,8 +210,10 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 autocmd BufNewFile,BufRead *.rvt set filetype=tcl
+autocmd BufNewFile,BufRead Dockerfile.dev set filetype=Dockerfile
 autocmd BufNewFile,BufRead *.test set filetype=tcl
 autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
+"autocmd BufNewFile,BufRead *\.*rc set filetype=json
 autocmd BufWritePre *.tcl,*.rvt :%s/\s\+$//e
 command! -range=% -nargs=0 Space2Tab execute '<line1>,<line2>s#^\( \{'.&ts.'\}\)\+#\=repeat("\t", len(submatch(0))/' . &ts . ')'
 

@@ -6,17 +6,6 @@ function cd() {
     builtin cd "${new_directory}" && ls
 }
 
-function reset_multicom() {
-	sudo service bacon stop
-	sudo bacon -reset -5 -children 5
-	sudo service sqlbirdd stop
-	cd /usr/local/flightaware/src/sqlbird
-	sudo rm /var/db/sqlbird/*
-	tclsh db/repsets.tcl
-	sqlbasebird
-	sudo service sqlbirdd start
-}
-
 function ide() {
 	tmux split-window -v -p 30
 	tmux split-window -h -p 66
@@ -30,6 +19,7 @@ function fixssh() {
 		fi
 	done
 }
+
 alias cdf='cd /usr/local/flightaware'
 alias cdfe='cd /usr/local/flightaware/etc'
 alias cdfs='cd /usr/local/flightaware/src'
@@ -60,6 +50,11 @@ alias tagify=' /usr/local/bin/exctags -R --langmap=TCL:.tcl.rvt *'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+export WORKON_HOME=$HOME/.virtualenvs   # Optional
+export PROJECT_HOME=$HOME/projects      # Optional
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
