@@ -9,7 +9,7 @@ fi
 
 export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/Justinfan/.oh-my-zsh"
+export ZSH="/Users/justin/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -30,6 +30,8 @@ plugins=(
 	zsh-autosuggestions
 )
 
+# help zsh find nvm BEFORE oh my zsh is sourced
+export NVM_DIR="/Users/justin/.nvm"
 ############################################################
 
 # FZF settings
@@ -52,11 +54,15 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Helpful functions 
 
 ############################################################
+
+
+# Split tmux pane into ide-style 3 windows
 function ide() {
 	tmux split-window -v -p 30
 	tmux split-window -h -p 66
 }
 
+## fixssh in tmux 
 function fixssh() {
 	for key in SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT; do
 		if (tmux show-environment | grep "^${key}" > /dev/null); then
@@ -65,6 +71,49 @@ function fixssh() {
 		fi
 	done
 }
+
+
+########## fzf functions
+
+## fd - cd to selected directory
+function fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# cdf - cd into the directory of the selected file
+function cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# Search a file with fzf inside a Tmux pane and then open it in an editor
+function vimf() {
+  local file=$(fzf-tmux)
+  # Open the file if it exists
+  if [ -n "$file" ]; then
+    # Use the default editor if it's defined, otherwise Vim
+    ${EDITOR:-nvim} "$file"
+  fi
+}
+
+# cd to any humu directory
+function fdh() {
+	cdhumu  && fd && ls
+}
+
+# cd to any the folder of any humu file
+function cdfh() {
+	cdhumu && cdf
+}
+
+function vimfh() {
+	cdhumu && vimf
+}
+
 ############################################################
 
 # Bindings 
@@ -78,6 +127,47 @@ function fixssh() {
 # Aliases
 
 ############################################################
+
+# Humu aliases
+alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+
+function weaver() {
+    $(get_git_root)/tools/weaver.sh "$@"
+}
+
+function wpy() {
+	weaver python_shell "$@"
+}
+
+function parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+}
+
+function get_git_root() {
+    git rev-parse --show-toplevel
+}
+
+alias cdhumu='cd ~/repos/humu'
+# Easy access to our env shell
+alias wpy='weaver python_shell'
+# Alerts you when the terminal prompts you
+alias alert="terminal-notifier -message"
+
+# Jumps you to different servers
+alias joy="cd ~/repos/humu/humu/servers/joy/"
+alias squeegee="cd ~/repos/humu/humu/servers/squeegee/"
+alias hero="cd ~/repos/humu/humu/servers/hero/"
+alias auth="cd ~/repos/humu/humu/servers/auth/"
+alias goblinshark=”wpy ~/repos/humu/humu/ingest/goblinshark.py”
+
+# Runs dev server
+alias humu="./toolbelt.sh dev"
+
+# Displays previously merged commits in a pretty way
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+
+#
+
 alias cds='cd ~/src'
 alias grep='grep --color'
 alias gsb='git checkout $(git branch | fzf)'
@@ -90,6 +180,7 @@ alias ssa='ssh -A'
 #alias tagdir='/usr/local/bin/exctags -R --langmap=TCL:.tcl.rvt *' 
 alias tx='tmux'
 alias txa=$'tmux a -t $(tmux ls | awk \'{print $1}\' | sed \'s/.$//\' | fzf)'
+alias vim='nvim'
 alias vimb='vim ~/.bashrc'
 alias vimv='vim ~/.vimrc'
 alias vimz='vim ~/.zshrc'
@@ -97,16 +188,21 @@ alias kb='kubectl'
 alias kbconnect='eval $(minikube docker-env)'
 alias mkbe='minikube'
 alias vf='vim "$(ls -a | fzf)"'
-alias cdls='cd "$@" && ls'
+
+
+############################################################
+# Environment variables
+############################################################
+export GITHUB_OAUTH_TOKEN="d3609a0cfd4c0d38fa0be0b315e2349ff00310c7"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export WORKON_HOME=$HOME/.virtualenvs   # Optional
-export PROJECT_HOME=$HOME/projects      # Optional
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs   # Optional
+#export PROJECT_HOME=$HOME/projects      # Optional
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+#source /usr/local/bin/virtualenvwrapper.sh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -190,9 +286,32 @@ source /usr/local/bin/virtualenvwrapper.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# enable syntax highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# enable vi-mode on command line
+#bindkey -v
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/Justinfan/Documents/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/Justinfan/Documents/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/justin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/Justinfan/Documents/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/Justinfan/Documents/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/justin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/completion.zsh.inc'; fi
+
+# HUMU CONFIGS
+# BEGIN GENERATED FROM HUMU BOOTSTRAP
+
+# pyenv Configuration
+eval "$(pyenv init -)"
+
+# nvm Configuration
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+
+# Add ICU utilities to PATH.
+export PATH="/usr/local/opt/icu4c/bin:/usr/local/opt/icu4c/sbin:$PATH"
+
+# END GENERATED FROM HUMU BOOTSTRAP
+#
+# Fixes nvm issue with humu onboarding
+nvm use --delete-prefix default

@@ -20,9 +20,6 @@ function fixssh() {
 	done
 }
 
-alias cdf='cd /usr/local/flightaware'
-alias cdfe='cd /usr/local/flightaware/etc'
-alias cdfs='cd /usr/local/flightaware/src'
 alias cds='cd ~/src'
 alias cdv='cd /vhosts/fan/fa_web'
 alias g='git'
@@ -57,4 +54,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export WORKON_HOME=$HOME/.virtualenvs   # Optional
 export PROJECT_HOME=$HOME/projects      # Optional
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export GITHUB_OAUTH_TOKEN="d3609a0cfd4c0d38fa0be0b315e2349ff00310c7"
 source /usr/local/bin/virtualenvwrapper.sh
+
+export NVM_DIR="/usr/local/opt/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
