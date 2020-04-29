@@ -42,7 +42,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'sbdchd/neoformat'
 
 " Quoting/parenthesizing
-Plug 'jiangmiao/auto-pairs'
+" Note: i'm using coc pairs to run pair closing
 Plug 'tpope/vim-surround'
 " Allow vim to repeat commands from vim-surround!
 Plug 'tpope/vim-repeat'
@@ -51,9 +51,6 @@ Plug 'tpope/vim-endwise'
 
 " Emmet snippets
 Plug 'mattn/emmet-vim'
-
-" For copy and pasting!
-Plug 'fcpg/vim-osc52'
 
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'
@@ -66,7 +63,7 @@ call plug#end()
 filetype plugin on
 set undodir=~/.vim/undodir
 " change directory to open buffer?
-set autochdir
+"set autochdir
 "---------------------------- UI stuff ----------------------------
 colorscheme gruvbox
 set background=dark
@@ -116,7 +113,7 @@ set splitright
 map H ^
 map L $
 " erase highlights with space
-nnoremap <Leader><space> :noh<cr>
+nnoremap <Leader><space> :let @/=""<cr>
 let mapleader = ","
 " Press * to search for the term under the cursor or a visual selection and
 " " then press a key below to replace all instances of it in the current file.
@@ -143,6 +140,15 @@ noremap <leader>so :source ~/.config/nvim/init.vim<CR>
 noremap <leader>ot :tabe ~/.tmux.conf<CR>
 noremap <leader>og :tabe ~/.gitconfig<CR>
 
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>y  "+y
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 " .............................................................................
 " COC mappings
 " .............................................................................
@@ -179,6 +185,7 @@ nmap <Leader>gd :Gdiff<CR>
 nmap <Leader>gg :Gstatus<CR>
 nmap <Leader>gw :Gwrite<CR>
 nmap <Leader>gr :Gread<CR>
+nmap <Leader>gb :Git blame<CR>
 
 " .............................................................................
 "  FZF mappings
@@ -191,7 +198,7 @@ nnoremap <C-p> :GFiles <CR>
 " Map a few common things to do with FZF.
 nnoremap <Leader><Enter> :Buffers<CR>
 nnoremap <Leader>l :Lines<CR>
-nmap <Leader>/ :Rg<CR>
+nmap <Leader>/ :PRg<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
@@ -204,13 +211,6 @@ nmap <Leader>/ :Rg<CR>
 
 " Open nerd tree at the current file or close nerd tree if pressed again.
 nnoremap <silent> <expr> <Leader>ne g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-
-
-" .............................................................................
-" SendViaOSC52 mappings
-" .............................................................................
-" Copy using yank to system keyboard (WIP not working at the moment)
-xmap <leader> y:call SendViaOSC52(getreg('"'))<cr>
 
 " .............................................................................
 " VimGrepper mappings
@@ -251,7 +251,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
-set noexpandtab
+set expandtab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -340,16 +340,35 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'active': {
+"      \   'left': [ [ 'mode', 'paste' ],
+"	  \				[ 'readonly', 'absolutepath', 'modified' ], 
+"      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+"      \ },
+"      \ 'component_function': {
+"      \   'cocstatus': 'coc#status',
+"      \   'currentfunction': 'CocCurrentFunction'
+"      \ },
+"      \ }
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-	  \				[ 'readonly', 'absolutepath', 'modified' ], 
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
-
+" .............................................................................
+" FZF configs
+" .............................................................................
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+command! -bang -nargs=* PRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+  \ fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)

@@ -100,20 +100,6 @@ function vimf() {
   fi
 }
 
-# cd to any humu directory
-function fdh() {
-	cdhumu  && fd && ls
-}
-
-# cd to any the folder of any humu file
-function cdfh() {
-	cdhumu && cdf
-}
-
-function vimfh() {
-	cdhumu && vimf
-}
-
 ############################################################
 
 # Bindings 
@@ -128,41 +114,7 @@ function vimfh() {
 
 ############################################################
 
-# Humu aliases
 alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-
-function weaver() {
-    $(get_git_root)/tools/weaver.sh "$@"
-}
-
-function wpy() {
-	weaver python_shell "$@"
-}
-
-function parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
-}
-
-function get_git_root() {
-    git rev-parse --show-toplevel
-}
-
-alias cdhumu='cd ~/repos/humu'
-# Easy access to our env shell
-alias wpy='weaver python_shell'
-# Alerts you when the terminal prompts you
-alias alert="terminal-notifier -message"
-
-# Jumps you to different servers
-alias joy="cd ~/repos/humu/humu/servers/joy/"
-alias squeegee="cd ~/repos/humu/humu/servers/squeegee/"
-alias hero="cd ~/repos/humu/humu/servers/hero/"
-alias auth="cd ~/repos/humu/humu/servers/auth/"
-alias goblinshark=”wpy ~/repos/humu/humu/ingest/goblinshark.py”
-
-# Runs dev server
-alias humu="./toolbelt.sh dev"
-
 # Displays previously merged commits in a pretty way
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 
@@ -299,19 +251,3 @@ if [ -f '/Users/justin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/justin/g
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/justin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/completion.zsh.inc'; fi
 
-# HUMU CONFIGS
-# BEGIN GENERATED FROM HUMU BOOTSTRAP
-
-# pyenv Configuration
-eval "$(pyenv init -)"
-
-# nvm Configuration
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-
-# Add ICU utilities to PATH.
-export PATH="/usr/local/opt/icu4c/bin:/usr/local/opt/icu4c/sbin:$PATH"
-
-# END GENERATED FROM HUMU BOOTSTRAP
-#
-# Fixes nvm issue with humu onboarding
-nvm use --delete-prefix default
