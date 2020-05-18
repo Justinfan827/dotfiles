@@ -2,6 +2,7 @@ scriptencoding utf-8
 set encoding=utf-8
 " Vimplug
 if empty(glob('~/.vim/autoload/plug.vim'))
+    
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -18,6 +19,7 @@ Plug 'junegunn/fzf.vim'
 " General
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
+Plug 'posva/vim-vue'
 Plug 'tpope/vim-unimpaired'
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -37,7 +39,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
 Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g ocaml-language-server' }
 Plug 'hail2u/vim-css3-syntax'
-
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"
 " Language formatter
 Plug 'sbdchd/neoformat'
 
@@ -54,7 +57,6 @@ Plug 'mattn/emmet-vim'
 
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'
-
 " Automatically clear search highlights after you move your cursor.
 Plug 'haya14busa/is.vim'
 call plug#end()
@@ -75,11 +77,10 @@ let g:gitgutter_override_sign_column_highlight = 1
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
 syntax on
-" italics for my favorite color scheme
 set shortmess=atI                  " Don't show the intro message when starting vim
 set title                          " set the terminal title
-set ruler                          "show status line
-set relativenumber
+set ruler                          "show cursor position
+set relativenumber                 " show relative line number
 set rulerformat=%10(%l,%c%V%)
 set laststatus=2                   "always show status line
 set cursorline                     "highlight current line
@@ -150,17 +151,22 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 " .............................................................................
-" COC mappings
+" COC settings
 " .............................................................................
 
-nmap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gh :call CocAction('doHover')<CR>
-nnoremap <silent> gD :call CocActionAsync('jumpDefinition', 'vsplit')<CR>
-nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
-nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
+" if hidden is not set, TextEdit might fail.
+set hidden " Manage multiple buffers effectively: the current buffer can be “sent” to the background without writing to disk. When a background buffer becomes current again, marks and undo-history are remembered. See chapter Buffers to understand this better.
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -174,6 +180,48 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gD :call CocActionAsync('jumpDefinition', 'vsplit')<CR>
+nnoremap <silent> gh :call CocAction('doHover')<CR>
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use U to show documentation in preview window
+nnoremap <silent> U :call <SID>show_documentation()<CR>
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
+nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
+
 " search current word under cursor
 nnoremap <silent> <Leader>ag :Find <C-R><C-W><CR>
 
@@ -244,18 +292,31 @@ au BufNewFile,BufRead *.py
 if !has('nvim')
 	set ttymouse=xterm2
 endif
-
-set mouse=a
+filetype plugin indent on
+set mouse=a " enable mouse for scrolling and resizing
 " Use :help 'option' to see the documentation for the given option.
-set autoindent
-set backspace=indent,eol,start
+
+set autoindent                              " maintain inident of current line
+set backspace=indent,eol,start              " Allow backspacing over indention, line breaks and insertion start
+set history=1000                            " Bigger history of executed commands
+set showcmd                                 " show incomplete commands at the bottom
+set noerrorbells                            "disable beep on errors
 set complete-=i
 set smarttab
-set expandtab
-set shiftwidth=4
-set tabstop=4
+set expandtab                               " Use spaces for tab
+set shiftwidth=4                            " '>' indents with 4 spaces
+set tabstop=4                               " Show existing tab with 4 spaces width
 set softtabstop=4
+
+" Disable backup files
+set nobackup
+
+
+set undofile "Maintain undo history between sessions
+set undodir=~/.vim/undodir "Save undo files in specified dir
+
 autocmd BufNewFile,BufRead *.rvt set filetype=tcl
+autocmd BufNewFile,BufRead *.vue set filetype=vue
 autocmd BufNewFile,BufRead Dockerfile.dev set filetype=Dockerfile
 autocmd BufNewFile,BufRead *.test set filetype=tcl
 autocmd BufNewFile,BufRead Jenkinsfile* set filetype=groovy
@@ -268,11 +329,11 @@ set ignorecase                     "case-insensitive search
 set smartcase                      "unless there's an uppercase letter in the keyword
 
 set laststatus=2
-set wildmenu
+set wildmenu                       "have enhanced command line completion
 
-"Have an extra line on top and below when scrolling
+
 if !&scrolloff
-  set scrolloff=1
+  set scrolloff=1                  "Have an extra line on top and below when scrolling
 endif
 
 " ----------------------------
@@ -291,7 +352,14 @@ autocmd BufNewFile,BufRead .env.* set filetype=sh
 "endif
 " Disable background color erase
 set t_ut=
-
+" .............................................................................
+" Vim-go configs
+" .............................................................................
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
 " .............................................................................
 " Polyglot configs
 " .............................................................................
@@ -306,23 +374,13 @@ let g:NERDTreeAutoDeleteBuffer=1
 " .............................................................................
 " Emmet configs
 " .............................................................................
-let g:user_emmet_leader_key=','
+let g:user_emmet_leader_key='\'
 let g:user_emmet_settings = {
   \  'javascript' : {
     \      'extends' : 'jsx',
     \  },
   \}
 
-
-" .............................................................................
-" COC configs
-" .............................................................................
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 
 " .............................................................................
 " NeoFormat configs
@@ -340,28 +398,30 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-"let g:lightline = {
-"      \ 'colorscheme': 'wombat',
-"      \ 'active': {
-"      \   'left': [ [ 'mode', 'paste' ],
-"	  \				[ 'readonly', 'absolutepath', 'modified' ], 
-"      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-"      \ },
-"      \ 'component_function': {
-"      \   'cocstatus': 'coc#status',
-"      \   'currentfunction': 'CocCurrentFunction'
-"      \ },
-"      \ }
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
       \ },
       \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'wombat',
+      "\ 'active': {
+      "\   'left': [ [ 'mode', 'paste' ],
+      "\             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      "\ },
+      "\ 'component_function': {
+      "\   'gitbranch': 'FugitiveHead',
+      "\   
+      "\ },
+      "\ }
+set statusline^=%{coc#status()}
+
 " .............................................................................
 " FZF configs
 " .............................................................................

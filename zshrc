@@ -55,7 +55,11 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ############################################################
 
-
+# call ls after cd is called
+ function chpwd() {
+    emulate -L zsh
+    ls -a
+}
 # Split tmux pane into ide-style 3 windows
 function ide() {
 	tmux split-window -v -p 30
@@ -100,6 +104,11 @@ function vimf() {
   fi
 }
 
+#cd to directory in personal repos
+function cdp() {
+    fd ~/personalRepos
+}
+
 ############################################################
 
 # Bindings 
@@ -120,7 +129,6 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 
 #
 
-alias cds='cd ~/src'
 alias grep='grep --color'
 alias gsb='git checkout $(git branch | fzf)'
 alias mk='make'
@@ -243,11 +251,37 @@ export PATH="$PATH:$HOME/.rvm/bin"
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # enable vi-mode on command line
 #bindkey -v
+
+#####
+# Go configs
+#######
+export GO111MODULE=on # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
 export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+# export PATH="/usr/local/anaconda3/bin:$PATH"  # commented out by conda initialize
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/justin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/justin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+ #>>> conda initialize >>>
+ #!! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+    #eval "$__conda_setup"
+#else
+    #if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
+        #. "/usr/local/anaconda3/etc/profile.d/conda.sh"
+    #else
+        #export PATH="/usr/local/anaconda3/bin:$PATH"
+    #fi
+#fi
+#unset __conda_setup
+ #<<< conda initialize <<<
 
