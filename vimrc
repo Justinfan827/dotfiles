@@ -19,7 +19,6 @@ Plug 'junegunn/fzf.vim'
 " General
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-grepper'
-Plug 'posva/vim-vue'
 Plug 'tpope/vim-unimpaired'
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -34,12 +33,13 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 
 " Language support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
-Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
-Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g ocaml-language-server' }
-Plug 'hail2u/vim-css3-syntax'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
+Plug 'hail2u/vim-css3-syntax'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'posva/vim-vue'
+Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g ocaml-language-server' }
+Plug 'sheerun/vim-polyglot'
 "
 " Language formatter
 Plug 'sbdchd/neoformat'
@@ -51,9 +51,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " This is a simple plugin that helps to end certain structures automatically. 
 Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
 
 " Emmet snippets
-Plug 'mattn/emmet-vim'
+"Plug 'mattn/emmet-vim'
 
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'

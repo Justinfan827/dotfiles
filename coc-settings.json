@@ -1,10 +1,23 @@
 {
-  "python.jediEnabled": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
+  "vetur.format.enable": true,
+  "python.jediEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   "coc.preferences.formatOnSaveFiletypes": [
+    "gopls",
+    "golang",
     "css",
+    "vue",
     "javascript",
     "typescript",
     "javascriptreact",
@@ -16,18 +29,11 @@
     "python"
   ],
   "eslint.filetypes": [
+    "vue",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
-  "eslint.autoFixOnSave": true,
-  "languageserver": {
-    "ocaml": {
-      "command": "ocaml-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["ocaml", "reason"]
-    }
-  }
+  "eslint.autoFixOnSave": true
 }
-

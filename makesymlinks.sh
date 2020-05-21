@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="tmux.conf vimrc zshrc bashrc ackrc config.fish"    # list of files/folders to symlink in homedir
+files="tmux.conf vimrc zshrc bashrc ackrc coc-settings.json"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -25,11 +25,12 @@ echo "...done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/dotfiles_old/
     echo "Creating symlink to $file in home directory."
-	if [ "$file" == "config.fish" ]; then
-		ln -s $dir/$file ~/.config/fish/.$file
+	if [ "$file" == "coc-settings.json" ]; then
+        mv ~/.config/nvim/$file ~/dotfiles_old/
+		ln -s $dir/$file ~/.config/nvim/$file
 	else
+        mv ~/.$file ~/dotfiles_old/
 		ln -s $dir/$file ~/.$file
 	fi
 done
