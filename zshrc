@@ -7,7 +7,7 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export TERM="xterm-256color"
+#export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/justin/.oh-my-zsh"
 
@@ -133,6 +133,7 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 alias grep='grep --color'
 alias gsb='git checkout $(git branch | fzf)'
 alias mk='make'
+alias chrome='chrome -a \"Google Chrome\"'
 alias sb='source ~/.bashrc'
 alias sz='source ~/.zshrc'
 alias st='tmux source-file ~/.tmux.conf'

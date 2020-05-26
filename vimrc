@@ -23,10 +23,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Theme and styling
-Plug 'morhetz/gruvbox'
+Plug 'fatih/molokai'
+Plug 'sainnhe/gruvbox-material'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'drewtempelmeyer/palenight.vim'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -66,13 +66,40 @@ call plug#end()
 filetype plugin on
 set undodir=~/.vim/undodir
 " change directory to open buffer?
-"set autochdir
-"---------------------------- UI stuff ----------------------------
-colorscheme gruvbox
-set background=dark
+set autochdir
+if has('folding')
+  if has('windows')
+    let &fillchars='vert: '           " less cluttered vertical window separators
+  endif
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99               " start unfolded
+endif
+
+" .............................................................................
+" .............................................................................
+" UI SETTINGS
+" .............................................................................
+" .............................................................................
+
+" tmux settings
+" Gruvbox settings
+" important!!
+if has('termguicolors')
+  set termguicolors
+endif
+
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_enable_italic = 0 
+let g:gruvbox_material_disable_italic_comment = 1
+
+
+colorscheme gruvbox-material        " Note: this should be placed after all configs
 set t_Co=256
-" So highlighting isnt all weird
-let g:gruvbox_invert_selection=0
+
+" Gruvbox configs
+"let g:gruvbox_invert_selection=0 " So highlighting isnt all weird
+set background=dark                 " Use gruvbox dark
+
 " Git gutter configs
 let g:gitgutter_override_sign_column_highlight = 1
 highlight SignColumn guibg=bg
@@ -358,9 +385,20 @@ set t_ut=
 " .............................................................................
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
+
+let g:go_fmt_fail_silently = 1       "disable locatiion list
+let g:go_def_mapping_enabled = 0     " disable vim-go :GoDef short cut (gd). Let coc handle it
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_diagnostic_errors = 1
+let g:go_highlight_diagnostic_warnings = 0
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_functions = 0
+let g:go_highlight_methods = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1 
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_variable_declarations = 1
 " .............................................................................
 " Polyglot configs
 " .............................................................................
@@ -411,7 +449,7 @@ let g:lightline = {
       \ },
       \ }
 "let g:lightline = {
-      "\ 'colorscheme': 'wombat',
+      "\ 'colorscheme': 'grubbox_material',
       "\ 'active': {
       "\   'left': [ [ 'mode', 'paste' ],
       "\             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
