@@ -27,6 +27,7 @@ Plug 'fatih/molokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
+Plug 'drewtempelmeyer/palenight.vim'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -81,24 +82,33 @@ endif
 " .............................................................................
 " .............................................................................
 
-" tmux settings
-" Gruvbox settings
-" important!!
+"""""""""""" Theming configs
+" Set terminal colors
 if has('termguicolors')
   set termguicolors
 endif
 
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+set t_Co=256
+
+"""""""""""" Gruvbox settings
 let g:gruvbox_material_background = 'medium'
 let g:gruvbox_material_enable_italic = 0 
 let g:gruvbox_material_disable_italic_comment = 1
-
-
-colorscheme gruvbox-material        " Note: this should be placed after all configs
-set t_Co=256
-
-" Gruvbox configs
-"let g:gruvbox_invert_selection=0 " So highlighting isnt all weird
 set background=dark                 " Use gruvbox dark
+
+"""""""""""" palenight settings
+"let g:palenight_terminal_italics=1
+
+""""""""""" Theme selection 
+colorscheme gruvbox-material      " Note: this should be placed after all configs
+"colorscheme palenight              " Note: this should be placed after all configs
+
+
 
 " Git gutter configs
 let g:gitgutter_override_sign_column_highlight = 1
@@ -106,16 +116,16 @@ highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
 syntax on
 set shortmess=atI                  " Don't show the intro message when starting vim
-set title                          " set the terminal title
-set ruler                          "show cursor position
-set relativenumber                 " show relative line number
+set title                          " Set the terminal title
+set ruler                          " Show cursor position
+set relativenumber                 " Show relative line number
 set rulerformat=%10(%l,%c%V%)
-set laststatus=2                   "always show status line
-set cursorline                     "highlight current line
-set number                         "show line numbers
+set laststatus=2                   " Always show status line
+set cursorline                     " Highlight current line
+set number                         " Show line numbers
 set numberwidth=5
-set hlsearch                       "highlight search keywords
-set noshowmode                     "Don't show bottom line since i'm using lightline.vim
+set hlsearch                       " Highlight search keywords
+set noshowmode                     " Don't show bottom line since i'm using lightline.vim
 
 " .............................................................................
 " .............................................................................
@@ -438,7 +448,7 @@ function! CocCurrentFunction()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]

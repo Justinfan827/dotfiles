@@ -35,5 +35,8 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "list.normalMappings": {
+    "<C-c>": "do:exit"
+  }
 }
