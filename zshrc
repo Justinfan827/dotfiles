@@ -9,7 +9,7 @@ fi
 
 #export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/justin/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -48,7 +48,6 @@ export FZF_BASE=/path/to/fzf/install/dir
 # export DISABLE_FZF_KEY_BINDINGS="true"
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ############################################################
 
@@ -249,8 +248,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# enable syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # enable vi-mode on command line
 #bindkey -v
 
