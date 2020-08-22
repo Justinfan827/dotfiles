@@ -60,3 +60,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 export NVM_DIR="/usr/local/opt/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -f /Users/jfan/.bashrc ]; then
+  source /Users/jfan/.bashrc
+fi
+if [ -f /Users/jfan/.blend_profile ]; then
+  source /Users/jfan/.blend_profile
+fi

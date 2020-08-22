@@ -1,6 +1,6 @@
 scriptencoding utf-8
 set encoding=utf-8
-" Vimplug
+" Vimplug: for managing extensions
 if empty(glob('~/.vim/autoload/plug.vim'))
     
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -15,12 +15,26 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Helpers for unix
 Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf.vim'
+"Plug 'chengzeyi/fzf-preview.vim' " 
+Plug 'yuki-ycino/fzf-preview.vim' " extension of fzf
 
 " General
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-grepper'
-Plug 'tpope/vim-unimpaired'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive' " git wrapper
+Plug 'tpope/vim-rhubarb' " link to git repo quickly
+Plug 'stsewd/fzf-checkout.vim' " checkout git branches in vim
+Plug 'itchyny/vim-gitbranch' " add git branch to your lightline
+Plug 'mhinz/vim-grepper' " grep easily
+Plug 'tpope/vim-unimpaired' " nice bindings e.g. ] space toi add empty line, ]l/q to move in location / quickfix list
+Plug 'christoomey/vim-tmux-navigator' " help navigate with vim / tmux splits
+Plug 'airblade/vim-rooter' " Changes vim working directory to the project root (helpful for grepping tools)
+Plug 'qpkorr/vim-bufkill' " kill buffer with :BD without killing session
+
+" Snippets
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
+"Plug 'honza/vim-snippets'
+"Plug 'grvcoelho/vim-javascript-snippets'
 
 " Theme and styling
 Plug 'fatih/molokai'
@@ -28,9 +42,8 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'drewtempelmeyer/palenight.vim'
-
-" NERDTree
-Plug 'scrooloose/nerdtree'
+"Plug 'ryanoasis/vim-devicons' " Add icons! doesn't work with fira though
+Plug 'scrooloose/nerdtree' 
 Plug 'scrooloose/nerdcommenter'
 
 " Language support
@@ -39,11 +52,10 @@ Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'posva/vim-vue'
-Plug 'reasonml-editor/vim-reason-plus', { 'do': 'npm i -g ocaml-language-server' }
 Plug 'sheerun/vim-polyglot'
-"
-" Language formatter
-Plug 'sbdchd/neoformat'
+Plug 'HerringtonDarkholme/yats.vim'
+set re=0
+let g:yats_host_keyword = 1
 
 " Quoting/parenthesizing
 " Note: i'm using coc pairs to run pair closing
@@ -67,13 +79,17 @@ call plug#end()
 filetype plugin on
 set undodir=~/.vim/undodir
 " change directory to open buffer?
-set autochdir
+"set autochdir
 if has('folding')
   if has('windows')
     let &fillchars='vert: '           " less cluttered vertical window separators
   endif
-  set foldmethod=indent               " not as cool as syntax, but faster
-  set foldlevelstart=99               " start unfolded
+  "-- FOLDING --
+    "set foldmethod=syntax "syntax highlighting items specify folds
+    set foldmethod=indent "not as cool as syntax folding, but faster
+    "set foldcolumn=1 "defines 1 col at window left, to indicate folding
+    let javaScript_fold=1 "activate folding by JS syntax
+    set foldlevelstart=99               " start unfolded
 endif
 
 " .............................................................................
@@ -126,6 +142,7 @@ set number                         " Show line numbers
 set numberwidth=5
 set hlsearch                       " Highlight search keywords
 set noshowmode                     " Don't show bottom line since i'm using lightline.vim
+set nowrap
 
 " .............................................................................
 " .............................................................................
@@ -151,9 +168,9 @@ set splitright
 " easier way to get to beginning end of line
 map H ^
 map L $
-" erase highlights with space
-nnoremap <Leader><space> :let @/=""<cr>
 let mapleader = ","
+" erase highlights with space
+nnoremap <Leader><space> :noh<cr>
 " Press * to search for the term under the cursor or a visual selection and
 " " then press a key below to replace all instances of it in the current file.
 nnoremap <Leader>r :%s///g<Left><Left>
@@ -179,18 +196,65 @@ noremap <leader>so :source ~/.config/nvim/init.vim<CR>
 noremap <leader>ot :tabe ~/.tmux.conf<CR>
 noremap <leader>og :tabe ~/.gitconfig<CR>
 
-" " Copy to clipboard
+" close all location and quickfix lists
+nmap <leader>l :windo lcl\|ccl<CR>
+
+" folding
+"nnoremap <> za         " toggle current fold
+" Fold everything / unfold everything
+nnoremap <expr> <leader>z &foldlevel ? 'zM' :'zR' "
+
+" Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>y  "+y
-
-" " Paste from clipboard
+vnoremap  <leader>Y  "+Y
+nnoremap  <leader>Y  "+Y
+" Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
+
+" cd to directory of current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" Console log from insert mode; Puts focus inside parentheses
+imap cll console.log({});<Esc>==f{a
+" Console log from visual mode on next line, puts visual selection inside parentheses
+vmap cll yocll<Esc>p
+" Console log from normal mode, inserted on next line with word your on inside parentheses
+nmap cll yiwocll<Esc>p
+
+" fmt.Print from insert mode; Puts focus inside parentheses
+imap fpp fmt.Println()<Esc>==f(a
+" Console log from visual mode on next line, puts visual selection inside parentheses
+vmap fpp yofpp<Esc>p
+" Console log from normal mode, inserted on next line with word your on inside parentheses
+nmap fpp yiwofpp<Esc>p
+imap fpn fmt.Println("\n\n\n")<Esc>==f(a
+
+"imap cjj JSON.stringify(,null, 2);<Esc>==f(a
+"nmap cjj yiwocjj<Esc>p
+
+"add new line in insert and normal mode
+imap cln console.log('\n\n\n');<Esc>
+" .............................................................................
+" Snippet settings
+" .............................................................................
+"imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+"smap <C-J> <Plug>snipMateNextOrTrigger
+
+
+
 " .............................................................................
 " COC settings
 " .............................................................................
+
+" Declare CoC extensions
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-eslint'
+  \ ]
 
 " if hidden is not set, TextEdit might fail.
 set hidden " Manage multiple buffers effectively: the current buffer can be “sent” to the background without writing to disk. When a background buffer becomes current again, marks and undo-history are remembered. See chapter Buffers to understand this better.
@@ -203,6 +267,7 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v12.14.1/bin/node'
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -261,35 +326,105 @@ nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
 
 " search current word under cursor
-nnoremap <silent> <Leader>ag :Find <C-R><C-W><CR>
+" https://github.com/junegunn/fzf.vim/issues/182
+command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
+nnoremap <silent> <Leader>ag :AgQ <C-R><C-W><CR>
+"nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " .............................................................................
-" fugitive mappings
+" fugitive mappings - git mappings / rhubarb directory
 " .............................................................................
 
 nmap <Leader>gd :Gdiff<CR>
+nmap <Leader>gm :Gdiff master<CR>
 nmap <Leader>gg :Gstatus<CR>
 nmap <Leader>gw :Gwrite<CR>
 nmap <Leader>gr :Gread<CR>
 nmap <Leader>gb :Git blame<CR>
+nmap <Leader>fc :GCheckout<CR>
+nmap <Leader>fct :GCheckoutTag<CR>
+
+" This lets me push from vim
+nnoremap <Leader>gp :Dispatch! git push<CR>
+
+
+" this helps me open up the line in github directly from vim
+let g:github_enterprise_urls = ['git@git.blendlabs.com:blend']
+nnoremap <Leader>bb :<C-R>=line('.')<CR>Gbrowse<CR>
+
 
 " .............................................................................
 "  FZF mappings
 " .............................................................................
 
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+"let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
-" Launch fzf with CTRL+P.
-nnoremap <C-p> :GFiles <CR>
-" Map a few common things to do with FZF.
+
+"nnoremap <C-p> :GFiles <CR> " Launch fzf with CTRL+P.
+
+" Search all files under git root
+nnoremap <C-p> :ProjectFiles <CR> 
+
+" Open buffers
 nnoremap <Leader><Enter> :Buffers<CR>
-nnoremap <Leader>l :Lines<CR>
-nmap <Leader>/ :PRg<CR>
+
+"nnoremap <Leader>l :Lines<CR>
+
+" searching through files using silver searcher
+nmap <Leader>/ :Ag<CR> 
+
+" searching the word currently under the cursor
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
+
+" .............................................................................
+" FZF Commands
+" .............................................................................
+
+" :GFiles will only find files committed to the repo. This will find the git
+" root and run :Files from the git root
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+" Map a few common things to do with FZF.
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+" using rip grep to search starting from root of git directory
+command! -bang -nargs=* PRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
+  \ fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
+
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
 "command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
 
+
+" .............................................................................
+" FZF preview Commands :) experimenting
+" .............................................................................
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
 
 " .............................................................................
 " scrooloose/nerdtree mappings
@@ -326,6 +461,10 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd FileType typescriptreact setlocal ts=2 sts=2 sw=2
+
 " Allow scroll in vim  
 if !has('nvim')
 	set ttymouse=xterm2
@@ -350,7 +489,7 @@ set softtabstop=4
 set nobackup
 
 
-set undofile "Maintain undo history between sessions
+"set undofile "Maintain undo history between sessions
 set undodir=~/.vim/undodir "Save undo files in specified dir
 
 autocmd BufNewFile,BufRead *.rvt set filetype=tcl
@@ -393,11 +532,18 @@ set t_ut=
 " .............................................................................
 " Vim-go configs
 " .............................................................................
-let g:go_def_mode='gopls'
+"let g:go_def_mode='gopls' // doesn't work with modules
+let g:go_def_mode='godef'
 let g:go_info_mode='gopls'
+let g:go_fmt_command = "goimports"
+
 
 let g:go_fmt_fail_silently = 1       "disable locatiion list
-let g:go_def_mapping_enabled = 0     " disable vim-go :GoDef short cut (gd). Let coc handle it
+let g:go_auto_type_info = 1          "Automatically show function signature when moving mouse over valid identifier"
+let g:go_def_mapping_enabled = 1     " disable vim-go :GoDef short cut (gd). Let coc handle it? or not?
+let g:go_auto_sameids = 0            " Disable automatically highlighting matching identifiers"
+
+
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_diagnostic_errors = 1
 let g:go_highlight_diagnostic_warnings = 0
@@ -409,6 +555,24 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1 
 let g:go_highlight_variable_assignments = 1
 let g:go_highlight_variable_declarations = 1
+
+
+" Note: CTRL-T will take you back the definition jumps you made
+" Find all declarations in this file
+au FileType go nmap <leader>gt :GoDeclsDir<cr> 
+" Find what this type implements
+au FileType go nmap <leader>gi :GoImplements<cr> 
+" Finds the callers of this function 
+au FileType go nmap <leader>gc :GoCallers<cr>    
+" Find the _test file for this go file.
+au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)  
+au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+" Go to where this identifier is defined. Ctrl T will bring you back.
+au FileType go nmap gd <Plug>(go-def) 
+"let g:go_guru_scope = ["/Users/jfan/go/src/git.blendlabs.com/blend/connectivity/server/..."]
+
+
 " .............................................................................
 " Polyglot configs
 " .............................................................................
@@ -447,37 +611,29 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+function! MyLineinfo()
+  return line('.') . '/' . line('$')
+endfunction
 let g:lightline = {
       \ 'colorscheme': 'palenight',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'gitbranch' , 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
-      \ },
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'filename': 'LightlineFilename',
+      \   'lineinfo': 'MyLineinfo', 
+      \   'gitbranch': 'gitbranch#name'
       \ }
-"let g:lightline = {
-      "\ 'colorscheme': 'grubbox_material',
-      "\ 'active': {
-      "\   'left': [ [ 'mode', 'paste' ],
-      "\             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      "\ },
-      "\ 'component_function': {
-      "\   'gitbranch': 'FugitiveHead',
-      "\   
-      "\ },
-      "\ }
+      \ }
 set statusline^=%{coc#status()}
-
-" .............................................................................
-" FZF configs
-" .............................................................................
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-command! -bang -nargs=* PRg
-  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1,
-  \ fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), <bang>0)
