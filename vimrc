@@ -1,39 +1,40 @@
 scriptencoding utf-8
 set encoding=utf-8
-" Vimplug: for managing extensions
+
+" Vimplug: for managing extensions.
 if empty(glob('~/.vim/autoload/plug.vim'))
-    
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif  
 call plug#begin('~/.vim/plugged')
 
-" Fzf for vim.
+" Fzf for vim: fuzzy search (ESSENTIAL)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Helpers for unix
 Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf.vim'
-"Plug 'chengzeyi/fzf-preview.vim' " 
-Plug 'yuki-ycino/fzf-preview.vim' " extension of fzf
+Plug 'yuki-ycino/fzf-preview.vim' " fancy extension of fzf
 
 " General
-Plug 'tpope/vim-fugitive' " git wrapper
+Plug 'tpope/vim-fugitive' " git wrapper in vim
 Plug 'tpope/vim-rhubarb' " link to git repo quickly
 Plug 'stsewd/fzf-checkout.vim' " checkout git branches in vim
 Plug 'itchyny/vim-gitbranch' " add git branch to your lightline
 Plug 'mhinz/vim-grepper' " grep easily
-Plug 'tpope/vim-unimpaired' " nice bindings e.g. ] space toi add empty line, ]l/q to move in location / quickfix list
+Plug 'tpope/vim-unimpaired' " nice bindings e.g. '] space' to add empty line, ]l or ]q to move in location / quickfix list
 Plug 'christoomey/vim-tmux-navigator' " help navigate with vim / tmux splits
 Plug 'airblade/vim-rooter' " Changes vim working directory to the project root (helpful for grepping tools)
 Plug 'qpkorr/vim-bufkill' " kill buffer with :BD without killing session
 
-" Snippets
+" Snippets (didn't find too useful)
 "Plug 'MarcWeber/vim-addon-mw-utils'
 "Plug 'tomtom/tlib_vim'
 "Plug 'garbas/vim-snipmate'
 "Plug 'honza/vim-snippets'
+" Emmet snippets
+"Plug 'mattn/emmet-vim'
 "Plug 'grvcoelho/vim-javascript-snippets'
 
 " Theme and styling
@@ -42,32 +43,28 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'drewtempelmeyer/palenight.vim'
-"Plug 'ryanoasis/vim-devicons' " Add icons! doesn't work with fira though
-Plug 'scrooloose/nerdtree' 
-Plug 'scrooloose/nerdcommenter'
+"Plug 'ryanoasis/vim-devicons' " Add icons! doesn't work with fira font though
+Plug 'scrooloose/nerdtree'  " NERDTree directory tree
+Plug 'scrooloose/nerdcommenter' " Key binding to comment out stuff
 
 " Language support
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " CoC: Intellisense engine 
+" Extensions for different languages 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
 Plug 'hail2u/vim-css3-syntax'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'posva/vim-vue'
 Plug 'sheerun/vim-polyglot'
-Plug 'HerringtonDarkholme/yats.vim'
-set re=0
-let g:yats_host_keyword = 1
+Plug 'HerringtonDarkholme/yats.vim' " JS language extension
+let g:yats_host_keyword = 1 " configure yats to highlight host specific keywords like addEventListener. Default is 1. Set it 0 to turn off highlighting.
+set re=0 "Old regexp engine will incur performance issues for yats and old engine is usually turned on by other plugins.
 
-" Quoting/parenthesizing
-" Note: i'm using coc pairs to run pair closing
-Plug 'tpope/vim-surround'
-" Allow vim to repeat commands from vim-surround!
-Plug 'tpope/vim-repeat'
-" This is a simple plugin that helps to end certain structures automatically. 
-Plug 'tpope/vim-endwise'
+" Quoting/parenthesizing Note: i'm using coc pairs to run pair closing
+Plug 'tpope/vim-surround' " amazing pugin to surround stuff
+Plug 'tpope/vim-repeat' " Allow vim to repeat commands from vim-surround!
+Plug 'tpope/vim-endwise' " This is a simple plugin that helps to end certain structures automatically. 
 Plug 'jiangmiao/auto-pairs'
 
-" Emmet snippets
-"Plug 'mattn/emmet-vim'
 
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'
@@ -75,16 +72,21 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'haya14busa/is.vim'
 call plug#end()
 
-" --------------------- Functionality stuff -----------------------
+" .............................................................................
+" .............................................................................
+" Basic Functionality
+" .............................................................................
+" .............................................................................
+
 filetype plugin on
 set undodir=~/.vim/undodir
-" change directory to open buffer?
-"set autochdir
+
+
+" ......................... folding ...........................
 if has('folding')
   if has('windows')
-    let &fillchars='vert: '           " less cluttered vertical window separators
+    let &fillchars='vert: ' " less cluttered vertical window separators
   endif
-  "-- FOLDING --
     "set foldmethod=syntax "syntax highlighting items specify folds
     set foldmethod=indent "not as cool as syntax folding, but faster
     "set foldcolumn=1 "defines 1 col at window left, to indicate folding
@@ -98,7 +100,7 @@ endif
 " .............................................................................
 " .............................................................................
 
-"""""""""""" Theming configs
+" ......................... theming configs ...........................
 " Set terminal colors
 if has('termguicolors')
   set termguicolors
@@ -109,27 +111,28 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-set t_Co=256
+set t_Co=256 " 256 colors in vim
 
-"""""""""""" Gruvbox settings
+" ......................... Gruvbox configs ...........................
 let g:gruvbox_material_background = 'medium'
 let g:gruvbox_material_enable_italic = 0 
 let g:gruvbox_material_disable_italic_comment = 1
-set background=dark                 " Use gruvbox dark
+set background=dark " Use gruvbox dark
 
-"""""""""""" palenight settings
-"let g:palenight_terminal_italics=1
+"let g:palenight_terminal_italics=1 "
 
-""""""""""" Theme selection 
-colorscheme gruvbox-material      " Note: this should be placed after all configs
+" Theme selection 
+colorscheme gruvbox-material      " Note: this should be placed after all theming configs
 "colorscheme palenight              " Note: this should be placed after all configs
 
 
 
-" Git gutter configs
+" ......................... GitGutter configs ...........................
 let g:gitgutter_override_sign_column_highlight = 1
 highlight SignColumn guibg=bg
 highlight SignColumn ctermbg=bg
+
+" ......................... Basic UI stuff configs ...........................
 syntax on
 set shortmess=atI                  " Don't show the intro message when starting vim
 set title                          " Set the terminal title
@@ -152,11 +155,6 @@ set nowrap
 
 " Avoid typing :
 nnoremap ; :
-"  Managing window splits
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
 " Split window
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
@@ -168,9 +166,13 @@ set splitright
 " easier way to get to beginning end of line
 map H ^
 map L $
+
+" mapping the leader key
 let mapleader = ","
-" erase highlights with space
+
+" erase highlights with leader key, then space
 nnoremap <Leader><space> :noh<cr>
+
 " Press * to search for the term under the cursor or a visual selection and
 " " then press a key below to replace all instances of it in the current file.
 nnoremap <Leader>r :%s///g<Left><Left>
@@ -192,9 +194,9 @@ xnoremap <silent> s* "sy:let @/=@s<CR>cgn
 noremap <leader>ov :tabe ~/.vimrc<CR>
 noremap <leader>oz :tabe ~/.zshrc<CR>
 noremap <leader>oc :tabe ~/.config/nvim/coc-settings.json<CR>
-noremap <leader>so :source ~/.config/nvim/init.vim<CR>
 noremap <leader>ot :tabe ~/.tmux.conf<CR>
 noremap <leader>og :tabe ~/.gitconfig<CR>
+noremap <leader>so :source ~/.config/nvim/init.vim<CR>
 
 " close all location and quickfix lists
 nmap <leader>l :windo lcl\|ccl<CR>
@@ -233,11 +235,9 @@ vmap fpp yofpp<Esc>p
 nmap fpp yiwofpp<Esc>p
 imap fpn fmt.Println("\n\n\n")<Esc>==f(a
 
-"imap cjj JSON.stringify(,null, 2);<Esc>==f(a
-"nmap cjj yiwocjj<Esc>p
-
 "add new line in insert and normal mode
 imap cln console.log('\n\n\n');<Esc>
+
 " .............................................................................
 " Snippet settings
 " .............................................................................
@@ -250,7 +250,7 @@ imap cln console.log('\n\n\n');<Esc>
 " COC settings
 " .............................................................................
 
-" Declare CoC extensions
+" Declare CoC extensions // TODO: move all cocsettings into vimrc
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint'
@@ -267,6 +267,7 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+" Which node version to use for CoC
 let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v12.14.1/bin/node'
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -330,7 +331,7 @@ nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
 command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
 nnoremap <silent> <Leader>ag :AgQ <C-R><C-W><CR>
 "nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_history_dir = '~/.local/share/fzf-history' " enable navigating search history using Ctrl-P and Ctrl-N
 
 " .............................................................................
 " fugitive mappings - git mappings / rhubarb directory
@@ -359,8 +360,6 @@ nnoremap <Leader>bb :<C-R>=line('.')<CR>Gbrowse<CR>
 " .............................................................................
 
 "let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
-
-
 "nnoremap <C-p> :GFiles <CR> " Launch fzf with CTRL+P.
 
 " Search all files under git root
@@ -375,7 +374,7 @@ nnoremap <Leader><Enter> :Buffers<CR>
 nmap <Leader>/ :Ag<CR> 
 
 " searching the word currently under the cursor
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
+"nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
 
 " .............................................................................
 " FZF Commands
@@ -411,13 +410,15 @@ command! -bang -nargs=* PRg
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
-nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+" Useful
 nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
 nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
 nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
 nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
 nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+nnoremap <silent> [fzf-p]g    :<C-u>FzfPreviewChanges<CR>
 nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
 nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
 nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
