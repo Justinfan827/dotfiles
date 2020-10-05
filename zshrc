@@ -27,6 +27,7 @@ DEFAULT_USER=`whoami`
 plugins=(
     jump
     fzf
+    aws
     web-search
     zsh-autosuggestions
 )
@@ -251,6 +252,8 @@ alias vimv='vim ~/.vimrc'
 alias vimz='vim ~/.zshrc'
 alias vimt='vim ~/.tmux.conf'
 alias vf='vimf'
+# open vim at root to avoid issues with coc tsserver
+alias vlend='vim ~/repo/git.blendlabs.com/blend/lending/backend/Gruntfile.js'
 
 # Docker
 alias kb='kubectl'
@@ -341,6 +344,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR='nvim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 

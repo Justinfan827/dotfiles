@@ -15,7 +15,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Helpers for unix
 Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim' " fancy extension of fzf
 
 " General
 Plug 'tpope/vim-fugitive' " git wrapper in vim
@@ -28,14 +27,18 @@ Plug 'christoomey/vim-tmux-navigator' " help navigate with vim / tmux splits
 Plug 'airblade/vim-rooter' " Changes vim working directory to the project root (helpful for grepping tools)
 Plug 'qpkorr/vim-bufkill' " kill buffer with :BD without killing session
 
-" Snippets (didn't find too useful)
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
-"Plug 'honza/vim-snippets'
-" Emmet snippets
-"Plug 'mattn/emmet-vim'
-"Plug 'grvcoelho/vim-javascript-snippets'
+" Nvim typescript (experimenting)
+"Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+"" For async completion
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+
+"" For Denite features
+"Plug 'Shougo/denite.nvim'
+
+"" Enable deoplete at startup
+"let g:deoplete#enable_at_startup = 1
 
 " Theme and styling
 Plug 'fatih/molokai'
@@ -49,13 +52,24 @@ Plug 'scrooloose/nerdcommenter' " Key binding to comment out stuff
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " CoC: Intellisense engine 
+"Plug 'dense-analysis/ale'
+
 " Extensions for different languages 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'posva/vim-vue'
+" .............................................................................
+" Polyglot configs
+" .............................................................................
+let g:polyglot_disabled = ['css', 'markdown']
+
 Plug 'sheerun/vim-polyglot'
-Plug 'HerringtonDarkholme/yats.vim' " JS language extension
+Plug 'leafgarland/typescript-vim' " TS language extension
+Plug 'peitalin/vim-jsx-typescript' " TSX language extension
+hi tsxTagName guifg=#E06C75
+
+"Plug 'HerringtonDarkholme/yats.vim' " JS language extension
 let g:yats_host_keyword = 1 " configure yats to highlight host specific keywords like addEventListener. Default is 1. Set it 0 to turn off highlighting.
 set re=0 "Old regexp engine will incur performance issues for yats and old engine is usually turned on by other plugins.
 
@@ -93,6 +107,10 @@ if has('folding')
     let javaScript_fold=1 "activate folding by JS syntax
     set foldlevelstart=99               " start unfolded
 endif
+
+" nvim setting
+let g:python3_host_prog = "/usr/local/bin/python3"
+let g:python_host_prog = "/usr/local/bin/python2"
 
 " .............................................................................
 " .............................................................................
@@ -219,6 +237,12 @@ vnoremap <leader>P "+P
 
 " cd to directory of current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+" JSON.stringify from insert mode; Puts focus inside parentheses
+imap clj JSON.stringify(,null, 2)<Esc>==f(a
+" JSON.stringify from visual mode on next line, puts visual selection inside parentheses
+vmap clj yocll<Esc>p
+" JSON.stringify from normal mode, inserted on next line with word your on inside parentheses
+nmap clj yiwoclj<Esc>p
 
 " Console log from insert mode; Puts focus inside parentheses
 imap cll console.log({});<Esc>==f{a
@@ -226,6 +250,8 @@ imap cll console.log({});<Esc>==f{a
 vmap cll yocll<Esc>p
 " Console log from normal mode, inserted on next line with word your on inside parentheses
 nmap cll yiwocll<Esc>p
+"add new line in insert and normal mode
+imap cln console.log('\n\n\n');<Esc>
 
 " fmt.Print from insert mode; Puts focus inside parentheses
 imap fpp fmt.Println()<Esc>==f(a
@@ -235,8 +261,6 @@ vmap fpp yofpp<Esc>p
 nmap fpp yiwofpp<Esc>p
 imap fpn fmt.Println("\n\n\n")<Esc>==f(a
 
-"add new line in insert and normal mode
-imap cln console.log('\n\n\n');<Esc>
 
 " .............................................................................
 " Snippet settings
@@ -245,6 +269,74 @@ imap cln console.log('\n\n\n');<Esc>
 "smap <C-J> <Plug>snipMateNextOrTrigger
 
 
+" .............................................................................
+" Session management
+" .............................................................................
+"https://dockyard.com/blog/2018/06/01/simple-vim-session-management-part-1
+" Helper to make a vim session
+exec 'nnoremap <Leader>ss :mksession! ' . '~/vim-sessions' . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+" Helper to save a vim session
+exec 'nnoremap <Leader>sr :so ' . '~/vim-sessions' . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+
+" .............................................................................
+" nvim-Typescript 
+" .............................................................................
+let g:typescript_indent_disable = 1
+
+" .............................................................................
+" ALE / deoplete settings
+" .............................................................................
+" <TAB>: completion: The default binding for vim popup selection is <c-n> , <c-p> besides arrow key.
+"" Use tab for trigger completion with characters ahead and navigate.
+"" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"function! s:check_back_space() abort "{{{
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction"}}}
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ deoplete#manual_complete()
+
+"function! s:check_back_space() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+"call deoplete#custom#option('omni_patterns', {
+"\ 'go': '[^. *\t]\.\w*',
+"\ })
+
+"set completeopt+=noselect,menuone
+
+"nmap <silent> <leader>aj :ALENext<cr>
+"nmap <silent> <leader>ak :ALEPrevious<cr>
+
+"let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+"let g:ale_fix_on_save = 1
+"let g:max_list = 20
+
+"let g:ale_fixers = {
+"\    'javascript': ['eslint'],
+"\    'typescript': ['eslint', 'tslint'],
+"\    'json': ['prettier'],
+"\}
+"let g:ale_linters = {
+"\   'javascript': ['eslint'],
+"\   'typescript': ['tsserver', 'tslint'],
+"\}
+
+"" Find all declarations in this file
+"au FileType javascript,typescript nmap gd :TSDef<cr> 
+"" Find what this type implements
+"au FileType javascript,typescript nmap gp :TSDefPreview<cr> 
+"" Finds the callers of this function 
+"au FileType javascript,typescript nmap <leader>gc :GoCallers<cr>    
+"" Find the _test file for this go file.
+"au Filetype javaScript,typescript nmap <leader>ga <Plug>(go-alternate-edit)  
 
 " .............................................................................
 " COC settings
@@ -268,7 +360,7 @@ set shortmess+=c
 set signcolumn=yes
 
 " Which node version to use for CoC
-let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v12.14.1/bin/node'
+let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v14.4.0/bin/node'
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -338,7 +430,7 @@ let g:fzf_history_dir = '~/.local/share/fzf-history' " enable navigating search 
 " .............................................................................
 
 nmap <Leader>gd :Gdiff<CR>
-nmap <Leader>gm :Gdiff master<CR>
+nmap <Leader>gm :Gdiff origin/master<CR>
 nmap <Leader>gg :Gstatus<CR>
 nmap <Leader>gw :Gwrite<CR>
 nmap <Leader>gr :Gread<CR>
@@ -350,31 +442,50 @@ nmap <Leader>fct :GCheckoutTag<CR>
 nnoremap <Leader>gp :Dispatch! git push<CR>
 
 
-" this helps me open up the line in github directly from vim
-let g:github_enterprise_urls = ['git@git.blendlabs.com:blend']
+let g:github_enterprise_urls = ['git@git.blendlabs.com:blend'] " this helps me open up the line in github directly from vim
 nnoremap <Leader>bb :<C-R>=line('.')<CR>Gbrowse<CR>
 
 
 " .............................................................................
 "  FZF mappings
 " .............................................................................
+"" See `man fzf-tmux` for available options
+" Alternatively, you can make fzf open in a tmux popup window (requires tmux 3.2 or above) by putting fzf-tmux options in tmux key.
 
-"let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+
+"if exists('$TMUX')
+  "let g:fzf_layout = { 'tmux': '-p90%,60%' }
+"else
+  "let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+"endif
+
+"let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all' " default fzf options
+let g:fzf_history_dir = '~/.local/share/fzf-history' " enable navigating search history using Ctrl-P and Ctrl-N
+"Customizable extra key bindings for opening selected files in different ways
+"let g:fzf_action
+"Determines the size and position of fzf window
+"let g:fzf_layout
+"Customizes fzf colors to match the current color scheme
+"let g:fzf_colors
+"let g:fzf_preview_window = '' " disable preview window
+
 "nnoremap <C-p> :GFiles <CR> " Launch fzf with CTRL+P.
 
 " Search all files under git root
 nnoremap <C-p> :ProjectFiles <CR> 
 
 " Open buffers
-nnoremap <Leader><Enter> :Buffers<CR>
+nnoremap <space><space> :Buffers!<CR>
 
+" Open all lines
 "nnoremap <Leader>l :Lines<CR>
 
 " searching through files using silver searcher
-nmap <Leader>/ :Ag<CR> 
+nmap <Leader>/ :Ag!<CR> 
 
-" searching the word currently under the cursor
-"nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
+" Search current word under cursor
+nnoremap <silent> <Leader>ag :Ag! <C-R><C-W><CR>
+
 
 " .............................................................................
 " FZF Commands
@@ -386,7 +497,7 @@ function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-command! ProjectFiles execute 'Files' s:find_git_root()
+command! ProjectFiles execute 'Files!' s:find_git_root()
 " Map a few common things to do with FZF.
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
@@ -402,6 +513,11 @@ command! -bang -nargs=* PRg
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
 "command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+
+" Command tosearch current word under cursor
+" https://github.com/junegunn/fzf.vim/issues/182
+"command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
+"nnoremap <silent> <Leader>ag :AgQ <C-R><C-W><CR>
 
 
 " .............................................................................
@@ -449,7 +565,7 @@ xmap gs  <plug>(GrepperOperator)
 
 " show trailing spaces, tabs, and end of lines
 set listchars=tab:>-,trail:·,eol:$,nbsp:_
-nmap <silent> <leader>ss :set nolist!<CR>
+nmap <silent> <leader>sa :set nolist!<CR>
 " ------------------------ Spaces and indenting --------------------------- 
 
 " python spacing
@@ -533,8 +649,15 @@ set t_ut=
 " .............................................................................
 " Vim-go configs
 " .............................................................................
-"let g:go_def_mode='gopls' // doesn't work with modules
-let g:go_def_mode='godef'
+
+" Debugging configs
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+	  \ }
+
+let g:go_def_mode='godef' " works with vendor! 
+"let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"
 
@@ -543,10 +666,10 @@ let g:go_fmt_fail_silently = 1       "disable locatiion list
 let g:go_auto_type_info = 1          "Automatically show function signature when moving mouse over valid identifier"
 let g:go_def_mapping_enabled = 1     " disable vim-go :GoDef short cut (gd). Let coc handle it? or not?
 let g:go_auto_sameids = 0            " Disable automatically highlighting matching identifiers"
+"let g:go_autodetect_gopath = 1 " Whether to automatically determine gopath
 
-
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_diagnostic_errors = 1
+let g:go_highlight_build_constraints = 0
+let g:go_highlight_diagnostic_errors = 0
 let g:go_highlight_diagnostic_warnings = 0
 let g:go_highlight_function_calls = 1
 let g:go_highlight_function_parameters = 1
@@ -567,8 +690,8 @@ au FileType go nmap <leader>gi :GoImplements<cr>
 au FileType go nmap <leader>gc :GoCallers<cr>    
 " Find the _test file for this go file.
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)  
-au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
-au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+"au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+"au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 " Go to where this identifier is defined. Ctrl T will bring you back.
 au FileType go nmap gd <Plug>(go-def) 
 "let g:go_guru_scope = ["/Users/jfan/go/src/git.blendlabs.com/blend/connectivity/server/..."]
