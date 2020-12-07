@@ -196,6 +196,13 @@ function vimf() {
   fi
 }
 
+# Helper function to install dev npm packages
+# https://git.blendlabs.com/blend/npm-verdaccio#publishing-to-sandbox-registry
+function dev_install() {
+    echo npm i @blend/${1}@npm:@dev/${1}@${2}
+    npm i @blend/${1}@npm:@dev/${1}@${2}
+}
+
 ############################################################
 
 # Bindings 

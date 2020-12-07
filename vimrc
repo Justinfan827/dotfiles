@@ -171,6 +171,8 @@ set nowrap
 " .............................................................................
 " .............................................................................
 
+" Jump to line by just typing 123<CR>
+nnoremap <CR> G
 " Avoid typing :
 nnoremap ; :
 " Split window
@@ -254,7 +256,7 @@ nmap cll yiwocll<Esc>p
 imap cln console.log('\n\n\n');<Esc>
 
 " fmt.Print from insert mode; Puts focus inside parentheses
-imap fpp fmt.Println()<Esc>==f(a
+imap fpp fmt.Println("")<Esc>==f"a
 " Console log from visual mode on next line, puts visual selection inside parentheses
 vmap fpp yofpp<Esc>p
 " Console log from normal mode, inserted on next line with word your on inside parentheses
@@ -377,9 +379,9 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Use `[c` and `]c` to navigate diagnostics (overlaps with git hunks)
+"nmap <silent> [c <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -417,13 +419,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
-
-" search current word under cursor
-" https://github.com/junegunn/fzf.vim/issues/182
-command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
-nnoremap <silent> <Leader>ag :AgQ <C-R><C-W><CR>
-"nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-let g:fzf_history_dir = '~/.local/share/fzf-history' " enable navigating search history using Ctrl-P and Ctrl-N
 
 " .............................................................................
 " fugitive mappings - git mappings / rhubarb directory
@@ -485,6 +480,10 @@ nmap <Leader>/ :Ag!<CR>
 
 " Search current word under cursor
 nnoremap <silent> <Leader>ag :Ag! <C-R><C-W><CR>
+" search current word under cursor
+" https://github.com/junegunn/fzf.vim/issues/182
+command! -nargs=* AgQ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': '-q '.shellescape(<q-args>.' ')})
+"nnoremap <silent> <Leader>ag :AgQ <C-R><C-W><CR>
 
 
 " .............................................................................
