@@ -239,9 +239,14 @@ alias st='tmux source-file ~/.tmux.conf'
 alias gsb='git checkout $(git branch | fzf)'
 alias g='git'
 alias gc='git commit -m'
+alias gcp='git checkout -' # checkout previous branch
+alias gco='git checkout' # checkout previous branch
 alias gp='git push'
-alias gu='git pull'
+alias gpu='git pull'
+alias gpum='git checkout master | git pull'
+alias gmm='git merge master'
 alias gst='git status'
+alias gd='g diff'
 
 # Tmux aliases
 alias tx='tmux'

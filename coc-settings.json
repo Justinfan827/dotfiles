@@ -18,8 +18,6 @@
     "golang",
     "css",
     "vue",
-    "javascript",
-    "typescript",
     "javascriptreact",
     "typescriptreact",
     "Markdown",
@@ -28,14 +26,9 @@
     "html",
     "python"
   ],
-  "eslint.filetypes": [
-    "vue",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.filetypes": ["vue", "javascript"],
   "eslint.autoFixOnSave": true,
+  "tslint.autoFixOnSave": true,
   "list.normalMappings": {
     "<C-c>": "do:exit"
   }
