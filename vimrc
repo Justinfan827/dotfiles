@@ -17,6 +17,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf.vim'
 
 " General
+Plug 'tpope/vim-dispatch' " dispatch async commands in vim (for git push and pull etc)
+Plug 'aacunningham/vim-fuzzy-stash' " git stash from vim
 Plug 'tpope/vim-fugitive' " git wrapper in vim
 Plug 'tpope/vim-rhubarb' " link to git repo quickly
 Plug 'stsewd/fzf-checkout.vim' " checkout git branches in vim
@@ -26,6 +28,7 @@ Plug 'tpope/vim-unimpaired' " nice bindings e.g. '] space' to add empty line, ]l
 Plug 'christoomey/vim-tmux-navigator' " help navigate with vim / tmux splits
 Plug 'airblade/vim-rooter' " Changes vim working directory to the project root (helpful for grepping tools)
 Plug 'qpkorr/vim-bufkill' " kill buffer with :BD without killing session
+"Plug 'SirVer/ultisnips' "Snippets! (vim-go)
 
 " Nvim typescript (experimenting)
 "Plug 'HerringtonDarkholme/yats.vim'
@@ -33,14 +36,14 @@ Plug 'qpkorr/vim-bufkill' " kill buffer with :BD without killing session
 "" For async completion
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-
 "" For Denite features
 "Plug 'Shougo/denite.nvim'
-
 "" Enable deoplete at startup
 "let g:deoplete#enable_at_startup = 1
 
 " Theme and styling
+Plug 'junegunn/goyo.vim' " focus mode
+Plug 'junegunn/limelight.vim' " hyperfocus writing in vim
 Plug 'fatih/molokai'
 Plug 'sainnhe/gruvbox-material'
 Plug 'airblade/vim-gitgutter'
@@ -65,7 +68,8 @@ Plug 'posva/vim-vue'
 let g:polyglot_disabled = ['css', 'markdown']
 
 Plug 'sheerun/vim-polyglot'
-Plug 'leafgarland/typescript-vim' " TS language extension
+Plug 'HerringtonDarkholme/yats.vim' " syntax highlighting
+Plug 'leafgarland/typescript-vim' " ts-extension
 Plug 'peitalin/vim-jsx-typescript' " TSX language extension
 hi tsxTagName guifg=#E06C75
 
@@ -110,7 +114,12 @@ endif
 
 " nvim setting
 let g:python3_host_prog = "/usr/local/bin/python3"
-let g:python_host_prog = "/usr/local/bin/python2"
+let g:python_host_prog = "/usr/bin/python2"
+"let g:python_host_prog = "/usr/local/bin/python2"
+"let g:node_host_prog = '/usr/local/bin/node'  
+" Which node version to use for CoC
+let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v14.4.0/bin/node'
+"let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v12.14.1/bin/node'
 
 " .............................................................................
 " .............................................................................
@@ -164,6 +173,11 @@ set numberwidth=5
 set hlsearch                       " Highlight search keywords
 set noshowmode                     " Don't show bottom line since i'm using lightline.vim
 set nowrap
+
+"............. GOYO distraction free mode ....................................................
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 
 " .............................................................................
 " .............................................................................
@@ -347,7 +361,8 @@ let g:typescript_indent_disable = 1
 " Declare CoC extensions // TODO: move all cocsettings into vimrc
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
-  \ 'coc-eslint'
+  \ 'coc-eslint',
+  \ 'coc-tslint',
   \ ]
 
 " if hidden is not set, TextEdit might fail.
@@ -361,15 +376,18 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
-" Which node version to use for CoC
-let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v14.4.0/bin/node'
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" : 
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" use tab for snippets
+let g:coc_snippet_next = '<tab>' 
+
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -390,6 +408,7 @@ nnoremap <silent> gh :call CocAction('doHover')<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
 
 " Use U to show documentation in preview window
 nnoremap <silent> U :call <SID>show_documentation()<CR>
@@ -426,16 +445,32 @@ nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
 
 nmap <Leader>gd :Gdiff<CR>
 nmap <Leader>gm :Gdiff origin/master<CR>
-nmap <Leader>gg :Gstatus<CR>
-nmap <Leader>gw :Gwrite<CR>
+nmap <Leader>gg :Git<CR>
+nmap <Leader>gw :Gwrite<CR><CR>
 nmap <Leader>gr :Gread<CR>
 nmap <Leader>gb :Git blame<CR>
 nmap <Leader>fc :GCheckout<CR>
 nmap <Leader>fct :GCheckoutTag<CR>
 
-" This lets me push from vim
-nnoremap <Leader>gp :Dispatch! git push<CR>
 
+" fugitive git bindings
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gl :silent! Git log<CR>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>go :Git checkout<Space>
+
+" This lets me push from vim
+nnoremap <leader>gps :Dispatch! git push<CR>
+nnoremap <leader>gpl :Dispatch! git pull<CR>
+
+" This lets me open git branches from vim  git fzf checkout extension
+nnoremap <leader>gr :GBranches<CR>
+
+" This lets me open git branches from vim  git fzf checkout extension
+nnoremap <leader>gss :GStash<space>
+nnoremap <leader>gsl :GStashList<CR>
 
 let g:github_enterprise_urls = ['git@git.blendlabs.com:blend'] " this helps me open up the line in github directly from vim
 nnoremap <Leader>bb :<C-R>=line('.')<CR>Gbrowse<CR>
@@ -579,6 +614,7 @@ au BufNewFile,BufRead *.py
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+
 autocmd FileType typescriptreact setlocal ts=2 sts=2 sw=2
 
 " Allow scroll in vim  
@@ -597,7 +633,7 @@ set noerrorbells                            "disable beep on errors
 set complete-=i
 set smarttab
 set expandtab                               " Use spaces for tab
-set shiftwidth=4                            " '>' indents with 4 spaces
+set shiftwidth=4                            " '>' indents with 3 spaces
 set tabstop=4                               " Show existing tab with 4 spaces width
 set softtabstop=4
 
@@ -646,6 +682,13 @@ autocmd BufNewFile,BufRead .env.* set filetype=sh
 " Disable background color erase
 set t_ut=
 " .............................................................................
+" ultisnips configs
+" .............................................................................
+" better key bindings for UltiSnipsExpandTrigger
+"let g:UltiSnipsExpandTrigger = ",<tab>"
+"let g:UltiSnipsJumpForwardTrigger = ",<tab>"
+"let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" .............................................................................
 " Vim-go configs
 " .............................................................................
 
@@ -655,12 +698,12 @@ let g:go_debug_windows = {
       \ 'stack':      'rightbelow 10new',
 	  \ }
 
-let g:go_def_mode='godef' " works with vendor! 
-"let g:go_def_mode='gopls'
+"let g:go_def_mode='godef' 
+let g:go_def_mode='gopls' "works with vendor
 let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"
 
-
+let g:go_addtags_transform = "camelcase" " snippet tags use camelcase
 let g:go_fmt_fail_silently = 1       "disable locatiion list
 let g:go_auto_type_info = 1          "Automatically show function signature when moving mouse over valid identifier"
 let g:go_def_mapping_enabled = 1     " disable vim-go :GoDef short cut (gd). Let coc handle it? or not?

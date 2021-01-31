@@ -101,12 +101,38 @@ function tms() {
     tmux switch -t $1
 }
 
+# Open the Pull Request URL for your current directory's branch (base branch defaults to master)
+function openpr() {
+  github_url=`git remote -v | awk '/fetch/{print $2}' | sed -Ee 's#(git@|git://)#https://#' -e 's@com:@com/@' -e 's%\.git$%%'`;
+  branch_name=`git symbolic-ref HEAD | cut -d"/" -f 3,4`;
+  pr_url=$github_url"/compare/"$branch_name
+  open $pr_url;
+}
+
+# Run git push and then immediately open the Pull Request URL
+function gpr() {
+  git push origin HEAD
+
+  if [ $? -eq 0 ]; then
+    openpr
+  else
+    echo 'failed to push commits and open a pull request.';
+  fi
+}
+
 ############################################################
 
 # Blend functions 
 
 ############################################################
 
+# Setup vault locally
+export VAULT_ADDR=https://vault.sandbox.k8s.centrio.com:8200
+function vault_token() {
+    CLIENT_ID=`cat ~/.deployinator_api_key  | jq -r '."Client-Id"'`
+    CLIENT_SECRET=`cat ~/.deployinator_api_key  | jq -r '."Client-Secret"'`
+    export VAULT_TOKEN=`curl -X POST https://deployinator.sandbox.k8s.centrio.com/api/vault.tokens -H "Client-Id: ${CLIENT_ID}" -H "Client-Secret: ${CLIENT_SECRET}" | jq -r '.token'`
+}
 
 # pure lending locally and point to connex
 function lending() {
@@ -127,7 +153,7 @@ function quietLending() {
 }
 
 ## just run connex and point to local lending
-function connex() {
+function cx() {
     cd ~/go/src/git.blendlabs.com/blend/connectivity
     LENDING_API_HOST=localhost:8080 LENDING_HOST=localhost:8080 make run
 }
@@ -242,6 +268,7 @@ alias gc='git commit -m'
 alias gcp='git checkout -' # checkout previous branch
 alias gco='git checkout' # checkout previous branch
 alias gp='git push'
+alias gundocommit='git reset --soft HEAD~'
 alias gpu='git pull'
 alias gpum='git checkout master | git pull'
 alias gmm='git merge master'
@@ -264,6 +291,7 @@ alias vimv='vim ~/.vimrc'
 alias vimz='vim ~/.zshrc'
 alias vimt='vim ~/.tmux.conf'
 alias vf='vimf'
+alias gvf='GO111MODULE=off vimf'
 # open vim at root to avoid issues with coc tsserver
 alias vlend='vim ~/repo/git.blendlabs.com/blend/lending/backend/Gruntfile.js'
 
@@ -376,10 +404,19 @@ export EDITOR='nvim'
 # enable vi-mode on command line
 #bindkey -v
 
+
+#####
+# Neovim configs
+#######
+# suggested by neovim healthcheck https://vi.stackexchange.com/questions/7644/use-vim-with-virtualenv/7654#7654
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
+
 #####
 # Go configs
 #######
-export GO111MODULE=off # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
+#export GO111MODULE=on # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
 export GOPATH=$HOME/go
 #export GOROOT=/usr/local/opt/go@1.12/libexec
 export GOROOT=/usr/local/opt/go@1.13/libexec

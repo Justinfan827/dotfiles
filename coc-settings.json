@@ -9,26 +9,24 @@
       }
     }
   },
-  "vetur.format.enable": true,
-  "python.jediEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "black",
   "coc.preferences.formatOnSaveFiletypes": [
     "gopls",
     "golang",
     "css",
     "vue",
     "javascriptreact",
-    "typescriptreact",
+    "typescript",
     "Markdown",
     "json",
     "graphql",
     "html",
     "python"
   ],
-  "eslint.filetypes": ["vue", "javascript"],
+  "prettier.tslintIntegration": true,
+  "prettier.eslintIntegration": true,
   "eslint.autoFixOnSave": true,
   "tslint.autoFixOnSave": true,
+  "tslint.exclude": ["~/repo/git.blendlabs.com/blend/lending/backend/dist"],
   "list.normalMappings": {
     "<C-c>": "do:exit"
   }
