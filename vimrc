@@ -20,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-dispatch' " dispatch async commands in vim (for git push and pull etc)
 Plug 'aacunningham/vim-fuzzy-stash' " git stash from vim
 Plug 'tpope/vim-fugitive' " git wrapper in vim
-Plug 'tpope/vim-rhubarb' " link to git repo quickly
+Plug 'tpope/vim-rhubarb' " link to git repo quickly (broken atm)
 Plug 'stsewd/fzf-checkout.vim' " checkout git branches in vim
 Plug 'itchyny/vim-gitbranch' " add git branch to your lightline
 Plug 'mhinz/vim-grepper' " grep easily
@@ -42,6 +42,7 @@ Plug 'qpkorr/vim-bufkill' " kill buffer with :BD without killing session
 "let g:deoplete#enable_at_startup = 1
 
 " Theme and styling
+Plug 'skielbasa/vim-material-monokai' 
 Plug 'junegunn/goyo.vim' " focus mode
 Plug 'junegunn/limelight.vim' " hyperfocus writing in vim
 Plug 'fatih/molokai'
@@ -65,12 +66,15 @@ Plug 'posva/vim-vue'
 " .............................................................................
 " Polyglot configs
 " .............................................................................
-let g:polyglot_disabled = ['css', 'markdown']
+"let g:polyglot_disabled = ['css', 'markdown']
 
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'HerringtonDarkholme/yats.vim' " syntax highlighting
+Plug 'pangloss/vim-javascript' " syntax highlighting
 Plug 'leafgarland/typescript-vim' " ts-extension
 Plug 'peitalin/vim-jsx-typescript' " TSX language extension
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
 hi tsxTagName guifg=#E06C75
 
 "Plug 'HerringtonDarkholme/yats.vim' " JS language extension
@@ -99,6 +103,14 @@ call plug#end()
 filetype plugin on
 set undodir=~/.vim/undodir
 
+" Auto read buffers while inside vim
+" https://vi.stackexchange.com/questions/444/how-do-i-reload-the-current-file/13092#13092
+au FocusGained,BufEnter * :checktime
+
+
+
+" Source Vim configuration file and install plugins
+nnoremap <silent><leader>1 :source ~/.vimrc \| :PlugInstall<CR>
 
 " ......................... folding ...........................
 if has('folding')
@@ -118,7 +130,7 @@ let g:python_host_prog = "/usr/bin/python2"
 "let g:python_host_prog = "/usr/local/bin/python2"
 "let g:node_host_prog = '/usr/local/bin/node'  
 " Which node version to use for CoC
-let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v14.4.0/bin/node'
+"let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v14.4.0/bin/node'
 "let g:coc_node_path = '/Users/jfan/.nvm/versions/node/v12.14.1/bin/node'
 
 " .............................................................................
@@ -175,8 +187,12 @@ set noshowmode                     " Don't show bottom line since i'm using ligh
 set nowrap
 
 "............. GOYO distraction free mode ....................................................
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+"autocmd! User GoyoEnter Limelight
+"autocmd! User GoyoLeave Limelight!
+let g:goyo_width = "500"
+let g:goyo_height = "100%"
+nnoremap <space>go :Goyo<CR>
+nnoremap <space>gc :Goyo!<CR>
 
 
 " .............................................................................
@@ -254,7 +270,7 @@ vnoremap <leader>P "+P
 " cd to directory of current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " JSON.stringify from insert mode; Puts focus inside parentheses
-imap clj JSON.stringify(,null, 2)<Esc>==f(a
+imap clj console.log(JSON.stringify(,null, 2))<Esc>==f,i
 " JSON.stringify from visual mode on next line, puts visual selection inside parentheses
 vmap clj yocll<Esc>p
 " JSON.stringify from normal mode, inserted on next line with word your on inside parentheses
@@ -362,8 +378,21 @@ let g:typescript_indent_disable = 1
 let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint',
+  \ 'coc-tslint-plugin',
   \ 'coc-tslint',
   \ ]
+
+" prettier / eslint based on setup
+"if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  "let g:coc_global_extensions += ['coc-prettier']
+"endif
+
+"if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  "let g:coc_global_extensions += ['coc-eslint']
+"endif
+"
+" We can create a mapping to show documentation for the word under the cursor in the same way:
+"nnoremap <silent> K :call CocAction('doHover')<CR>
 
 " if hidden is not set, TextEdit might fail.
 set hidden " Manage multiple buffers effectively: the current buffer can be “sent” to the background without writing to disk. When a background buffer becomes current again, marks and undo-history are remembered. See chapter Buffers to understand this better.
@@ -397,9 +426,6 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[c` and `]c` to navigate diagnostics (overlaps with git hunks)
-"nmap <silent> [c <Plug>(coc-diagnostic-prev)
-"nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -409,9 +435,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -435,6 +458,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Run some code action
+nmap <leader>do <Plug>(coc-codeaction)
 
 nmap <silent> <Leader>m <Plug>(coc-diagnostic-prev)
 nmap <silent> <Leader>n <Plug>(coc-diagnostic-next)
@@ -449,7 +474,6 @@ nmap <Leader>gg :Git<CR>
 nmap <Leader>gw :Gwrite<CR><CR>
 nmap <Leader>gr :Gread<CR>
 nmap <Leader>gb :Git blame<CR>
-nmap <Leader>fc :GCheckout<CR>
 nmap <Leader>fct :GCheckoutTag<CR>
 
 
@@ -458,7 +482,7 @@ nnoremap <leader>gc :Gcommit -v -q<CR>
 nnoremap <leader>gt :Gcommit -v -q %:p<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gl :silent! Git log<CR>
-nnoremap <leader>gm :Gmove<Space>
+"nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>go :Git checkout<Space>
 
 " This lets me push from vim
@@ -466,13 +490,28 @@ nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
 " This lets me open git branches from vim  git fzf checkout extension
-nnoremap <leader>gr :GBranches<CR>
+nnoremap <leader>fb :GBranches<CR>
 
 " This lets me open git branches from vim  git fzf checkout extension
 nnoremap <leader>gss :GStash<space>
 nnoremap <leader>gsl :GStashList<CR>
 
 let g:github_enterprise_urls = ['git@git.blendlabs.com:blend'] " this helps me open up the line in github directly from vim
+"https://github.com/vim/vim/issues/4738 temporary fix
+if has('macunix')
+  function! OpenURLUnderCursor()
+    let s:uri = expand('<cWORD>')
+    let s:uri = matchstr(s:uri, '[a-z]*:\/\/[^ >,;()]*')
+    let s:uri = substitute(s:uri, '?', '\\?', '')
+    let s:uri = shellescape(s:uri, 1)
+    if s:uri != ''
+      silent exec "!open '".s:uri."'"
+      :redraw!
+    endif
+  endfunction
+  nnoremap gx :call OpenURLUnderCursor()<CR>
+endif
+
 nnoremap <Leader>bb :<C-R>=line('.')<CR>Gbrowse<CR>
 
 
@@ -612,8 +651,14 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
+" Typescript / JS setup
+" Sometimes syntax highlighting can get out of sync in large JSX and TSX files. This was happening too often for me so I opted to enable syntax sync fromstart, which forces vim to rescan the entire buffer when highlighting. This does so at a performance cost, especially for large files. It is significantly faster in Neovim than in vim.
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd BufWritePost  *.ts :CocCommand tslint.fixAllProblems
 
 autocmd FileType typescriptreact setlocal ts=2 sts=2 sw=2
 
@@ -742,7 +787,6 @@ au FileType go nmap gd <Plug>(go-def)
 " .............................................................................
 " Polyglot configs
 " .............................................................................
-let g:polyglot_disabled = ['css', 'markdown']
 
 " .............................................................................
 " NERDTree configs

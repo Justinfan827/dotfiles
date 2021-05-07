@@ -29,11 +29,15 @@ plugins=(
     fzf
     aws
     web-search
+    pass
     zsh-autosuggestions
 )
 
 # help zsh find nvm BEFORE oh my zsh is sourced
 export NVM_DIR="$HOME/.nvm"
+
+# ge aws cli completion
+export PATH=/usr/local/bin/aws_completer:$PATH
 ############################################################
 
 # FZF settings
@@ -126,6 +130,9 @@ function gpr() {
 
 ############################################################
 
+function cx_sandbox() {
+    PGPASSWORD=$1 psql -h connectivity-sandbox-new.cj1yhu1y5rvu.us-east-1.rds.amazonaws.com -U blend_admin connectivity
+}
 # Setup vault locally
 export VAULT_ADDR=https://vault.sandbox.k8s.centrio.com:8200
 function vault_token() {
@@ -194,8 +201,53 @@ function svault() {
     export VAULT_TOKEN=$(cat ~/.vault-token)
 }
 
+function incomeTest() {
+    watchexec -c -w ./ "make test extra=\"-- $3 -run .*$1.* ./pkg/$2\""
+}
 
-########## fzf functions
+function goTest() {
+    watchexec -c -w ./ "go test $3 -run .*$1.* $2"
+}
+
+############################################################
+# FZF terminal functions 
+############################################################
+
+# c - browse chrome history
+function c() {
+  local cols sep google_history open
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+
+  if [ "$(uname)" = "Darwin" ]; then
+    google_history="$HOME/Library/Application Support/Google/Chrome/Default/History"
+    open=open
+  else
+    google_history="$HOME/.config/google-chrome/Default/History"
+    open=xdg-open
+  fi
+  cp -f "$google_history" /tmp/h
+  sqlite3 -separator $sep /tmp/h \
+    "select substr(title, 1, $cols), url
+     from urls order by last_visit_time desc" |
+  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+}
+
+# b - browse chrome bookmarks
+function b() {
+     bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+
+     jq_script='
+        def ancestors: while(. | length >= 2; del(.[-1,-2]));
+        . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
+
+    jq -r "$jq_script" < "$bookmarks_path" \
+        | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
+        | fzf --ansi \
+        | cut -d$'\t' -f2 \
+        | xargs open
+}
 
 ## fd - cd to selected directory
 function fd() {
@@ -210,6 +262,12 @@ function cdf() {
    local file
    local dir
    file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# open a vim session
+function vims() {
+    vim -S "~/vim-sessions/$1.vim"
+
 }
 
 # Search a file with fzf inside a Tmux pane and then open it in an editor
@@ -235,6 +293,26 @@ function dev_install() {
 
 ############################################################
 
+############################################################
+
+# Productivity in terminal 
+
+############################################################
+# LESS terminal pager optimization
+# https://www.topbug.net/blog/2016/09/27/make-gnu-less-more-powerful/
+# # set options for less
+export LESS='--quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4'
+# or the short version
+# export LESS='-F -i -J -M -R -W -x4 -X -z-4'
+# # Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
 
 
 ############################################################
@@ -249,6 +327,11 @@ alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 
 #
 
+alias we='watchexec -c -w ./'
+alias weg='watchexec -c -w ./ go run'
+
+alias monolint='jm gomono && repoctl lint'
+
 alias grep='grep --color'
 alias mk='make'
 alias chrome='chrome -a \"Google Chrome\"'
@@ -262,12 +345,15 @@ alias sz='source ~/.zshrc'
 alias st='tmux source-file ~/.tmux.conf'
 
 # Git alias
+# copy current branch name
+alias gitb="git branch | grep '^\*' | cut -d' ' -f2 | pbcopy" 
 alias gsb='git checkout $(git branch | fzf)'
 alias g='git'
 alias gc='git commit -m'
 alias gcp='git checkout -' # checkout previous branch
-alias gco='git checkout' # checkout previous branch
+alias gnew='git checkout -b' 
 alias gp='git push'
+alias gpo='git push -u origin HEAD'
 alias gundocommit='git reset --soft HEAD~'
 alias gpu='git pull'
 alias gpum='git checkout master | git pull'
@@ -291,9 +377,10 @@ alias vimv='vim ~/.vimrc'
 alias vimz='vim ~/.zshrc'
 alias vimt='vim ~/.tmux.conf'
 alias vf='vimf'
-alias gvf='GO111MODULE=off vimf'
 # open vim at root to avoid issues with coc tsserver
 alias vlend='vim ~/repo/git.blendlabs.com/blend/lending/backend/Gruntfile.js'
+
+alias nr="npm run"
 
 # Docker
 alias kb='kubectl'
@@ -307,11 +394,6 @@ alias mkbe='minikube'
 # Environment variables
 ############################################################
 export GITHUB_OAUTH_TOKEN="d3609a0cfd4c0d38fa0be0b315e2349ff00310c7"
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="/usr/local/bin:$PATH"
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 #export WORKON_HOME=$HOME/.virtualenvs   # Optional
 #export PROJECT_HOME=$HOME/projects      # Optional
 #export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
@@ -416,7 +498,7 @@ fi
 #####
 # Go configs
 #######
-#export GO111MODULE=on # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
+export GO111MODULE=auto # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
 export GOPATH=$HOME/go
 #export GOROOT=/usr/local/opt/go@1.12/libexec
 export GOROOT=/usr/local/opt/go@1.13/libexec
@@ -429,8 +511,9 @@ export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 ################### blend configs
 # note: nvm dir is set up in the first few lines for oh my zsh
 # Commenting these lines out. For some reason, this really slows down startup
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# my problem: i have nvm installed by brew and by make setup node. WOOO I FIXED IT! I installed nvm in HOME directory
+#[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Creating an alias here to load nvm manually
 alias loadnvm="/usr/local/opt/nvm/nvm.sh && /usr/local/opt/nvm/etc/bash_completion.d/nvm"  
@@ -453,15 +536,23 @@ export PATH=$HOME/mongodb/bin:$PATH
 
 ################### blend configs
 
-# blend profile contents
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/justin/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/path.zsh.inc'; fi
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/justin/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/justin/google-cloud-sdk/completion.zsh.inc'; fi
+# load aws command completion: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html
+autoload bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
 
+
+#zprof
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="/usr/local/bin:$PATH"
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-#zprof
+#source $(brew --prefix nvm)/nvm.sh #this loads nvm for me
+#
+# ulimit increase for blend
+ulimit -f unlimited -t unlimited -v unlimited -n 64000 -u 2048
