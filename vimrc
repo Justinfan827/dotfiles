@@ -20,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-dispatch' " dispatch async commands in vim (for git push and pull etc)
 Plug 'aacunningham/vim-fuzzy-stash' " git stash from vim
 Plug 'tpope/vim-fugitive' " git wrapper in vim
-Plug 'tpope/vim-rhubarb' " link to git repo quickly (broken atm)
+Plug 'tpope/vim-rhubarb' " link to git repo quickly
 Plug 'stsewd/fzf-checkout.vim' " checkout git branches in vim
 Plug 'itchyny/vim-gitbranch' " add git branch to your lightline
 Plug 'mhinz/vim-grepper' " grep easily
