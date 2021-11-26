@@ -57,6 +57,7 @@ local load_core =function()
 
   require('core.options')
   require('core.mappings')
+  require('core.events')
   require('plugins')
   require('ui')
   require('lsp')

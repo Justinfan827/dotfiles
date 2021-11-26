@@ -7,5 +7,6 @@ require('gitsigns').setup()
 require('tools.reload')
 require('tools.treesitter')
 require('tools.telescope')
+require('tools.formatter')
 --require('tools.cmp')
 

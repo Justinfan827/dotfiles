@@ -95,8 +95,12 @@ use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
-  -- test line
+  -- lua line
   use 'hoob3rt/lualine.nvim'
+  use '' 
+
+  -- testing formatting
+  use 'mhartington/formatter.nvim'
 
   -- lua scratchpad
 
