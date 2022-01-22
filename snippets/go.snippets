@@ -1,0 +1,38 @@
+snippet testt "table test function"
+	func Test${1:name}(t *testing.T) {
+		tests := []struct {
+			name string
+		}{
+			{
+				name: "${2:test name}",
+			},
+		}
+
+		for _, test := range tests {
+			t.Run(test.name, func(t *testing.T) {
+				${0:${VISUAL}}
+			})
+		}
+	}
+
+
+snippet sw "switch"
+	switch ${1:var} {
+	case ${2:value1}:
+		${3}
+	case ${4:value2}:
+		${5}
+	default:
+		${0}
+	}
+
+snippet forr "for range loop"
+	for ${1:e} := range ${2:collection} {
+		${0:${VISUAL}}
+	}
+
+snippet fori "for int loop"
+	for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
+		${0:${VISUAL}}
+	}
+

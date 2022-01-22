@@ -1,31 +1,30 @@
-local lsp = require('lsp.nvim_lsp')
-local nvim_lsp = require('lspconfig')
+local lsp = require("lsp.nvim_lsp")
+local nvim_lsp = require("lspconfig")
 
 local on_attach = lsp.on_attach
-local capabilities  = lsp.capabilities
+local capabilities = lsp.capabilities
 
-nvim_lsp.gopls.setup{
+nvim_lsp.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   flags = {
-    debounce_text_changes = 150,
+    debounce_text_changes = 150
   },
   cmd = {"gopls", "serve"},
   settings = {
     gopls = {
       analyses = {
-        unusedparams = true,
+        unusedparams = true
       },
-      staticcheck = true,
-    },
+      staticcheck = true
+    }
   }
 }
 
-
 -- import on save
 function goimports(timeout_ms)
-  local context = { only = { "source.organizeImports" } }
-  vim.validate { context = { context, "t", true } }
+  local context = {only = {"source.organizeImports"}}
+  vim.validate {context = {context, "t", true}}
 
   local params = vim.lsp.util.make_range_params()
   params.context = context
@@ -33,9 +32,13 @@ function goimports(timeout_ms)
   -- See the implementation of the textDocument/codeAction callback
   -- (lua/vim/lsp/handler.lua) for how to do this properly.
   local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
-  if not result or next(result) == nil then return end
+  if not result or next(result) == nil then
+    return
+  end
   local actions = result[1].result
-  if not actions then return end
+  if not actions then
+    return
+  end
   local action = actions[1]
 
   -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
