@@ -4,6 +4,6 @@
 require("lsp.nvim_lsp")
 
 -- for some reason, splitting into multiple files makes things not work
---require('lsp.gopls_lsp')
+require("lsp.gopls_lsp")
 --require('lsp.lua_lsp')
 --require('lsp.tsserver_lsp')

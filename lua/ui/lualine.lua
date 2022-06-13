@@ -7,7 +7,8 @@ end
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = "solarized_dark",
+    --theme = "solarized_dark",
+    theme = "gruvbox",
     section_separators = {"", ""},
     component_separators = {"", ""},
     disabled_filetypes = {}
@@ -15,7 +16,10 @@ lualine.setup {
   sections = {
     lualine_a = {"mode"},
     lualine_b = {"branch"},
-    lualine_c = {"filename"},
+    lualine_c = {
+      "filename",
+      require("auto-session-library").current_session_name
+    },
     lualine_x = {
       {"diagnostics", sources = {"nvim_lsp"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},
       "encoding",

@@ -74,6 +74,27 @@ _G.packer_plugins = {
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["TrueZen.nvim"] = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/TrueZen.nvim",
+    url = "https://github.com/Pocco81/TrueZen.nvim"
+  },
+  ["auto-session"] = {
+    config = { "\27LJ\2\nz\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\31auto_session_suppress_dirs\1\2\0\0\a~/\1\0\1\14log_level\tinfo\nsetup\17auto-session\frequire\0" },
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/auto-session",
+    url = "https://github.com/rmagatti/auto-session"
+  },
+  ["bufferline.nvim"] = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
+  catppuccin = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -134,6 +155,11 @@ _G.packer_plugins = {
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/gx-extended.vim",
     url = "https://github.com/stsewd/gx-extended.vim"
   },
+  harpoon = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
+  },
   ["is.vim"] = {
     loaded = true,
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/is.vim",
@@ -148,11 +174,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
-  },
-  ["lush.nvim"] = {
-    loaded = true,
-    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/lush.nvim",
-    url = "https://github.com/rktjmp/lush.nvim"
   },
   nerdcommenter = {
     loaded = true,
@@ -179,6 +200,11 @@ _G.packer_plugins = {
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-spectre"] = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/nvim-spectre",
+    url = "https://github.com/windwp/nvim-spectre"
+  },
   ["nvim-tree.lua"] = {
     config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0" },
     loaded = true,
@@ -194,6 +220,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["onedark.nvim"] = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/onedark.nvim",
+    url = "https://github.com/navarasu/onedark.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -290,15 +321,15 @@ _G.packer_plugins = {
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/vim-gh-line",
     url = "https://github.com/ruanyl/vim-gh-line"
   },
+  ["vim-golang-alternate"] = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/vim-golang-alternate",
+    url = "https://github.com/benmills/vim-golang-alternate"
+  },
   ["vim-husk"] = {
     loaded = true,
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/vim-husk",
     url = "https://github.com/vim-utils/vim-husk"
-  },
-  ["vim-obsession"] = {
-    loaded = true,
-    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/vim-obsession",
-    url = "https://github.com/tpope/vim-obsession"
   },
   ["vim-repeat"] = {
     loaded = true,
@@ -314,6 +345,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/justin/.local/share/nvim/site/pack/packer/start/vim-snippets",
     url = "https://github.com/honza/vim-snippets"
+  },
+  ["vim-subversive"] = {
+    loaded = true,
+    path = "/Users/justin/.local/share/nvim/site/pack/packer/start/vim-subversive",
+    url = "https://github.com/svermeulen/vim-subversive"
   },
   ["vim-surround"] = {
     loaded = true,
@@ -348,6 +384,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for which-key.nvim]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
 time([[Config for which-key.nvim]], false)
+-- Config for: auto-session
+time([[Config for auto-session]], true)
+try_loadstring("\27LJ\2\nz\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\31auto_session_suppress_dirs\1\2\0\0\a~/\1\0\1\14log_level\tinfo\nsetup\17auto-session\frequire\0", "config", "auto-session")
+time([[Config for auto-session]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")

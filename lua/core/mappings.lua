@@ -1,4 +1,3 @@
---
 -- map is a wrapper around vim api to help set variables
 -- in a more vimscript way
 -- e.g. If we wanted to do:
@@ -87,8 +86,8 @@ map {"i", "fpn", 'fmt.Printf("\\n\\n\\n")<Esc>==f(a'}
 
 map {"n", "s*", ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn"}
 map {"x", "s*", "sy:let @/=@s<CR>cgn"}
+
 -- fugitive mappings
---
 map {"n", "<Leader>gd", ":Gvdiffsplit<CR>"}
 map {"n", "<Leader>gm", ":Gvdiffsplit origin/master<CR>"}
 map {"n", "<Leader>gg", ":Git<CR>"}
@@ -145,7 +144,7 @@ map {"n", "<leader>sa", ":set nolist!<CR>", {silent = true}}
 map {"n", "<leader>qr", '<cmd>:lua require("tools.telescope").reload()<CR>', {silent = true}}
 
 -- Run go imports
-map {"n", "<leader>gi", "<cmd>:lua goimports(1000)<CR>", {silent = true}}
+map {"n", "<leader>gi", "<cmd>:lua GO_IMPORTS(1000)<CR>", {silent = true}}
 
 -- telescope
 --
@@ -157,23 +156,70 @@ map {"n", "<leader>vrc", '<cmd>:lua require("tools.telescope").search_nvim()<CR>
 -- <c-d> - deletes that worktree
 -- <c-D> - force deletes that worktree
 map {"n", "<leader>wt", '<cmd>:lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {silent = true}}
-map {
-  "n",
-  "<leader>wt",
-  '<cmd>:lua require("telescope").extensions.git_worktree.create_git_worktree()<CR>',
-  {silent = true}
-}
 
 -- float term mappings
-map {"n","<leader>fn", ":FloatermNew<CR>", {silent=false}}
-map {"n","<leader>ff", ":FloatermToggle<CR>", {silent=false}}
-map {"n","<leader>fk", ":FloatermKill<CR>", {silent=false}}
-map {"v","<leader>fn", ":FloatermNew<CR>", {silent=false}}
-map {"v","<leader>ff", ":FloatermToggle<CR>", {silent=false}}
-map {"v","<leader>fk", ":FloatermKill<CR>", {silent=false}}
+map {"n", "<leader>fn", ":FloatermNew<CR>", {silent = false}}
+map {"n", "<leader>ff", ":FloatermToggle<CR>", {silent = false}}
+map {"n", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
+map {"v", "<leader>fn", ":FloatermNew<CR>", {silent = false}}
+map {"v", "<leader>ff", ":FloatermToggle<CR>", {silent = false}}
+map {"v", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
+
+-- harpoon mappings
+map {"n", "<leader>h", '<cmd>:lua require("harpoon.mark").add_file()<CR>', {silent = false}}
+map {"n", "<leader>1", '<cmd>:lua require("harpoon.ui").nav_file(1)<CR>', {silent = false}}
+map {"n", "<leader>2", '<cmd>:lua require("harpoon.ui").nav_file(2)<CR>', {silent = false}}
+map {"n", "<leader>3", '<cmd>:lua require("harpoon.ui").nav_file(3)<CR>', {silent = false}}
+map {"n", "<leader>4", '<cmd>:lua require("harpoon.ui").nav_file(4)<CR>', {silent = false}}
+map {"n", "<leader>5", '<cmd>:lua require("harpoon.ui").nav_file(5)<CR>', {silent = false}}
+map {"n", "<leader>6", '<cmd>:lua require("harpoon.ui").nav_file(6)<CR>', {silent = false}}
+map {"n", "<leader>7", '<cmd>:lua require("harpoon.ui").nav_file(7)<CR>', {silent = false}}
+map {"n", "<leader>8", '<cmd>:lua require("harpoon.ui").nav_file(8)<CR>', {silent = false}}
+map {"n", "<leader>9", '<cmd>:lua require("harpoon.ui").nav_file(9)<CR>', {silent = false}}
+map {"n", "<leader>m", '<cmd>:lua require("harpoon.ui").toggle_quick_menu()<CR>', {silent = false}}
+--map {"n", "<leader>nn", '<cmd>:lua require("harpoon.ui").nav_next()<CR>', {silent = false}}
+--map {"n", "<leader>np", '<cmd>:lua require("harpoon.ui").nav_prev()<CR>', {silent = false}}
+--map {"n", "<leader><space>", ":Telescope harpoon marks<CR>", {silent = true}}
+
+-- spectre mappings
+--
+-- search current word
+map {"n", "<leader>S", "<cmd>lua require('spectre').open()<CR>", {silent = true}}
+map {"n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", {silent = true}}
+-- search in current file
+map {"n", "<leader>sp", "viw:lua require('spectre').open_file_search()<CR>", {silent = true}}
+map {"v", "<leader>S", "<cmd>lua require('spectre').open_visual()<CR>", {silent = true}}
+
+-- subversive mappings
+--map {"n", "<leader>k", "<plug>(SubversiveSubstitute)", {}}
+--map {"n", "<leader>kk", "<plug>(SubversiveSubstituteLine)", {}}
+--map {"n", "<leader>K", "<plug>(SubversiveSubstituteToEndOfLine)",{}}
+--
+-- switching golang alternate vs test file
+map {"n", "<leader>d", ":A<CR>", {silent = true}}
+--map {"n", "<leader>AS", ":AV<CR>", {silent = true}}
+--map {"v", "<leader>A", ":A<CR>", {silent = true}}
+--map {"v", "<leader>AS", ":AV<CR>", {silent = true}}
+
+-- regex folding
+map {"n", "<leader>F", ":setlocal foldmethod=manual<CR><CR>"}
+-- https://stackoverflow.com/questions/51484595/search-a-pattern-and-fold-the-matching-lines-in-gvim
+map {
+  "n",
+  "<leader>Z",
+  ":setlocal foldexpr=(getline(v:lnum)=~@/)?0:1 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
+}
+map {
+  "n",
+  "<leader>z",
+  ":setlocal foldexpr=(getline(v:lnum)=~@/)?1:0 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
+}
 
 -- my own git branches with updated mappings
 map {"n", "<leader>tb", '<cmd>:lua require("tools.telescope").git_branches()<CR>', {silent = true}}
+
+-- focus mode
+--map {"n", "<leader>z", ":TZAtaraxis<CR>", {silent = true}}
 
 vim.cmd(
   [[

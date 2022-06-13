@@ -3,8 +3,9 @@
 -- it will call the Plenary function to reload the module. So this is how I did it.
 
 local actions = require("telescope.actions")
+local telescope = require("telescope")
 
-require("telescope").setup {
+telescope.setup {
   defaults = {
     mappings = {
       n = {
@@ -14,7 +15,9 @@ require("telescope").setup {
   }
 }
 
-require("telescope").load_extension("fzy_native")
+telescope.load_extension("harpoon")
+
+telescope.load_extension("fzy_native")
 
 local M = {}
 

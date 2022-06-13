@@ -1,4 +1,4 @@
-snippet testt "table test function"
+snippet tbt "table test function"
 	func Test${1:name}(t *testing.T) {
 		tests := []struct {
 			name string
@@ -9,12 +9,14 @@ snippet testt "table test function"
 		}
 
 		for _, test := range tests {
+			test := test
 			t.Run(test.name, func(t *testing.T) {
 				${0:${VISUAL}}
+				t.Parallel()
+				its := assert.New(t)
 			})
 		}
 	}
-
 
 snippet sw "switch"
 	switch ${1:var} {

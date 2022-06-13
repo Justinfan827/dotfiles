@@ -22,6 +22,9 @@ local function load_options()
     termguicolors = true,
     -- enable mouse for normal + visual mode
     mouse = "nv",
+    -- enable folding via treesitter
+    --foldmethod = "expr",
+    --foldexpr = "nvim_treesitter#foldexpr()",
     errorbells = true,
     visualbell = true,
     hidden = true,
@@ -156,10 +159,11 @@ local function load_variables()
     -- fzf
     --
     fzf_history_dir = "~/.local/share/fzf-history",
-
     -- floatterm
-     floaterm_shell = "fish"
-
+    floaterm_shell = "fish"
+    -- not 100% sure what these do tbh
+    --UltiSnipsJumpForwardTrigger = "<C-a>",
+    --UltiSnipsJumpBackwardTrigger = "<C-s>"
   }
 
   for variable, value in pairs(global_variables) do

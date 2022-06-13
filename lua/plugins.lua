@@ -54,11 +54,30 @@ return require("packer").startup(
     use "SirVer/ultisnips" --snippets
     use "honza/vim-snippets" -- go snippets
     use "qpkorr/vim-bufkill" -- kill buffer with :BD without killing session
-    use "tpope/vim-obsession"
     use "vim-utils/vim-husk" -- navigate vim command line better
+    use {
+      -- session management
+      -- Auto Session by default stores sessions in vim.fn.stdpath('data').."/sessions/".
+      "rmagatti/auto-session",
+      config = function()
+        require("auto-session").setup {
+          log_level = "info",
+          auto_session_suppress_dirs = {"~/"}
+        }
+      end
+    }
 
     ---- Theme and styling
-    use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+    use {"ellisonleao/gruvbox.nvim"}
+    use(
+      {
+        "catppuccin/nvim",
+        as = "catppuccin"
+      }
+    )
+    use "navarasu/onedark.nvim"
+
+    --use 'eddyekofo94/gruvbox-flat.nvim'
     use "drewtempelmeyer/palenight.vim"
     use "scrooloose/nerdcommenter" -- Key binding to comment out stuff
 
@@ -118,6 +137,9 @@ return require("packer").startup(
     -- testing formatting
     use "mhartington/formatter.nvim"
 
+    -- persistent marks
+    use "ThePrimeagen/harpoon"
+
     -- floating terminal
     use "voldikss/vim-floaterm"
     -- whichkey for better leader key
@@ -127,6 +149,34 @@ return require("packer").startup(
         require("which-key").setup {}
       end
     }
+    -- substitutions
+    use "svermeulen/vim-subversive"
+
+    -- zen mode
+    use "Pocco81/TrueZen.nvim"
+
+    -- buffer line
+    use {"akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons"}
+
+    -- search and replace
+    use "windwp/nvim-spectre"
+
+    -- go test file switch
+    use "benmills/vim-golang-alternate"
+
+    use {
+      "pwntester/octo.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+        "kyazdani42/nvim-web-devicons"
+      },
+      config = function()
+        require "octo".setup()
+      end
+    }
+    -- personal plugins
+    --use "~/workbench/testy/testy.nvim"
 
     -- lua scratchpad
   end
