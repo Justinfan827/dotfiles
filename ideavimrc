@@ -1,0 +1,6 @@
+source ~/.vimrc
+
+
+
+" format on save 
+map <leader>da <Action>(ReformatCode)
