@@ -17,6 +17,16 @@ require("formatter").setup(
           }
         end
       },
+      yaml = {
+        -- prettier
+        function()
+          return {
+            exe = "prettier",
+            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = true
+          }
+        end
+      },
       typescript = {
         -- prettier
         function()
@@ -51,6 +61,15 @@ require("formatter").setup(
           return {
             exe = "luafmt",
             args = {"--indent-count", 2, "--stdin"},
+            stdin = true
+          }
+        end
+      },
+      python = {
+        function()
+          return {
+            exe = "~/Library/Python/3.8/bin/black",
+            args = {"-q", "-"},
             stdin = true
           }
         end

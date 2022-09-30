@@ -17,6 +17,25 @@ return require("packer").startup(
       run = ":TSUpdate"
     }
     use "nvim-treesitter/playground"
+    use "nvim-treesitter/nvim-treesitter-textobjects"
+    -- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
+    -- better folding
+    --use {
+    --"kevinhwang91/nvim-ufo",
+    --opt = true,
+    --event = {"BufReadPre"},
+    --wants = {"promise-async"},
+    --requires = "kevinhwang91/promise-async",
+    --config = function()
+    --require("ufo").setup {
+    --provider_selector = function(bufnr, filetype)
+    --return {"lsp", "treesitter", "indent"}
+    --end
+    --}
+    --vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+    --vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+    --end
+    --}
 
     -- Fzf for vim: fuzzy search (ESSENTIAL)
     use {
@@ -51,7 +70,9 @@ return require("packer").startup(
     use "christoomey/vim-tmux-navigator" -- help navigate with vim / tmux splits
     use "airblade/vim-rooter" -- Changes vim working directory to the project root (helpful for grepping tools)
     use "AndrewRadev/splitjoin.vim" -- split structs in golang with gS, gJ
-    use "SirVer/ultisnips" --snippets
+    --use "SirVer/ultisnips" --snippets
+    use "L3MON4D3/LuaSnip" -- Snippets plugin
+    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
     use "honza/vim-snippets" -- go snippets
     use "qpkorr/vim-bufkill" -- kill buffer with :BD without killing session
     use "vim-utils/vim-husk" -- navigate vim command line better
@@ -68,6 +89,8 @@ return require("packer").startup(
     }
 
     ---- Theme and styling
+    --
+    use "kaicataldo/material.vim"
     use {"ellisonleao/gruvbox.nvim"}
     use(
       {
@@ -104,8 +127,6 @@ return require("packer").startup(
       end
     }
 
-    use "L3MON4D3/LuaSnip" -- Snippets plugin
-
     -- language support
     use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
     use "nvim-lua/lsp-status.nvim" -- helper for getting status of lsp onto lualine
@@ -117,7 +138,6 @@ return require("packer").startup(
     use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
 
-    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
     use "dag/vim-fish"
 
     --use {'neoclide/coc.nvim', branch = 'release'} -- CoC: Intellisense engine
@@ -165,17 +185,17 @@ return require("packer").startup(
     use "benmills/vim-golang-alternate"
 
     -- PR's in nvim omg
-    use {
-      "pwntester/octo.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim",
-        "kyazdani42/nvim-web-devicons"
-      },
-      config = function()
-        require("tools.octo").octoSetup()
-      end
-    }
+    --use {
+    --"pwntester/octo.nvim",
+    --requires = {
+    --"nvim-lua/plenary.nvim",
+    --"nvim-telescope/telescope.nvim",
+    --"kyazdani42/nvim-web-devicons"
+    --},
+    --config = function()
+    --require("tools.octo").octoSetup()
+    --end
+    --}
 
     -- easy motion
     use {

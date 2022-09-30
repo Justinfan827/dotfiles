@@ -180,6 +180,10 @@ map {"n", "<leader>m", '<cmd>:lua require("harpoon.ui").toggle_quick_menu()<CR>'
 --map {"n", "<leader>nn", '<cmd>:lua require("harpoon.ui").nav_next()<CR>', {silent = false}}
 --map {"n", "<leader>np", '<cmd>:lua require("harpoon.ui").nav_prev()<CR>', {silent = false}}
 --map {"n", "<leader><space>", ":Telescope harpoon marks<CR>", {silent = true}}
+--
+
+-- keep register when pasting
+map {"v", "<leader>p", '"_dP', {silent = true}}
 
 -- spectre mappings
 --
@@ -204,16 +208,16 @@ map {"n", "<leader>d", ":A<CR>", {silent = true}}
 -- regex folding
 --map {"n", "<leader>F", ":setlocal foldmethod=manual<CR><CR>"}
 -- https://stackoverflow.com/questions/51484595/search-a-pattern-and-fold-the-matching-lines-in-gvim
-map {
-  "n",
-  "<leader>Z",
-  ":setlocal foldexpr=(getline(v:lnum)=~@/)?0:1 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
-}
-map {
-  "n",
-  "<leader>z",
-  ":setlocal foldexpr=(getline(v:lnum)=~@/)?1:0 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
-}
+--map {
+--"n",
+--"<leader>Z",
+--":setlocal foldexpr=(getline(v:lnum)=~@/)?0:1 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
+--}
+--map {
+--"n",
+--"<leader>z",
+--":setlocal foldexpr=(getline(v:lnum)=~@/)?1:0 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
+--}
 
 -- my own git branches with updated mappings
 map {"n", "<leader>tb", '<cmd>:lua require("tools.telescope").git_branches()<CR>', {silent = true}}

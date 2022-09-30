@@ -103,12 +103,3 @@ function M.nvim_create_augroups(definitions)
     api.nvim_command("augroup END")
   end
 end
-
-local autoCommands = {
-  -- other autocommands
-  open_folds = {
-    {"BufReadPost,FileReadPost", "*", "normal zR"} -- open folds by default when using treesitter folding
-  }
-}
-
-M.nvim_create_augroups(autoCommands)

@@ -22,9 +22,12 @@ local function load_options()
     termguicolors = true,
     -- enable mouse for normal + visual mode
     mouse = "nv",
-    -- enable folding via treesitter
-    --foldmethod = "expr",
-    --foldexpr = "nvim_treesitter#foldexpr()",
+    -- enable folding via treesitter + ufo
+    foldcolumn = "1",
+    foldlevel = 99,
+    foldlevelstart = -1,
+    --foldlevelstart = 99,
+    foldenable = true,
     errorbells = true,
     visualbell = true,
     hidden = true,
@@ -33,7 +36,8 @@ local function load_options()
     virtualedit = "block",
     encoding = "utf-8",
     viewoptions = "folds,cursor,curdir,slash,unix",
-    sessionoptions = "curdir,help,tabpages,winsize",
+    -- recommended by auto-session plugin
+    sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal",
     clipboard = "unnamedplus",
     wildignorecase = true,
     wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
@@ -80,7 +84,6 @@ local function load_options()
     shortmess = "aoOTIcF",
     scrolloff = 2,
     sidescrolloff = 5,
-    foldlevelstart = 99,
     ruler = false,
     list = false,
     showtabline = 2,

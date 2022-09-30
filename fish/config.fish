@@ -34,10 +34,13 @@ set -gx VAULT_HOST vault.sandbox.k8s.centrio.com:8200
 set -x GO111MODULE auto # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
 set -x GOPATH $HOME/go
 set -x GOROOT /usr/local/opt/go/libexec
-set PATH $GOPATH/bin $GOROOT/bin  $HOME/tools/lua-language-server/bin/macOS $PATH
+set PATH $GOPATH/bin $GOROOT/bin  $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
 #set -gx GOPATH $HOME/go
 #set -gx GOBIN $GOPATH/bin
 #set -gx PATH $GOROOT/bin:$GOPATH/bin $PATH
+#o
+#
+set -gx JIRA_API_TOKEN "b9Fqh0aleNgvGHqDocKdD505"
 
 # Blend sourcegraph CLIENT_ID
 set -gx SRC_ENDPOINT "https://sourcegraph.k8s.tools.blend.com"
@@ -119,7 +122,7 @@ alias gg "git log --remotes --tags --branches --graph --pretty=format:'%Cred%h%C
 alias gl "git log --remotes --tags --branches --no-walk --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gsb "g checkout (g branch | fzf | sed -e 's/^[ \t]*//')"
 alias jj "blend-productivity-cli"
-alias gc 'git commit -m'
+alias cc 'git checkout'
 alias gcp 'git checkout -' # checkout previous branch
 alias gcc 'git checkout -b' 
 alias gp 'git push'
@@ -301,6 +304,12 @@ end
 function startMongo -d "start mongo"
   mkdir -p ~/mongodb/data/db && mongod --dbpath ~/mongodb/data/db > /dev/null 2>&1 &
 end
+
+function inrun -d "run income"
+    to in
+    make run
+end
+
 function lbrun -d "run lending backend"
     cd ~/repo/git.blendlabs.com/blend/lending/backend
     nvm use 14
@@ -367,7 +376,7 @@ end
 
 
 function wev
-    set cmd "go vet ./..."
+    set cmd "go vet ./... && revive ./..."
     watchexec -c -w ./ $cmd
 end
 
