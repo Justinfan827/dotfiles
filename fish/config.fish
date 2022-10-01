@@ -134,6 +134,8 @@ alias gmm 'git merge master'
 alias gst 'git status'
 alias gd='g diff'
 
+alias c='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
 # Tmux aliases
 alias t 'tmux'
 alias txa "tmux a -t (tmux ls | awk '{print $1}' |  sed 's/ .*\$//' | fzf)"
