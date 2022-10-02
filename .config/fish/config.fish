@@ -40,7 +40,7 @@ set PATH $GOPATH/bin $GOROOT/bin  $HOME/tools/lua-language-server/bin/macOS $HOM
 #set -gx PATH $GOROOT/bin:$GOPATH/bin $PATH
 #o
 #
-set -gx JIRA_API_TOKEN "b9Fqh0aleNgvGHqDocKdD505"
+set -gx JIRA_API_TOKEN (cat ~/.jira_token)
 
 # Blend sourcegraph CLIENT_ID
 set -gx SRC_ENDPOINT "https://sourcegraph.k8s.tools.blend.com"
@@ -53,7 +53,6 @@ set -gx CPPFLAGS "-I/usr/local/opt/libxml2/include"
 set -gx CGO_ENABLED 1
 set -gx PATH $HOME/pact/bin $PATH
 
-set -gx GITHUB_OAUTH_TOKEN "d3609a0cfd4c0d38fa0be0b315e2349ff00310c7"
 set -gx PATH $HOME/.local/bin $PATH
 
 ###########################################
