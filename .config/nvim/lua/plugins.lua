@@ -68,7 +68,12 @@ return require("packer").startup(
     use "tpope/vim-unimpaired" -- nice bindings e.g. '] space' to add empty line, ]l or ]q to move in location / quickfix list
     use "stsewd/gx-extended.vim" -- make gx work in opening files
     use "christoomey/vim-tmux-navigator" -- help navigate with vim / tmux splits
-    use "airblade/vim-rooter" -- Changes vim working directory to the project root (helpful for grepping tools)
+    --use "airblade/vim-rooter" -- Changes vim working directory to the project root (helpful for grepping tools)
+    -- New NVIM rooter
+    use {
+      "ahmedkhalf/project.nvim",
+      config = require("tools.lsp_rooter").setup()
+    }
     use "AndrewRadev/splitjoin.vim" -- split structs in golang with gS, gJ
     --use "SirVer/ultisnips" --snippets
     use "L3MON4D3/LuaSnip" -- Snippets plugin
@@ -122,9 +127,7 @@ return require("packer").startup(
     use {
       "kyazdani42/nvim-tree.lua",
       requires = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require "nvim-tree".setup {}
-      end
+      config = require("tools.nvim_tree").setup()
     }
 
     -- language support

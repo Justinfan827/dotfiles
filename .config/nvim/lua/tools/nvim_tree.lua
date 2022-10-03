@@ -1,4 +1,5 @@
-function nvim_tree()
+local M = {}
+M.setup = function()
   require "nvim-tree".setup {
     -- disables netrw completely
     disable_netrw = true,
@@ -70,5 +71,4 @@ function nvim_tree()
     }
   }
 end
---  TODO: turn on in needed
-nvim_tree()
+return M

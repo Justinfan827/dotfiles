@@ -35,19 +35,13 @@ set -x GO111MODULE auto # https://github.com/kubernetes/client-go/blob/master/IN
 set -x GOPATH $HOME/go
 set -x GOROOT /usr/local/opt/go/libexec
 set PATH $GOPATH/bin $GOROOT/bin  $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
-#set -gx GOPATH $HOME/go
-#set -gx GOBIN $GOPATH/bin
-#set -gx PATH $GOROOT/bin:$GOPATH/bin $PATH
-#o
-#
-set -gx JIRA_API_TOKEN (cat ~/.jira_token)
 
+set -gx JIRA_API_TOKEN (cat ~/.jira_token)
 # Blend sourcegraph CLIENT_ID
 set -gx SRC_ENDPOINT "https://sourcegraph.k8s.tools.blend.com"
 set -gx SRC_ACCESS_TOKEN (cat ~/.sourcegraph_token  | jq -r '."token"')
 
-# Blend mismo service variavles
-
+# Blend mismo service variables
 set -gx LDFLAGS "-L/usr/local/opt/libxml2/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/libxml2/include"
 set -gx CGO_ENABLED 1
@@ -143,16 +137,14 @@ alias vsp "tmux split-window -v"
 
 
 # Vim aliases
-alias vaws 'vim ~/.aws/config'
 alias vi 'nvim'
 alias fv 'fzf | xargs nvim'
 alias vim 'nvim'
-alias viml 'cd ~/.config/nvim && vim'
-alias vimb 'cd ~/dotfiles && vim ~/dotfiles/bashrc'
-alias vimv 'cd ~/dotfiles && vim ~/dotfiles/vimrc'
-alias vimz 'cd ~/dotfiles && vim ~/dotfiles/zshrc'
-alias vimt 'cd ~/dotfiles && vim ~/dotfiles/tmux.conf'
-alias vimf 'cd ~/dotfiles/fish && vim ~/dotfiles/fish/config.fish'
+alias viml 'vim ~/.config/nvim/init.vim'
+alias vimt 'vim ~/.tmux.conf'
+alias vimg 'vim ~/.gitconfig'
+alias vimf 'vim ~/.config/fish/config.fish'
+alias vaws 'vim ~/.aws/config'
 # leverage vim auto sessions by cding to project root first 
 alias vmon 'to gomono && vim'
 alias vin 'to in && vim'
@@ -517,3 +509,6 @@ if string match -r -q  '/Users/justin/repo/git.blendlabs.com/blend/lending/*' (p
     set PATH /usr/local/opt/openjdk/bin:$HOME/mongodb/bin $PATH
     pgrep mongod > /dev/null ||  mkdir -p ~/mongodb/data/db && mongod --dbpath ~/mongodb/data/db > /dev/null 2>&1 &
 end
+
+
+### BLEND SPECIFIC
