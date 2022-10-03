@@ -75,8 +75,7 @@ return require("packer").startup(
       config = require("tools.lsp_rooter").setup()
     }
     use "AndrewRadev/splitjoin.vim" -- split structs in golang with gS, gJ
-    --use "SirVer/ultisnips" --snippets
-    use "L3MON4D3/LuaSnip" -- Snippets plugin
+    use({"L3MON4D3/LuaSnip", tag = "v1.0.0"})
     use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
     use "honza/vim-snippets" -- go snippets
     use "qpkorr/vim-bufkill" -- kill buffer with :BD without killing session

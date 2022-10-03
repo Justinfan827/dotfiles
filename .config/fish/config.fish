@@ -127,7 +127,11 @@ alias gmm 'git merge master'
 alias gst 'git status'
 alias gd='g diff'
 
+# managine dot files with a git repo
 alias c='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cnvim='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add ~/.config/nvim/ && c status'
+alias cfish='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add ~/.config/fish/ && c status'
+alias cst='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME status'
 
 # Tmux aliases
 alias t 'tmux'
@@ -140,7 +144,7 @@ alias vsp "tmux split-window -v"
 alias vi 'nvim'
 alias fv 'fzf | xargs nvim'
 alias vim 'nvim'
-alias viml 'vim ~/.config/nvim/init.vim'
+alias viml 'cd ~/.config/nvim && vim'
 alias vimt 'vim ~/.tmux.conf'
 alias vimg 'vim ~/.gitconfig'
 alias vimf 'vim ~/.config/fish/config.fish'
