@@ -161,6 +161,10 @@ alias vmismo 'to mismo && vim'
 alias vcp 'to caliper && vim'
 alias vlt 'to loandr && vim' # loan toolbox
 
+# temporarily mark directory with '-' tag
+alias sd 'to rm - && to add -'
+alias ds 'to -'
+
 alias nr "npm run"
 # Docker
 alias kb 'kubectl'
@@ -372,9 +376,10 @@ function purgeLocalSqs
 end
 
 
-function wev
-    set cmd "go vet ./... && revive ./..."
-    watchexec -c -w ./ $cmd
+function veti -d 'vet income'
+    set cmd "cd ~/go/src/golang.blend.com/project/income && make lint"
+    set fullCmd "echo \"Running: $cmd\" && $cmd"
+    watchexec -c -w ./ $fullCmd
 end
 
 # examples
