@@ -16,6 +16,7 @@ require "nvim-treesitter.configs".setup {
     "gomod",
     "fish",
     "json",
+    "markdown",
     "yaml",
     "html",
     "scss"
@@ -45,6 +46,7 @@ require "nvim-treesitter.configs".setup {
   }
 }
 
+require("nvim-ts-autotag").setup()
 require "nvim-treesitter.configs".setup {
   textobjects = {
     swap = {

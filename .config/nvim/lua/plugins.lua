@@ -16,6 +16,7 @@ return require("packer").startup(
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate"
     }
+    use "windwp/nvim-ts-autotag"
     use "nvim-treesitter/playground"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     -- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
@@ -76,21 +77,20 @@ return require("packer").startup(
     }
     use "AndrewRadev/splitjoin.vim" -- split structs in golang with gS, gJ
     use({"L3MON4D3/LuaSnip", tag = "v1.0.0"})
-    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
     use "honza/vim-snippets" -- go snippets
     use "qpkorr/vim-bufkill" -- kill buffer with :BD without killing session
     use "vim-utils/vim-husk" -- navigate vim command line better
-    use {
-      -- session management
-      -- Auto Session by default stores sessions in vim.fn.stdpath('data').."/sessions/".
-      "rmagatti/auto-session",
-      config = function()
-        require("auto-session").setup {
-          log_level = "info",
-          auto_session_suppress_dirs = {"~/"}
-        }
-      end
-    }
+    --use {
+    ---- session management
+    ---- Auto Session by default stores sessions in vim.fn.stdpath('data').."/sessions/".
+    --"rmagatti/auto-session",
+    --config = function()
+    --require("auto-session").setup {
+    --log_level = "info",
+    --auto_session_suppress_dirs = {"~/"}
+    --}
+    --end
+    --}
 
     ---- Theme and styling
     --
@@ -132,13 +132,16 @@ return require("packer").startup(
     -- language support
     use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
     use "nvim-lua/lsp-status.nvim" -- helper for getting status of lsp onto lualine
-    use "jose-elias-alvarez/nvim-lsp-ts-utils" -- typescript helper
+    use "MunifTanjim/prettier.nvim" -- prettier
+    use "jose-elias-alvarez/null-ls.nvim" -- null-ls is a language server abstraction
     -- Completion
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
     use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
+    use "hrsh7th/cmp-path"
+    use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
 
     use "dag/vim-fish"
 
@@ -184,21 +187,23 @@ return require("packer").startup(
     use "windwp/nvim-spectre"
 
     -- go test file switch
-    use "benmills/vim-golang-alternate"
-
-    -- PR's in nvim omg
+    use "benmills/vim-golang-alternate" -- PR's in nvim omg
     --use {
     --"pwntester/octo.nvim",
     --requires = {
     --"nvim-lua/plenary.nvim",
     --"nvim-telescope/telescope.nvim",
-    --"kyazdani42/nvim-web-devicons"
+    use "kyazdani42/nvim-web-devicons"
     --},
     --config = function()
     --require("tools.octo").octoSetup()
     --end
     --}
 
+    -- Debugging
+    use "mfussenegger/nvim-dap"
+    use {"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
+    use "leoluz/nvim-dap-go"
     -- easy motion
     use {
       "phaazon/hop.nvim",

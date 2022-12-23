@@ -87,6 +87,9 @@ augroup END
   true
 )
 
+-- Showing the Inline Diagnostics Automatically in the Hover Window
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
+
 local vim = vim
 local api = vim.api
 local M = {}

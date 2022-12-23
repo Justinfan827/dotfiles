@@ -37,7 +37,7 @@ local function load_options()
     encoding = "utf-8",
     viewoptions = "folds,cursor,curdir,slash,unix",
     -- recommended by auto-session plugin
-    sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal",
+    --sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal",
     clipboard = "unnamedplus",
     wildignorecase = true,
     wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
@@ -119,7 +119,7 @@ local function load_options()
 
   local window_local = {
     concealcursor = "niv",
-    conceallevel = 2,
+    conceallevel = 0,
     foldenable = true,
     number = true,
     signcolumn = "yes",

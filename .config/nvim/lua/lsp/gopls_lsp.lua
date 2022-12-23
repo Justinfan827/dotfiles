@@ -27,6 +27,7 @@ nvim_lsp.gopls.setup {
   flags = {
     debounce_text_changes = 150
   },
+  --root_dir = nvim_lsp.util.root_pattern("main.go", "go.mod"),
   filetypes = {"go", "gomod"},
   cmd = {"gopls", "serve"},
   settings = {

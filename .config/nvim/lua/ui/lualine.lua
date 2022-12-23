@@ -18,7 +18,6 @@ lualine.setup {
     lualine_b = {"branch"},
     lualine_c = {
       "filename",
-      require("auto-session-library").current_session_name
     },
     lualine_x = {
       {"diagnostics", sources = {"nvim_lsp"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},

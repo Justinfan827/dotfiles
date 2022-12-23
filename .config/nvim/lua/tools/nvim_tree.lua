@@ -74,4 +74,20 @@ M.setup = function()
     }
   }
 end
+
+-- change width of nvim tree
+M.toggleWidth = function()
+  -- run command :NvimTreeResize to resize commands
+  -- hack to set width to 30 (default)
+  local key = "jfan-nvim-tree-width"
+  local targetWidth = "50"
+  if vim.g[key] == "50" then
+    targetWidth = "30"
+  end
+  vim.api.nvim_command(":NvimTreeResize " .. targetWidth)
+  vim.api.nvim_command(":NvimTreeToggle")
+  vim.api.nvim_command(":NvimTreeToggle")
+  vim.g[key] = targetWidth
+end
+
 return M

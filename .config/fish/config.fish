@@ -31,7 +31,8 @@ set -gx VAULT_ADDR https://vault.sandbox.k8s.centrio.com:8200
 set -gx VAULT_HOST vault.sandbox.k8s.centrio.com:8200
 
 # Go variables
-set -x GO111MODULE auto # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
+# after go 1.13, maybe don't need this? https://go.dev/doc/code
+#set -x GO111MODULE auto # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
 set -x GOPATH $HOME/go
 set -x GOROOT /usr/local/opt/go/libexec
 set PATH $GOPATH/bin $GOROOT/bin  $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
@@ -88,6 +89,8 @@ alias fsa "fisher add $argv"
 alias fsr "fisher remove (fisher list | fzf)"
 alias fsl "fisher list"
 
+# blend nvm
+alias nbm 'nvm use 14'
 alias we 'watchexec -c -w ./'
 alias weg 'watchexec -c -w ./ go run'
 
@@ -127,7 +130,7 @@ alias gmm 'git merge master'
 alias gst 'git status'
 alias gd='g diff'
 
-# managine dot files with a git repo
+# managine dot files with a git bare repo
 alias c='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cnvim='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add ~/.config/nvim/ && c status'
 alias cfish='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME add ~/.config/fish/ && c status'
@@ -142,7 +145,7 @@ alias vsp "tmux split-window -v"
 
 # Vim aliases
 alias vi 'nvim'
-alias fv 'fzf | xargs nvim'
+alias fv 'vim ( fzf | xargs )'
 alias vim 'nvim'
 alias viml 'cd ~/.config/nvim && vim'
 alias vimt 'vim ~/.tmux.conf'
@@ -202,6 +205,12 @@ set -gx FZF_DEFAULT_OPTS '--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --c
 
 #############################################################
 
+function lbsetup -d "setup lending"
+    source /Users/justin/repo/git.blendlabs.com/blend/lending/venv-py3/bin/activate.fish
+    set PATH /usr/local/opt/openjdk/bin:$HOME/mongodb/bin $PATH
+    pgrep mongod > /dev/null ||  mkdir -p ~/mongodb/data/db && mongod --dbpath ~/mongodb/data/db > /dev/null 2>&1 &
+end
+
 function ghu
     set test ( git remote -v | grep push | awk '{ print $2;}')
     set URL (echo $test | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")
@@ -259,6 +268,10 @@ end
 ## Blend functions 
 
 #############################################################
+
+function makeMongo -d "make mongo db"
+ mkdir -p ~/mongodb/data/db && mongod --dbpath ~/mongodb/data/db > /dev/null 2>&1 &
+end
 
 function makeGoProtos -d "make protos and create definitions in monorepo"
   cd ~/repo/git.blendlabs.com/blend/protos
@@ -504,7 +517,7 @@ set ARCHFLAGS "-arch x86_64"
 ## krew: kubectl plugin manager
 #export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-set -gx NODE_ENV dev
+#set -gx NODE_ENV dev
 set -gx SERVICE_ENV dev
 set -gx DEPLOYMENT blend-borrower
 set -gx TENANT_LIST blend-borrower
@@ -513,11 +526,6 @@ ulimit -t unlimited  # cpu
 ulimit -v unlimited 
 ulimit -n 64000 
 ulimit -u 2048
-if string match -r -q  '/Users/justin/repo/git.blendlabs.com/blend/lending/*' (pwd)
-    source /Users/justin/repo/git.blendlabs.com/blend/lending/venv-py3/bin/activate.fish
-    set PATH /usr/local/opt/openjdk/bin:$HOME/mongodb/bin $PATH
-    pgrep mongod > /dev/null ||  mkdir -p ~/mongodb/data/db && mongod --dbpath ~/mongodb/data/db > /dev/null 2>&1 &
-end
 
 
 ### BLEND SPECIFIC

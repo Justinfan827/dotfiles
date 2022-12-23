@@ -55,6 +55,8 @@ map {"i", "kj", "<ESC>"}
 --map{'n','<C-n>' ,':NvimTreeToggle<CR>'}
 map {"n", "<leader>r", ":NvimTreeRefresh<CR>"}
 map {"n", "<C-n>", ":NvimTreeFindFileToggle<CR>"}
+-- Toggle width of nvim tree
+map {"n", "<leader>n", '<cmd>:lua require("tools.nvim_tree").toggleWidth()<CR>', {silent = true}}
 
 -- cd to directory of current file
 map {"n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>"}
@@ -89,7 +91,8 @@ map {"x", "s*", "sy:let @/=@s<CR>cgn"}
 
 -- fugitive mappings
 map {"n", "<Leader>gd", ":Gvdiffsplit<CR>"}
-map {"n", "<Leader>gm", ":Gvdiffsplit origin/master<CR>"}
+map {"n", "<Leader>gms", ":Gvdiffsplit origin/master<CR>"}
+map {"n", "<Leader>gma", ":Gvdiffsplit origin/main<CR>"}
 map {"n", "<Leader>gg", ":Git<CR>"}
 map {"n", "<Leader>gw", ":Gwrite<CR><CR>"}
 map {"n", "<Leader>gr", ":Gread<CR>"}
@@ -164,6 +167,25 @@ map {"n", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
 map {"v", "<leader>fn", ":FloatermNew<CR>", {silent = false}}
 map {"v", "<leader>ff", ":FloatermToggle<CR>", {silent = false}}
 map {"v", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
+
+-- dap debuging
+map {"n", "<leader>dc", "<Cmd>lua require'dap'.continue()<CR>", {silent = false}}
+map {"n", "<leader>do", "<Cmd>lua require'dap'.step_over()<CR>", {silent = false}}
+map {"n", "<leader>di", "<Cmd>lua require'dap'.step_into()<CR>", {silent = false}}
+map {"n", "<leader>du", "<Cmd>lua require'dap'.step_out()<CR>", {silent = false}}
+map {"n", "<Leader>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {silent = false}}
+map {
+  "n",
+  "<Leader>dB",
+  "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+  {silent = false}
+}
+map {
+  "n",
+  "<Leader>dL",
+  "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+  {silent = false}
+}
 
 -- harpoon mappings
 map {"n", "<leader>h", '<cmd>:lua require("harpoon.mark").add_file()<CR>', {silent = false}}

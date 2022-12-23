@@ -49,6 +49,23 @@ func Test{}(t *testing.T) {{
 )
 table.insert(snippets, tableTest)
 
+local forrange =
+  s(
+  "forr",
+  fmt(
+    [[
+	for _, {} := range {} {{
+
+	}}
+]],
+    {
+      i(1, "opt"),
+      i(2, "opts")
+    }
+  )
+)
+table.insert(snippets, forrange)
+
 -- End Refactoring --
 
 return snippets, autosnippets

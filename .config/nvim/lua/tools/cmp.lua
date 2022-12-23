@@ -61,33 +61,35 @@ cmp.setup {
       -- turning this on means cmp will replace current word when adding into buffer
       --behavior = cmp.ConfirmBehavior.Replace,
       select = true
-    },
-    ["<Tab>"] = cmp.mapping(
-      function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif ls.expand_or_jumpable() then
-          ls.expand_or_jump()
-        else
-          fallback()
-        end
-      end,
-      {"i", "s"}
-    ),
-    ["<S-Tab>"] = cmp.mapping(
-      function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif ls.jumpable(-1) then
-          ls.jump(-1)
-        else
-          fallback()
-        end
-      end,
-      {"i", "s"}
-    )
+    }
+    -- LEARN TO NOT USE TAB!
+    --["<Tab>"] = cmp.mapping(
+    --function(fallback)
+    --if cmp.visible() then
+    --cmp.select_next_item()
+    --elseif ls.expand_or_jumpable() then
+    --ls.expand_or_jump()
+    --else
+    --fallback()
+    --end
+    --end,
+    --{"i", "s"}
+    --),
+    --["<S-Tab>"] = cmp.mapping(
+    --function(fallback)
+    --if cmp.visible() then
+    --cmp.select_prev_item()
+    --elseif ls.jumpable(-1) then
+    --ls.jump(-1)
+    --else
+    --fallback()
+    --end
+    --end,
+    --{"i", "s"}
+    --)
   },
   sources = {
+    {name = "nvim_lua"},
     {name = "luasnip"},
     {name = "copilot"},
     {name = "nvim_lsp", max_item_count = 6},
