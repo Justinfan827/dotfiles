@@ -17,7 +17,7 @@ lualine.setup {
     lualine_a = {"mode"},
     lualine_b = {"branch"},
     lualine_c = {
-      "filename",
+      {"filename", path = 2}
     },
     lualine_x = {
       {"diagnostics", sources = {"nvim_lsp"}, symbols = {error = " ", warn = " ", info = " ", hint = " "}},

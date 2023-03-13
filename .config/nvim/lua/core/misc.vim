@@ -9,19 +9,6 @@ function! s:find_files()
         execute 'Files!'
     endif
 endfunction
-command! ProjectFiles execute s:find_files()
-nnoremap <leader>p :ProjectFiles<CR>
 
-" toggle coc
-function! ToggleCoc()
-   if b:coc_enabled == 0
-      let b:coc_enabled = 1
-      CocStart
-      echo 'COC on'
-   else
-      let b:coc_enabled = 0
-      echo 'COC off'
-      call coc#rpc#stop()
-   endif
-endfunction
+command! ProjectFiles execute s:find_files()
 
