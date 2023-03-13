@@ -28,7 +28,7 @@ function M.search_nvim()
   require("telescope.builtin").find_files(
     {
       prompt_title = "<VimRC>",
-      cwd = "/Users/justin/.config/nvim"
+      cwd = "$HOME/.config/nvim"
     }
   )
 end

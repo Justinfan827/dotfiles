@@ -123,7 +123,7 @@ map {"n", "<leader><space>", ":noh<CR>"}
 --  FZF mappings
 -- .............................................................................
 -- Search all files under git root
-vim.cmd "source /Users/justin/.config/nvim/lua/core/misc.vim"
+vim.cmd "source $HOME/.config/nvim/lua/core/misc.vim"
 
 map {"n", "<C-p>", ":ProjectFiles <CR>"}
 --map {"n", "<C-p>", ":Telescope git_files <CR>"}

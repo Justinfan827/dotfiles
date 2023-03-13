@@ -101,7 +101,6 @@ alias nr 'npm run'
 alias chrome 'chrome -a \"Google Chrome\"'
 alias ssa 'ssh -A'
 alias aw 'aws-vault'
-alias gc 'gcloud'
 
 # Sourcing
 alias sb 'source ~/.bashrc'
@@ -289,6 +288,3 @@ function vims
     set session (ls ~/vim-sessions | fzf)
     vim -S ~/vim-sessions/$session
 end
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.inc' ]; . '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.inc'; end

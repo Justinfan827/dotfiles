@@ -11,34 +11,19 @@ return require("packer").startup(
   function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
+    -- auto generate docs
+    use {
+      "kkoomen/vim-doge",
+      run = ":call doge#install()"
+    }
     -- treesitter
     use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate"
+      "nvim-treesitter/nvim-treesitter"
     }
-    use "windwp/nvim-ts-autotag"
     use "nvim-treesitter/playground"
     use "nvim-treesitter/nvim-treesitter-textobjects"
-    -- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
-    -- better folding
-    --use {
-    --"kevinhwang91/nvim-ufo",
-    --opt = true,
-    --event = {"BufReadPre"},
-    --wants = {"promise-async"},
-    --requires = "kevinhwang91/promise-async",
-    --config = function()
-    --require("ufo").setup {
-    --provider_selector = function(bufnr, filetype)
-    --return {"lsp", "treesitter", "indent"}
-    --end
-    --}
-    --vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-    --vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-    --end
-    --}
-
     -- Fzf for vim: fuzzy search (ESSENTIAL)
+    use "windwp/nvim-ts-autotag"
     use {
       "junegunn/fzf",
       run = function()
@@ -50,10 +35,25 @@ return require("packer").startup(
     -- Helpers for unix
     use "tpope/vim-eunuch"
 
+    -- Lua
+    use {
+      "folke/trouble.nvim",
+      requires = "nvim-tree/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {}
+      end
+    }
     -- git helpers
     use "tpope/vim-dispatch" -- dispatch async commands in vim (for git push and pull etc)
     use "aacunningham/vim-fuzzy-stash" -- git stash from vim
     use "tpope/vim-fugitive" -- git wrapper in vim
+    use {
+      "goolord/alpha-nvim",
+      requires = {"nvim-tree/nvim-web-devicons"},
+      config = function()
+        require "alpha".setup(require "alpha.themes.startify".config)
+      end
+    }
     use "ruanyl/vim-gh-line" -- link to git repo
     use "ThePrimeagen/git-worktree.nvim"
     -- git signs
@@ -143,17 +143,12 @@ return require("packer").startup(
     use "hrsh7th/cmp-path"
     use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
 
-    use "dag/vim-fish"
-
-    --use {'neoclide/coc.nvim', branch = 'release'} -- CoC: Intellisense engine
-    --use 'fatih/vim-go'
-
     -- telescope
     use "nvim-lua/popup.nvim"
     use "nvim-lua/plenary.nvim"
     use {
-      "nvim-telescope/telescope.nvim",
-      requires = {{"nvim-lua/plenary.nvim"}}
+      "nvim-telescope/telescope.nvim"
+      -- requires = {{"nvim-lua/plenary.nvim"}}
     }
     use "nvim-telescope/telescope-fzy-native.nvim"
     -- lua line
@@ -219,3 +214,22 @@ return require("packer").startup(
     -- lua scratchpad
   end
 )
+
+-- https://alpha2phi.medium.com/neovim-for-beginners-code-folding-7574925412ea
+-- better folding
+--use {
+--"kevinhwang91/nvim-ufo",
+--opt = true,
+--event = {"BufReadPre"},
+--wants = {"promise-async"},
+--requires = "kevinhwang91/promise-async",
+--config = function()
+--require("ufo").setup {
+--provider_selector = function(bufnr, filetype)
+--return {"lsp", "treesitter", "indent"}
+--end
+--}
+--vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+--vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+--end
+--}

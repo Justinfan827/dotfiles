@@ -170,8 +170,6 @@ local function load_variables()
     --
     --
     --
-    do_filetype_lua = 1, -- use filetype.lua
-    did_load_filetypes = 0 -- don't fallback to filetype.vim if filetype.lua fails
   }
 
   for variable, value in pairs(global_variables) do
@@ -192,8 +190,6 @@ local function load_variables()
       },
       cache_enabled = 0
     }
-    vim.g.python_host_prog = "/usr/bin/python"
-    vim.g.python3_host_prog = "/usr/local/bin/python3"
   end
 end
 

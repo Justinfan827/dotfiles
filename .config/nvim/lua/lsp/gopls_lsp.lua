@@ -32,11 +32,6 @@ nvim_lsp.gopls.setup {
   cmd = {"gopls", "serve"},
   settings = {
     gopls = {
-      --env = {
-      --GO_ROOT = "/Users/justin/sdk/go1.18beta1",
-      --GO_ROOT = "/usr/local/opt/go/libexec",
-      --PATH = "$HOME/golang/bin/go1.18beta1:$PATH"
-      --},
       analyses = {
         unusedparams = true
       },

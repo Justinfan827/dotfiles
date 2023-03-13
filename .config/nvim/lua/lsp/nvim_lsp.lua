@@ -15,6 +15,7 @@ lsp_status.register_progress()
 local on_attach = function(client, bufnr)
   -- add lsp-status capabilities
   lsp_status.on_attach(client)
+  -- Revisit this, i think we shouldn't enable omnifunc if we're using nvim cmp
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local opts = {noremap = true, silent = true}
@@ -50,10 +51,10 @@ local on_attach = function(client, bufnr)
 
   -- Note: i also have the formatter plugin at the moment
   -- Format command to run lsp based formatting
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
@@ -61,7 +62,7 @@ local on_attach = function(client, bufnr)
       "<cmd>lua vim.lsp.buf.formatting()<CR>",
       {noremap = true, silent = false}
     )
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.documentRangeFormattingProvider then
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
@@ -76,21 +77,10 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- use cmp_nvim_lsp + lsp-status capabilities
 capabilities =
-  vim.tbl_extend("keep", require("cmp_nvim_lsp").update_capabilities(capabilities), lsp_status.capabilities)
+  vim.tbl_extend("keep", require("cmp_nvim_lsp").default_capabilities(capabilities), lsp_status.capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 M.capabilities = capabilities
 M.on_attach = on_attach
 
---#
---#
---# LSP SETUPS TO MIGRATE TO OWN FILE
---#
---#
-
--- folding support
---capabilities.textDocument.foldingRange = {
---dynamicRegistration = false,
---lineFoldingOnly = true
---}
 return M
