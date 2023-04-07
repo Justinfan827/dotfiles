@@ -223,6 +223,9 @@ map {"v", "<leader>S", "<cmd>lua require('spectre').open_visual()<CR>", {silent 
 --
 -- switching golang alternate vs test file
 map {"n", "<leader>d", ":A<CR>", {silent = true}}
+
+-- format with mharrington
+map {"n", "ff", ":FormatLock<CR>", {silent = true}}
 --map {"n", "<leader>AS", ":AV<CR>", {silent = true}}
 --map {"v", "<leader>A", ":A<CR>", {silent = true}}
 --map {"v", "<leader>AS", ":AV<CR>", {silent = true}}

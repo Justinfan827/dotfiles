@@ -22,9 +22,9 @@ return require("packer").startup(
     }
     use "nvim-treesitter/playground"
     use "nvim-treesitter/nvim-treesitter-textobjects"
-    -- Fzf for vim: fuzzy search (ESSENTIAL)
-    use "windwp/nvim-ts-autotag"
+    use "windwp/nvim-ts-autotag" -- auto tag for closing react tags
     use {
+      -- Fzf for vim: fuzzy search (ESSENTIAL)
       "junegunn/fzf",
       run = function()
         vim.fn["fzf#install"]()
@@ -109,7 +109,16 @@ return require("packer").startup(
     use "scrooloose/nerdcommenter" -- Key binding to comment out stuff
 
     -- Quoting/parenthesizing Note: i'm using coc pairs to run pair closing
-    use "tpope/vim-surround" -- amazing pugin to surround stuff
+    --use "tpope/vim-surround" -- amazing pugin to surround stuff
+    use( -- trying out new surround written in lua
+      {
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+          require("nvim-surround").setup({})
+        end
+      }
+    )
     use "tpope/vim-repeat" -- Allow vim to repeat commands from vim-surround!
     use "tpope/vim-endwise" -- This is a simple plugin that helps to end certain structures automatically.
     use "windwp/nvim-autopairs"
@@ -130,10 +139,28 @@ return require("packer").startup(
     }
 
     -- language support
+    use "onsails/lspkind.nvim" -- vscode-like pictograms to neovim built in lsp
     use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
     use "nvim-lua/lsp-status.nvim" -- helper for getting status of lsp onto lualine
     use "MunifTanjim/prettier.nvim" -- prettier
     use "jose-elias-alvarez/null-ls.nvim" -- null-ls is a language server abstraction
+    use(
+      {
+        -- cool lsp UI (experimenting)
+        "glepnir/lspsaga.nvim",
+        opt = true,
+        branch = "main",
+        event = "LspAttach",
+        config = function()
+          require("lspsaga").setup({})
+        end,
+        requires = {
+          {"nvim-tree/nvim-web-devicons"},
+          --Please make sure you install markdown and markdown_inline parser
+          {"nvim-treesitter/nvim-treesitter"}
+        }
+      }
+    )
     -- Completion
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-buffer"
@@ -142,6 +169,7 @@ return require("packer").startup(
     use "hrsh7th/cmp-nvim-lua"
     use "hrsh7th/cmp-path"
     use "saadparwaiz1/cmp_luasnip" -- Snippets source for nvim-cmp
+    use "rafamadriz/friendly-snippets" -- friendly snippets for a whole bunch of languages
 
     -- telescope
     use "nvim-lua/popup.nvim"

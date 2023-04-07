@@ -19,6 +19,8 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local opts = {noremap = true, silent = true}
+  -- code actions
+  vim.api.nvim_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   -- open diagnostics in a float
   vim.api.nvim_set_keymap("n", "<space>l", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -54,23 +56,23 @@ local on_attach = function(client, bufnr)
   -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
   -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      "n",
-      "ff",
-      "<cmd>lua vim.lsp.buf.formatting()<CR>",
-      {noremap = true, silent = false}
-    )
-  elseif client.server_capabilities.documentRangeFormattingProvider then
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      "n",
-      "ff",
-      "<cmd>lua vim.lsp.buf.range_formatting()<CR>",
-      {noremap = true, silent = false}
-    )
-  end
+  --if client.server_capabilities.documentFormattingProvider then
+  --vim.api.nvim_buf_set_keymap(
+  --bufnr,
+  --"n",
+  --"ff",
+  --"<cmd>lua vim.lsp.buf.formatting()<CR>",
+  --{noremap = true, silent = false}
+  --)
+  --elseif client.server_capabilities.documentRangeFormattingProvider then
+  --vim.api.nvim_buf_set_keymap(
+  --bufnr,
+  --"n",
+  --"ff",
+  --"<cmd>lua vim.lsp.buf.range_formatting()<CR>",
+  --{noremap = true, silent = false}
+  --)
+  --end
 end
 
 -- nvim-cmp supports additional completion capabilities

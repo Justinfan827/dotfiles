@@ -27,18 +27,6 @@ set -x GOPATH $HOME/go
 set PATH $GOPATH/bin $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
 
 # set -gx JIRA_API_TOKEN (cat ~/.jira_token)
-# Blend sourcegraph CLIENT_ID
-# set -gx SRC_ENDPOINT "https://sourcegraph.k8s.tools.blend.com"
-# set -gx SRC_ACCESS_TOKEN (cat ~/.sourcegraph_token  | jq -r '."token"')
-
-# Blend mismo service variables
-set -gx LDFLAGS "-L/usr/local/opt/libxml2/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/libxml2/include"
-set -gx CGO_ENABLED 1
-set -gx PATH $HOME/pact/bin $PATH
-
-set -gx PATH $HOME/.local/bin $PATH
-
 if test -d (brew --prefix)"/share/fish/completions"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
 end
@@ -49,22 +37,9 @@ end
 
 ###########################################
 
-if [ -f /Users/jfan/.blend_profile ]
-  source /Users/jfan/.blend_profile
-end
 fish_add_path /opt/homebrew/bin
 set PATH $HOME/mongodb/bin $PATH
 
-
-# for local dev with sensitive data pipeline
-# https://github.com/pyenv/pyenv/blob/master/README.md#basic-github-checkout
- #set PYENV_ROOT $HOME/.pyenv
-#set -x PATH $PYENV_ROOT/shims $PYENV_ROOT/bin $PATH
-#pyenv init - | source
-
-#pyenv rehash
-#status is-login; and pyenv init --path | source
-#status is-interactive; and pyenv init - | source
 
 ############################################################
 
@@ -88,11 +63,8 @@ alias fsr "fisher remove (fisher list | fzf)"
 alias fsl "fisher list"
 
 # blend nvm
-alias nbm 'nvm use 14'
 alias we 'watchexec -c -w ./'
 alias weg 'watchexec -c -w ./ go run'
-
-alias monolint 'to gomono && repoctl lint'
 
 alias grep 'grep --color'
 alias mk 'make'
@@ -116,7 +88,6 @@ alias gitb "git branch | grep '^\*' | cut -d' ' -f2 | pbcopy"
 alias gg "git log --remotes --tags --branches --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gl "git log --remotes --tags --branches --no-walk --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gsb "g checkout (g branch | fzf | sed -e 's/^[ \t]*//')"
-alias jj "blend-productivity-cli"
 alias cc 'git checkout'
 alias gcp 'git checkout -' # checkout previous branch
 alias gcc 'git checkout -b' 
