@@ -7,6 +7,16 @@
 require("formatter").setup(
   {
     filetype = {
+      html = {
+        -- prettier
+        function()
+          return {
+            exe = "prettierd",
+            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = true
+          }
+        end
+      },
       sh = {
         -- Shell Script Formatter
         function()
@@ -18,6 +28,16 @@ require("formatter").setup(
         end
       },
       yaml = {
+        -- prettier
+        function()
+          return {
+            exe = "prettier",
+            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = true
+          }
+        end
+      },
+      typescriptreact = {
         -- prettier
         function()
           return {
