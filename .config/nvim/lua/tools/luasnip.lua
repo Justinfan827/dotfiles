@@ -23,6 +23,17 @@ ls.config.set_config(
     }
   }
 )
+-- html snippets in javascript and javascriptreact
+ls.snippets = {
+  html = {}
+}
+ls.snippets.javascript = ls.snippets.html
+ls.snippets.javascriptreact = ls.snippets.html
+ls.snippets.typescriptreact = ls.snippets.html
+
+-- from friendlysnippets
+require("luasnip/loaders/from_vscode").load({include = {"html"}})
+require("luasnip/loaders/from_vscode").lazy_load()
 
 -- key maps
 
