@@ -11,11 +11,9 @@ return require("packer").startup(
   function(use)
     -- Packer can manage itself
     use "wbthomason/packer.nvim"
-    -- auto generate docs
-    use {
-      "kkoomen/vim-doge",
-      run = ":call doge#install()"
-    }
+    -- Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
+    use "folke/neodev.nvim"
+
     -- treesitter
     use {
       "nvim-treesitter/nvim-treesitter"
@@ -48,6 +46,7 @@ return require("packer").startup(
     use "aacunningham/vim-fuzzy-stash" -- git stash from vim
     use "tpope/vim-fugitive" -- git wrapper in vim
     use {
+      -- nvim entry screen
       "goolord/alpha-nvim",
       requires = {"nvim-tree/nvim-web-devicons"},
       config = function()
@@ -69,8 +68,7 @@ return require("packer").startup(
     use "tpope/vim-unimpaired" -- nice bindings e.g. '] space' to add empty line, ]l or ]q to move in location / quickfix list
     use "stsewd/gx-extended.vim" -- make gx work in opening files
     use "christoomey/vim-tmux-navigator" -- help navigate with vim / tmux splits
-    --use "airblade/vim-rooter" -- Changes vim working directory to the project root (helpful for grepping tools)
-    -- New NVIM rooter
+    -- New NVIM rooter: this is problematic for new installs
     use {
       "ahmedkhalf/project.nvim",
       config = require("tools.lsp_rooter").setup()
@@ -127,9 +125,6 @@ return require("packer").startup(
     use "nelstrom/vim-visual-star-search"
     ---- Automatically clear search highlights after you move your cursor.
     use "haya14busa/is.vim"
-
-    -- fzf alternative
-    use {"liuchengxu/vim-clap", run = ":Clap install-binary!"}
 
     -- nerd tree alternative
     use {
