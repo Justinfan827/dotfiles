@@ -44,6 +44,36 @@ vim.api.nvim_create_autocmd(
 )
 
 --
+-- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+-- set spacing / indents for go projects
+--
+vim.api.nvim_create_autocmd(
+  "FileType",
+  {
+    pattern = "go",
+    callback = function()
+      -- Number of spaces that a <Tab> in the file counts for.  Also see
+      -- the |:retab| command, and the 'softtabstop' option.
+      vim.opt_local.tabstop = 8
+      -- Number of spaces that a <Tab> counts for while performing editing
+      -- operations, like inserting a <Tab> or using <BS>.  It "feels" like
+      -- <Tab>s are being inserted, while in fact a mix of spaces and <Tab>s is
+      -- used.  This is useful to keep the 'ts' setting at its standard value
+      -- of 8, while being able to edit like it is set to 'sts'.  However,
+      -- commands like "x" still work on the actual characters.
+      vim.opt_local.softtabstop = 8
+      -- Number of spaces to use for each step of (auto)indent.  Used for
+      -- |'cindent'|, |>>|, |<<|, etc.
+      -- When zero the 'ts' value will be used.  Use the |shiftwidth()|
+      -- function to get the effective shiftwidth value.
+      vim.opt_local.shiftwidth = 8
+      vim.opt.expandtab = false
+    end,
+    desc = "Set tabstop, softtabstop, shiftwidth for node development"
+  }
+)
+
+--
 -- set spacing / indents for node projects
 --
 vim.api.nvim_create_autocmd(
