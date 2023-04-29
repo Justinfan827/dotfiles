@@ -83,7 +83,7 @@ map {"i", "fpq", 'fmt.Println("")<Esc>==f"a'}
 -- Console log from visual mode on next line, puts visual selection inside parentheses
 map {"v", "fpp", "yofpp<Esc>p"}
 -- Console log from normal mode, inserted on next line with word your on inside parentheses
-map {"n", "fpp", "yiwofpp<Esc>p"}
+map {"n", "fpp", '"ayiwofmt.Println("LOGGING", <C-R>a)<Esc>'}
 map {"i", "fpn", 'fmt.Printf("\\n\\n\\n")<Esc>==f(a'}
 
 map {"n", "s*", ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn"}
@@ -169,23 +169,23 @@ map {"v", "<leader>ff", ":FloatermToggle<CR>", {silent = false}}
 map {"v", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
 
 -- dap debuging
-map {"n", "<leader>dc", "<Cmd>lua require'dap'.continue()<CR>", {silent = false}}
-map {"n", "<leader>do", "<Cmd>lua require'dap'.step_over()<CR>", {silent = false}}
-map {"n", "<leader>di", "<Cmd>lua require'dap'.step_into()<CR>", {silent = false}}
-map {"n", "<leader>du", "<Cmd>lua require'dap'.step_out()<CR>", {silent = false}}
-map {"n", "<Leader>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {silent = false}}
-map {
-  "n",
-  "<Leader>dB",
-  "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-  {silent = false}
-}
-map {
-  "n",
-  "<Leader>dL",
-  "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-  {silent = false}
-}
+--map {"n", "<leader>dc", "<Cmd>lua require'dap'.continue()<CR>", {silent = false}}
+--map {"n", "<leader>do", "<Cmd>lua require'dap'.step_over()<CR>", {silent = false}}
+--map {"n", "<leader>di", "<Cmd>lua require'dap'.step_into()<CR>", {silent = false}}
+--map {"n", "<leader>du", "<Cmd>lua require'dap'.step_out()<CR>", {silent = false}}
+--map {"n", "<Leader>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {silent = false}}
+--map {
+--"n",
+--"<Leader>dB",
+--"<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+--{silent = false}
+--}
+--map {
+--"n",
+--"<Leader>dL",
+--"<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
+--{silent = false}
+--}
 
 -- harpoon mappings
 map {"n", "<leader>h", '<cmd>:lua require("harpoon.mark").add_file()<CR>', {silent = false}}
@@ -199,6 +199,7 @@ map {"n", "<leader>7", '<cmd>:lua require("harpoon.ui").nav_file(7)<CR>', {silen
 map {"n", "<leader>8", '<cmd>:lua require("harpoon.ui").nav_file(8)<CR>', {silent = false}}
 map {"n", "<leader>9", '<cmd>:lua require("harpoon.ui").nav_file(9)<CR>', {silent = false}}
 map {"n", "<leader>m", '<cmd>:lua require("harpoon.ui").toggle_quick_menu()<CR>', {silent = false}}
+--map {"n", "<leader>m", "<cmd>:Telescope harpoon marks<CR>", {silent = false}}
 --map {"n", "<leader>nn", '<cmd>:lua require("harpoon.ui").nav_next()<CR>', {silent = false}}
 --map {"n", "<leader>np", '<cmd>:lua require("harpoon.ui").nav_prev()<CR>', {silent = false}}
 --map {"n", "<leader><space>", ":Telescope harpoon marks<CR>", {silent = true}}
@@ -299,4 +300,94 @@ vim.cmd(
   nnoremap <silent> <space><space> <cmd>Telescope buffers<cr>
   nnoremap <silent><leader>th <cmd>Telescope help_tags<cr>
 ]]
+)
+
+--
+--  dap mappings for debugging
+--
+vim.keymap.set(
+  "n",
+  "<Leader>dc",
+  function()
+    require("dap").continue()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>do",
+  function()
+    require("dap").step_over()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>di",
+  function()
+    require("dap").step_into()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>do",
+  function()
+    require("dap").step_out()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>db",
+  function()
+    require("dap").toggle_breakpoint()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>dB",
+  function()
+    require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>dr",
+  function()
+    require("dap").repl.open()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>dl",
+  function()
+    require("dap").run_last()
+  end
+)
+vim.keymap.set(
+  {"n", "v"},
+  "<Leader>dh",
+  function()
+    require("dap.ui.widgets").hover()
+  end
+)
+vim.keymap.set(
+  {"n", "v"},
+  "<Leader>dp",
+  function()
+    require("dap.ui.widgets").preview()
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>df",
+  function()
+    local widgets = require("dap.ui.widgets")
+    widgets.centered_float(widgets.frames)
+  end
+)
+vim.keymap.set(
+  "n",
+  "<Leader>ds",
+  function()
+    local widgets = require("dap.ui.widgets")
+    widgets.centered_float(widgets.scopes)
+  end
 )

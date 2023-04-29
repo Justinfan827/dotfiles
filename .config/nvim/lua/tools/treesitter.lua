@@ -15,6 +15,7 @@ require "nvim-treesitter.configs".setup {
     "lua",
     "gomod",
     "fish",
+    "python",
     "json",
     "markdown",
     "yaml",
