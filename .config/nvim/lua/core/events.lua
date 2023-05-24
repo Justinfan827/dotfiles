@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
   "FileType",
   {
-    pattern = "javascript,typescript,typescriptreact",
+    pattern = "javascript,typescript,typescriptreact,css",
     callback = function()
       -- Number of spaces that a <Tab> in the file counts for.  Also see
       -- the |:retab| command, and the 'softtabstop' option.
