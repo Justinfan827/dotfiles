@@ -228,6 +228,19 @@ function fhist -d 'cd to one of the previously visited locations'
 	commandline -f repaint
 end
 
+function newHTML -d "create html and css file to run some test"
+  set dirName /tmp/play_(date +%H:%M)
+  echo $val
+  mkdir -p $dirName
+  mkdir -p $dirName/css
+  cd $dirName
+  touch index.html 
+  touch css/style.css
+  tmux split-window -v -p 20 "live-server"
+  tmux last-pane
+  vim index.html
+end
+
 function fcoc -d "Fuzzy-find and checkout a commit"
   git log --pretty=oneline --abbrev-commit --reverse | fzf --tac +s -e | awk '{print $1;}' | read -l result; and git checkout "$result"
 end

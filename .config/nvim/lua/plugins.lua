@@ -18,6 +18,8 @@ return require("packer").startup(
     use {
       "nvim-treesitter/nvim-treesitter"
     }
+
+    use "lukas-reineke/indent-blankline.nvim"
     use "nvim-treesitter/playground"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     use "windwp/nvim-ts-autotag" -- auto tag for closing react tags
@@ -91,7 +93,6 @@ return require("packer").startup(
     --}
 
     ---- Theme and styling
-    --
     use "kaicataldo/material.vim"
     use {"ellisonleao/gruvbox.nvim"}
     use(
@@ -101,9 +102,9 @@ return require("packer").startup(
       }
     )
     use "navarasu/onedark.nvim"
-
-    --use 'eddyekofo94/gruvbox-flat.nvim'
     use "drewtempelmeyer/palenight.vim"
+
+    use "norcalli/nvim-colorizer.lua"
     use "scrooloose/nerdcommenter" -- Key binding to comment out stuff
 
     -- Quoting/parenthesizing Note: i'm using coc pairs to run pair closing
@@ -139,23 +140,23 @@ return require("packer").startup(
     use "nvim-lua/lsp-status.nvim" -- helper for getting status of lsp onto lualine
     use "MunifTanjim/prettier.nvim" -- prettier
     use "jose-elias-alvarez/null-ls.nvim" -- null-ls is a language server abstraction
-    use(
-      {
-        -- cool lsp UI (experimenting)
-        "glepnir/lspsaga.nvim",
-        opt = true,
-        branch = "main",
-        event = "LspAttach",
-        config = function()
-          require("lspsaga").setup({})
-        end,
-        requires = {
-          {"nvim-tree/nvim-web-devicons"},
-          --Please make sure you install markdown and markdown_inline parser
-          {"nvim-treesitter/nvim-treesitter"}
-        }
-      }
-    )
+    --use(
+    --{
+    ---- cool lsp UI (experimenting)
+    --"glepnir/lspsaga.nvim",
+    --opt = true,
+    --branch = "main",
+    --event = "LspAttach",
+    --config = function()
+    --require("lspsaga").setup({})
+    --end,
+    --requires = {
+    --{"nvim-tree/nvim-web-devicons"},
+    ----Please make sure you install markdown and markdown_inline parser
+    --{"nvim-treesitter/nvim-treesitter"}
+    --}
+    --}
+    --)
     -- Completion
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-buffer"
