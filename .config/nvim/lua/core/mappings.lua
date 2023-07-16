@@ -105,6 +105,15 @@ map {"n", "<leader>ge", ":Gedit<CR>"}
 map {"n", "<leader>gl", ":silent! Git log<CR>"}
 map {"n", "<leader>go", ":Git checkout<Space>"}
 
+-- move lines: https://vim.fandom.com/wiki/Moving_lines_up_or_down
+-- <A- means with the mac OS cmd key
+map {"n", "<A-j>", ":m .+1<CR>=="}
+map {"n", "<A-k>", ":m .-2<CR>=="}
+map {"i", "<A-j>", "<Esc>:m .+1<CR>==gi"}
+map {"i", "<A-k>", "<Esc>:m .-2<CR>==gi"}
+map {"v", "<A-j>", ":m '>+1<CR>gv=gv"}
+map {"v", "<A-k>", ":m '<-2<CR>gv=gv"}
+
 -- This lets me push from vim
 map {"n", "<leader>gps", ":Dispatch! git push<CR>"}
 map {"n", "<leader>gpl", ":Dispatch! git pull<CR>"}
@@ -151,6 +160,8 @@ map {"n", "<leader>gi", "<cmd>:lua GO_IMPORTS(1000)<CR>", {silent = true}}
 
 -- telescope
 --
+
+-- folding
 
 -- Search vimrc from anywhere
 map {"n", "<leader>vrc", '<cmd>:lua require("tools.telescope").search_nvim()<CR>', {silent = true}}
@@ -210,7 +221,7 @@ map {"v", "<leader>p", '"_dP', {silent = true}}
 
 -- spectre mappings
 --
--- search current word
+-- search and replace current word
 map {"n", "<leader>S", "<cmd>lua require('spectre').open()<CR>", {silent = true}}
 map {"n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", {silent = true}}
 -- search in current file
@@ -226,24 +237,10 @@ map {"v", "<leader>S", "<cmd>lua require('spectre').open_visual()<CR>", {silent 
 map {"n", "<leader>d", ":A<CR>", {silent = true}}
 
 -- format with mharrington
-map {"n", "ff", ":FormatLock<CR>", {silent = true}}
+map {"n", "ff", ":Format<CR>", {silent = true}}
 --map {"n", "<leader>AS", ":AV<CR>", {silent = true}}
 --map {"v", "<leader>A", ":A<CR>", {silent = true}}
 --map {"v", "<leader>AS", ":AV<CR>", {silent = true}}
-
--- regex folding
---map {"n", "<leader>F", ":setlocal foldmethod=manual<CR><CR>"}
--- https://stackoverflow.com/questions/51484595/search-a-pattern-and-fold-the-matching-lines-in-gvim
---map {
---"n",
---"<leader>Z",
---":setlocal foldexpr=(getline(v:lnum)=~@/)?0:1 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
---}
---map {
---"n",
---"<leader>z",
---":setlocal foldexpr=(getline(v:lnum)=~@/)?1:0 foldmethod=expr foldlevel=0 foldcolumn=2 foldminlines=0<CR><CR>"
---}
 
 -- my own git branches with updated mappings
 map {"n", "<leader>tb", '<cmd>:lua require("tools.telescope").git_branches()<CR>', {silent = true}}
@@ -308,89 +305,89 @@ vim.cmd(
 --
 --  dap mappings for debugging
 --
-vim.keymap.set(
-  "n",
-  "<Leader>dc",
-  function()
-    require("dap").continue()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>do",
-  function()
-    require("dap").step_over()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>di",
-  function()
-    require("dap").step_into()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>do",
-  function()
-    require("dap").step_out()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>db",
-  function()
-    require("dap").toggle_breakpoint()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>dB",
-  function()
-    require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>dr",
-  function()
-    require("dap").repl.open()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>dl",
-  function()
-    require("dap").run_last()
-  end
-)
-vim.keymap.set(
-  {"n", "v"},
-  "<Leader>dh",
-  function()
-    require("dap.ui.widgets").hover()
-  end
-)
-vim.keymap.set(
-  {"n", "v"},
-  "<Leader>dp",
-  function()
-    require("dap.ui.widgets").preview()
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>df",
-  function()
-    local widgets = require("dap.ui.widgets")
-    widgets.centered_float(widgets.frames)
-  end
-)
-vim.keymap.set(
-  "n",
-  "<Leader>ds",
-  function()
-    local widgets = require("dap.ui.widgets")
-    widgets.centered_float(widgets.scopes)
-  end
-)
+--vim.keymap.set(
+--"n",
+--"<Leader>dc",
+--function()
+--require("dap").continue()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>do",
+--function()
+--require("dap").step_over()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>di",
+--function()
+--require("dap").step_into()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>do",
+--function()
+--require("dap").step_out()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>db",
+--function()
+--require("dap").toggle_breakpoint()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>dB",
+--function()
+--require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>dr",
+--function()
+--require("dap").repl.open()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>dl",
+--function()
+--require("dap").run_last()
+--end
+--)
+--vim.keymap.set(
+--{"n", "v"},
+--"<Leader>dh",
+--function()
+--require("dap.ui.widgets").hover()
+--end
+--)
+--vim.keymap.set(
+--{"n", "v"},
+--"<Leader>dp",
+--function()
+--require("dap.ui.widgets").preview()
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>df",
+--function()
+--local widgets = require("dap.ui.widgets")
+--widgets.centered_float(widgets.frames)
+--end
+--)
+--vim.keymap.set(
+--"n",
+--"<Leader>ds",
+--function()
+--local widgets = require("dap.ui.widgets")
+--widgets.centered_float(widgets.scopes)
+--end
+--)

@@ -163,7 +163,7 @@ local function load_variables()
     --
     fzf_history_dir = "~/.local/share/fzf-history",
     -- floatterm
-    floaterm_shell = "fish",
+    floaterm_shell = "fish"
     -- not 100% sure what these do tbh
     --UltiSnipsJumpForwardTrigger = "<C-a>",
     --UltiSnipsJumpBackwardTrigger = "<C-s>"

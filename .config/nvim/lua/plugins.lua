@@ -18,11 +18,15 @@ return require("packer").startup(
     use {
       "nvim-treesitter/nvim-treesitter"
     }
+    use "github/copilot.vim"
 
     use "lukas-reineke/indent-blankline.nvim"
     use "nvim-treesitter/playground"
     use "nvim-treesitter/nvim-treesitter-textobjects"
+
     use "windwp/nvim-ts-autotag" -- auto tag for closing react tags
+    use "windwp/nvim-autopairs" -- auto pairs
+
     use {
       -- Fzf for vim: fuzzy search (ESSENTIAL)
       "junegunn/fzf",
@@ -120,7 +124,6 @@ return require("packer").startup(
     )
     use "tpope/vim-repeat" -- Allow vim to repeat commands from vim-surround!
     use "tpope/vim-endwise" -- This is a simple plugin that helps to end certain structures automatically.
-    use "windwp/nvim-autopairs"
 
     ---- Modify * to also work with visual selections.
     use "nelstrom/vim-visual-star-search"
@@ -138,7 +141,7 @@ return require("packer").startup(
     use "onsails/lspkind.nvim" -- vscode-like pictograms to neovim built in lsp
     use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
     use "nvim-lua/lsp-status.nvim" -- helper for getting status of lsp onto lualine
-    use "MunifTanjim/prettier.nvim" -- prettier
+    use "MunifTanjim/prettier.nvim" -- prettier support
     use "jose-elias-alvarez/null-ls.nvim" -- null-ls is a language server abstraction
     --use(
     --{
@@ -175,6 +178,9 @@ return require("packer").startup(
       -- requires = {{"nvim-lua/plenary.nvim"}}
     }
     use "nvim-telescope/telescope-fzy-native.nvim"
+    use {
+      "benfowler/telescope-luasnip.nvim"
+    }
     -- lua line
     use "hoob3rt/lualine.nvim"
 
@@ -223,6 +229,9 @@ return require("packer").startup(
     use "mfussenegger/nvim-dap"
     use {"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
     use "leoluz/nvim-dap-go"
+
+    -- folding
+    --use {"kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async"}
     -- easy motion
     use {
       "phaazon/hop.nvim",
