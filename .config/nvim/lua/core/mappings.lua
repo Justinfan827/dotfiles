@@ -89,6 +89,16 @@ map {"i", "fpn", 'fmt.Printf("\\n\\n\\n")<Esc>==f(a'}
 map {"n", "s*", ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn"}
 map {"x", "s*", "sy:let @/=@s<CR>cgn"}
 
+-- make page down and up less disorienting
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- make search terms stay in the middle
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+
+-- Primeagen says no to Q
+vim.keymap.set("n", "Q", "<nop>")
+
 -- fugitive mappings
 map {"n", "<Leader>gd", ":Gvdiffsplit<CR>"}
 map {"n", "<Leader>gms", ":Gvdiffsplit origin/master<CR>"}
@@ -108,11 +118,14 @@ map {"n", "<leader>go", ":Git checkout<Space>"}
 -- move lines: https://vim.fandom.com/wiki/Moving_lines_up_or_down
 -- <A- means with the mac OS cmd key
 map {"n", "<A-j>", ":m .+1<CR>=="}
-map {"n", "<A-k>", ":m .-2<CR>=="}
 map {"i", "<A-j>", "<Esc>:m .+1<CR>==gi"}
+map {"n", "<A-k>", ":m .-2<CR>=="}
 map {"i", "<A-k>", "<Esc>:m .-2<CR>==gi"}
 map {"v", "<A-j>", ":m '>+1<CR>gv=gv"}
 map {"v", "<A-k>", ":m '<-2<CR>gv=gv"}
+
+-- this keeps your cursor in place when using J to move the line below above
+vim.keymap.set("n", "J", "mzJ`z")
 
 -- This lets me push from vim
 map {"n", "<leader>gps", ":Dispatch! git push<CR>"}
@@ -216,7 +229,8 @@ map {"n", "<leader>m", '<cmd>:lua require("harpoon.ui").toggle_quick_menu()<CR>'
 --map {"n", "<leader><space>", ":Telescope harpoon marks<CR>", {silent = true}}
 --
 
--- keep register when pasting
+-- keep register when pasting. This is the greatest!
+-- deletes and puts it in the  void register
 map {"v", "<leader>p", '"_dP', {silent = true}}
 
 -- spectre mappings
@@ -291,6 +305,19 @@ map {
   "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>",
   {}
 }
+
+-- undo tree is insane to recover from issues
+vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>")
+
+-- navigation in quick fix and location list
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+-- nice fun one to change the current word under the cursor
+vim.keymap.set("n", "<leader>vv", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 
 vim.cmd(
   [[
