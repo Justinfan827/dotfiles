@@ -64,6 +64,7 @@ local function load_options()
     ignorecase = true,
     smartcase = true,
     infercase = true,
+    hlsearch = true,
     incsearch = true,
     wrapscan = true,
     complete = ".,w,b,k",
