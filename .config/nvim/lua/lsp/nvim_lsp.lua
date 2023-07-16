@@ -53,9 +53,9 @@ local on_attach = function(client, bufnr)
 
   -- Note: i also have the formatter plugin at the moment
   -- Format command to run lsp based formatting
-  -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  --vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
-  -- Set some keybinds conditional on server capabilities
+  ----  Set some keybinds conditional on server capabilities
   --if client.server_capabilities.documentFormattingProvider then
   --vim.api.nvim_buf_set_keymap(
   --bufnr,

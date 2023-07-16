@@ -19,6 +19,8 @@ telescope.load_extension("harpoon")
 telescope.load_extension("fzy_native")
 telescope.load_extension("projects")
 
+--telescope.load_extension("luasnip")
+
 local M = {}
 
 --
