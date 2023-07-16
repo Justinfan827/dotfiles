@@ -139,12 +139,12 @@ map {"n", "<leader>gss", ":GStash<space>"}
 map {"n", "<leader>gsl", ":GStashList<CR>"}
 
 -- no hilight
-map {"n", "<leader><space>", ":noh<CR>"}
+map {"n", ",<leader>", ":noh<CR>"}
 
 -- .............................................................................
 --  FZF mappings
 -- .............................................................................
--- Search all files under git root
+-- Search all files under git root via a project files function
 vim.cmd "source $HOME/.config/nvim/lua/core/misc.vim"
 
 map {"n", "<C-p>", ":ProjectFiles <CR>"}
