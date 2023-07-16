@@ -2,7 +2,7 @@ vim.cmd(
   [[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source ~/.config/nvim/init.vim | PackerCompile
+    autocmd BufWritePost plugins.lua source ~/.config/nvim/init.lua | PackerCompile
   augroup end
 ]]
 )
@@ -19,6 +19,8 @@ return require("packer").startup(
       "nvim-treesitter/nvim-treesitter"
     }
     use "github/copilot.vim"
+    -- undo tree!
+    use "mbbill/undotree"
 
     use "lukas-reineke/indent-blankline.nvim"
     use "nvim-treesitter/playground"
