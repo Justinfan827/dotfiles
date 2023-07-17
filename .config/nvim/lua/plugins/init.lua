@@ -51,7 +51,7 @@ return {
     }
     -- tag = 'release' -- To use the latest release
   },
-  "tpope/vim-unimpaired", -- nice bindings e.g. '] space' to add empty line, ]l or ]q to move in location / quickfix list
+  -- "tpope/vim-unimpaired", -- nice bindings e.g. '] space' to add empty line, ]l or ]q to move in location / quickfix list
   "stsewd/gx-extended.vim", -- make gx work in opening files
   "christoomey/vim-tmux-navigator", -- help navigate with vim / tmux splits
   -- misc helpers
@@ -110,12 +110,14 @@ return {
     end
   },
   -- language support
-  "onsails/lspkind.nvim", -- vscode-like pictograms to neovim built in lsp
+  "williamboman/mason.nvim", -- manage lsp installations
+  "williamboman/mason-lspconfig.nvim", -- manage lsp installations
   "neovim/nvim-lspconfig", -- Collection of configurations for built-in LSP client
   "nvim-lua/lsp-status.nvim", -- helper for getting status of lsp onto lualine
   "MunifTanjim/prettier.nvim", -- prettier support
   "jose-elias-alvarez/null-ls.nvim", -- null-ls is a language server abstraction
-  -- Completion
+  -- cmp
+  "onsails/lspkind.nvim", -- vscode-like pictograms to neovim built in lsp
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-cmdline",
@@ -175,18 +177,9 @@ return {
   -- Debugging
   "mfussenegger/nvim-dap",
   {"rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap"}},
-  "leoluz/nvim-dap-go",
+  "leoluz/nvim-dap-go"
   -- folding
   -- {"kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async"}
-  -- easy motion
-  {
-    "phaazon/hop.nvim",
-    branch = "v1", -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require "hop".setup {keys = "asdfjkl;"}
-    end
-  }
   -- personal plugins
   -- "~/workbench/testy/testy.nvim"
 }
