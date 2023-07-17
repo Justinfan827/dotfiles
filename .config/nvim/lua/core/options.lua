@@ -204,5 +204,7 @@ vim.cmd [[
   cnoreabbrev H vert h
 ]]
 
+vim.cmd([[set t_Co=256]])
+
 load_options()
 load_variables()
