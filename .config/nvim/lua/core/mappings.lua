@@ -26,8 +26,9 @@ end
 
 -- https://github.com/nanotee/nvim-lua-guide#defining-mappings
 --
+--
 -- copy the directory of the current buffer to clipboard
-map {"n", "<leader>c", ":let @+=expand('%:p')<CR>"}
+--map {"n", "<leader>c", ":let @+=expand('%:p')<CR>"}
 map {"", "H", "^"}
 map {"", "L", "$"}
 -- Jump to line by just typing 123<CR>
@@ -261,50 +262,6 @@ map {"n", "<leader>tb", '<cmd>:lua require("tools.telescope").git_branches()<CR>
 
 -- focus mode
 --map {"n", "<leader>z", ":TZAtaraxis<CR>", {silent = true}}
-
----- hopping around!
-map {
-  "n",
-  "f",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",
-  {}
-}
-map {
-  "n",
-  "F",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",
-  {}
-}
-map {
-  "o",
-  "f",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
-  {}
-}
-map {
-  "o",
-  "F",
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
-  {}
-}
-map {
-  "n",
-  "<leader>e",
-  "<cmd> lua require'hop'.hint_words({})<cr>",
-  {}
-}
-map {
-  "v",
-  "<leader>e",
-  "<cmd> lua require'hop'.hint_words({})<cr>",
-  {}
-}
-map {
-  "o",
-  "<leader>e",
-  "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>",
-  {}
-}
 
 -- undo tree is insane to recover from issues
 vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>")
