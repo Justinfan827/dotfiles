@@ -2,5 +2,6 @@
     "diagnostics.globals": [
         "vim",
         "color"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }
