@@ -148,42 +148,43 @@ map {"n", ",<leader>", ":noh<CR>"}
 -- Search all files under git root via a project files function
 vim.cmd "source $HOME/.config/nvim/lua/core/misc.vim"
 
-map {"n", "<C-p>", ":ProjectFiles <CR>"}
---map {"n", "<C-p>", ":Telescope git_files <CR>"}
-
--- Open buffers
---map {"n", "<space><space>", ":Buffers!<CR>"}
-
--- Open all lines
-map {"n", "<Leader>l", ":Lines<CR>"}
+-- map {"n", "<C-p>", ":ProjectFiles <CR>"}
 
 -- searching through files using silver searcher
 map {"n", "<Leader>/", ":Ag!<CR>"}
-
--- Search current word under cursor
-map {"n", "<Leader>ag", ":Ag! <C-R><C-W><CR>", {silent = true}}
-
+-- fuzzy grep current word under cursor
+-- map {"n", "<Leader>ag", ":Ag! <C-R><C-W><CR>", {silent = true}}
 -- toggle list
 map {"n", "<leader>sa", ":set nolist!<CR>", {silent = true}}
-
 -- Reload lua module
 map {"n", "<leader>qr", '<cmd>:lua require("tools.telescope").reload()<CR>', {silent = true}}
 
 -- Run go imports
 map {"n", "<leader>gi", "<cmd>:lua GO_IMPORTS(1000)<CR>", {silent = true}}
 
--- telescope
---
-
 -- folding
 
 -- Search vimrc from anywhere
 map {"n", "<leader>vrc", '<cmd>:lua require("tools.telescope").search_nvim()<CR>', {silent = true}}
+
+--
+-- TELESCOPE mappings
+--
+
 -- git work trees
 -- -- <Enter> - switches to that worktree
 -- <c-d> - deletes that worktree
 -- <c-D> - force deletes that worktree
 map {"n", "<leader>wt", '<cmd>:lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {silent = true}}
+map {"n", "<C-p>", ":Telescope find_files <CR>"}
+vim.cmd(
+  [[
+  nnoremap <silent> <leader>ag <cmd>Telescope grep_string<cr>
+  " nnoremap <silent> <leader>/ <cmd>Telescope live_grep<cr>
+  nnoremap <silent> <space><space> <cmd>Telescope buffers<cr>
+  nnoremap <silent><leader>th <cmd>Telescope help_tags<cr>
+]]
+)
 
 -- float term mappings
 map {"n", "<leader>fn", ":FloatermNew<CR>", {silent = false}}
@@ -192,25 +193,6 @@ map {"n", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
 map {"v", "<leader>fn", ":FloatermNew<CR>", {silent = false}}
 map {"v", "<leader>ff", ":FloatermToggle<CR>", {silent = false}}
 map {"v", "<leader>fk", ":FloatermKill<CR>", {silent = false}}
-
--- dap debuging
---map {"n", "<leader>dc", "<Cmd>lua require'dap'.continue()<CR>", {silent = false}}
---map {"n", "<leader>do", "<Cmd>lua require'dap'.step_over()<CR>", {silent = false}}
---map {"n", "<leader>di", "<Cmd>lua require'dap'.step_into()<CR>", {silent = false}}
---map {"n", "<leader>du", "<Cmd>lua require'dap'.step_out()<CR>", {silent = false}}
---map {"n", "<Leader>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {silent = false}}
---map {
---"n",
---"<Leader>dB",
---"<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
---{silent = false}
---}
---map {
---"n",
---"<Leader>dL",
---"<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
---{silent = false}
---}
 
 -- harpoon mappings
 map {"n", "<leader>h", '<cmd>:lua require("harpoon.mark").add_file()<CR>', {silent = false}}
@@ -274,17 +256,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- nice fun one to change the current word under the cursor
 vim.keymap.set("n", "<leader>vv", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
-
-vim.cmd(
-  [[
-  nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
-  nnoremap <silent> <leader>ta <cmd>Telescope grep_string<cr>
-  nnoremap <silent> <leader>tr <cmd>Telescope live_grep<cr>
-  nnoremap <silent> <space><space> <cmd>Telescope buffers<cr>
-  nnoremap <silent><leader>th <cmd>Telescope help_tags<cr>
-]]
-)
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 
 --
 --  dap mappings for debugging

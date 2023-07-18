@@ -49,33 +49,38 @@ require "nvim-treesitter.configs".setup {
 }
 
 require("nvim-ts-autotag").setup()
-require "nvim-treesitter.configs".setup {
-  textobjects = {
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner"
+require "nvim-treesitter.configs".setup(
+  {
+    textobjects = {
+      swap = {
+        enable = true,
+        swap_next = {
+          ["<leader>a"] = "@parameter.inner"
+        },
+        swap_previous = {
+          ["<leader>A"] = "@parameter.inner"
+        }
       },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner"
+      select = {
+        enable = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["ap"] = "@parameter.outer",
+          ["ip"] = "@parameter.inner",
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@call.outer",
+          ["ic"] = "@call.inner",
+          ["as"] = "@statement.outer",
+          ["iv"] = "@variable",
+          ["av"] = "@variable"
+        }
       }
     },
-    select = {
-      enable = true,
-      -- Automatically jump forward to textobj, similar to targets.vim
-      lookahead = true,
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["ap"] = "@parameter.outer",
-        ["ip"] = "@parameter.inner",
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@call.outer",
-        ["ic"] = "@call.inner",
-        ["as"] = "@statement.outer",
-        ["iv"] = "@variable",
-        ["av"] = "@variable"
-      }
+    context_commentstring = {
+      enable = true
     }
   }
-}
+)
