@@ -1,4 +1,5 @@
 require("lsp.gopls_lsp")
+require('lsp.signature')
 --require("lsp.nvim_lsp")
 --require("lsp.bashls_lsp")
 --require("lsp.eslint_lsp")
@@ -86,6 +87,8 @@ masonLspConfig.setup_handlers(
     ["lua_ls"] = function()
       lspconfig.lua_ls.setup(
         {
+          on_attach = opts.on_attach,
+          capabilities = opts.capabilities,
           settings = {
             Lua = {
               runtime = {
@@ -117,8 +120,8 @@ masonLspConfig.setup_handlers(
     ["gopls"] = function()
       lspconfig.gopls.setup(
         {
-          capabilities = cmpNvimLsp.default_capabilities(),
-          on_attach = require("lsp.on_attach").on_attach,
+          capabilities = opts.capabilities,
+          on_attach = opts.on_attach,
           flags = {
             debounce_text_changes = 150
           },

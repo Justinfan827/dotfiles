@@ -132,15 +132,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 map {"n", "<leader>gps", ":Dispatch! git push<CR>"}
 map {"n", "<leader>gpl", ":Dispatch! git pull<CR>"}
 
--- This lets me open git branches from vim  git fzf checkout extension
-map {"n", "<leader>fb", ":GBranches<CR>"}
-
--- This lets me open git branches from vim  git fzf checkout extension
-map {"n", "<leader>gss", ":GStash<space>"}
-map {"n", "<leader>gsl", ":GStashList<CR>"}
-
 -- no hilight
-map {"n", ",<leader>", ":noh<CR>"}
+map {"n", "<leader><leader>", ":noh<CR>"}
 
 -- .............................................................................
 --  FZF mappings
@@ -167,6 +160,8 @@ map {"n", "<leader>gi", "<cmd>:lua GO_IMPORTS(1000)<CR>", {silent = true}}
 -- Search vimrc from anywhere
 map {"n", "<leader>vrc", '<cmd>:lua require("tools.telescope").search_nvim()<CR>', {silent = true}}
 
+map {"n", "<leader>ct", "<cmd>TroubleToggle<CR>", {silent = true}}
+
 --
 -- TELESCOPE mappings
 --
@@ -175,7 +170,9 @@ map {"n", "<leader>vrc", '<cmd>:lua require("tools.telescope").search_nvim()<CR>
 -- -- <Enter> - switches to that worktree
 -- <c-d> - deletes that worktree
 -- <c-D> - force deletes that worktree
-map {"n", "<leader>wt", '<cmd>:lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {silent = true}}
+-- map {"n", "<leader>wt", '<cmd>:lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {silent = true}}
+--
+map {"n", "<leader>w", "<cmd>w<cr>", {silent = true}}
 map {"n", "<C-p>", ":Telescope find_files <CR>"}
 vim.cmd(
   [[

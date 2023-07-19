@@ -16,6 +16,7 @@ return {
   "windwp/nvim-autopairs", -- auto pairs
   "tpope/vim-eunuch", -- Helpers for unix
   "junegunn/fzf.vim", -- fzf
+  "tpope/vim-unimpaired", -- mappings for quickfix + location lists
   {
     -- Fzf for vim: fuzzy search (ESSENTIAL)
     "junegunn/fzf",
@@ -56,21 +57,36 @@ return {
     end
   },
   "AndrewRadev/splitjoin.vim", -- split structs in golang with gS, gJ
-  {"L3MON4D3/LuaSnip", tag = "v1.0.0"},
-  "honza/vim-snippets", -- go snippets
   "qpkorr/vim-bufkill", -- kill buffer with :BD without killing session
   "vim-utils/vim-husk", -- navigate vim command line better
   ---- Theme and styling
   "kaicataldo/material.vim",
   -- Load gruvbox without lazy since it's my default colorscheme
   {
-    "ellisonleao/gruvbox.nvim",
+    "luisiacc/gruvbox-baby"
+  },
+  {
+    "sainnhe/gruvbox-material",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme gruvbox]])
+      vim.cmd([[colorscheme gruvbox-material]])
     end
   },
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("onedark").setup(
+  --       {
+  --         style = "warm"
+  --       }
+  --     )
+  --     require("onedark").load()
+  --     vim.cmd([[colorscheme onedark]])
+  --   end
+  -- },
   "ruanyl/vim-gh-line", -- link to git repo
   "navarasu/onedark.nvim",
   "drewtempelmeyer/palenight.vim",
@@ -111,6 +127,8 @@ return {
     "weilbith/nvim-code-action-menu",
     cmd = "CodeActionMenu"
   },
+  "ray-x/lsp_signature.nvim", -- show signatures while typing
+  {"j-hui/fidget.nvim", tag = "legacy"}, -- show status for lsp in pop up
   "kosayoda/nvim-lightbulb", -- lightbulb for codeactions
   "MunifTanjim/prettier.nvim", -- prettier support
   "jayp0521/mason-null-ls.nvim", -- mason null-ls integration
@@ -151,6 +169,8 @@ return {
   "zbirenbaum/copilot-cmp",
   "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
   "rafamadriz/friendly-snippets", -- friendly snippets for a whole bunch of languages
+  {"L3MON4D3/LuaSnip", tag = "v1.0.0"},
+  "honza/vim-snippets", -- go snippets
   --
   -- telescope
   --
