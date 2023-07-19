@@ -1,9 +1,12 @@
+-- Utilities for creating configurations
+local util = require "formatter.util"
 -- https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
 -- https://github.com/mhartington/formatter.nvim/blob/master/CONFIG.md
 --
 --
 -- if the LSP supports formattting, i have it setup so ff will format the file,
 -- but if formatting is not supported, just use this
+
 require("formatter").setup(
   {
     filetype = {
@@ -48,14 +51,15 @@ require("formatter").setup(
         end
       },
       typescriptreact = {
+        require("formatter.defaults.prettierd")
         -- prettier
-        function()
-          return {
-            exe = "prettierd",
-            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
-            stdin = true
-          }
-        end
+        -- function()
+        --   return {
+        --     exe = "prettierd",
+        --     args = {"--stdin-filepath", util.escape_path(util.get_current_buffer_file_path())},
+        --     stdin = true
+        --   }
+        -- end
       },
       typescript = {
         -- prettier

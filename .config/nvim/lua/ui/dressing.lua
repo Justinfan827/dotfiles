@@ -1,10 +1,2 @@
-require("dressing").setup(
-  {
-    input = {
-      enabled = true
-    },
-    select = {
-      enabled = true
-    }
-  }
-)
+-- use defaults
+require("dressing").setup()

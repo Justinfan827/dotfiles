@@ -5,8 +5,6 @@ local ls = require "luasnip"
 -- tell luasnip where to load snippets
 -- load if i wanna use snippets from the 'luasnippets directory'
 require("luasnip.loaders.from_lua").load()
--- load if i wanna use pre loaded snippets in the 'snippets directory'
---require("luasnip.loaders.from_snipmate").load()
 
 ls.config.set_config(
   {

@@ -3,20 +3,15 @@ local M = {}
 M.on_attach = function(client, bufnr)
   local opts = {noremap = true, silent = true}
   local keymap = vim.api.nvim_buf_set_keymap
-
-  if client.name == "tsserver" then
-    client.server_capabilities.document_formatting = false
-  end
-
-  if client.name == "lua_ls" then
-    client.server_capabilities.document_formatting = false
-  end
+  -- setting up formatters
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+  -- https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ#i-see-multiple-formatting-options-and-i-want-a-single-server-to-format-how-do-i-do-this
 
   if client.name == "tsserver" then
     keymap(bufnr, "n", "gd", "<cmd>TypescriptGoToSourceDefinition<CR>", opts)
   else
-    -- keymap(bufnr, "n", "gd", "<cmd>Trouble lsp_definitions<CR>", opts)
-    keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    -- keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    keymap(bufnr, "n", "gd", "<cmd>TroubleToggle lsp_definitions<CR>", opts)
   end
 
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -35,7 +30,13 @@ M.on_attach = function(client, bufnr)
     {expr = true}
   )
   keymap(bufnr, "n", "<leader>ca", "<cmd>CodeActionMenu<CR>", opts)
-  keymap(bufnr, "n", "gf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
+  keymap(
+    bufnr,
+    "n",
+    "gf", -- never use tsserver for formatting https://www.reddit.com/r/neovim/comments/yturkn/comment/iw69zpx/?utm_source=reddit&utm_medium=web2x&context=3
+    '<cmd>lua vim.lsp.buf.format({ async = true , filter = function(client) return client.name ~= "tsserver" end })<CR>',
+    opts
+  )
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
   keymap(bufnr, "n", "d]", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
