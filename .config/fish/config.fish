@@ -16,17 +16,19 @@ end
 set --universal nvm_default_version v19.7.0
 
 set -gx EDITOR nvim
-## Setup vault locally
-set -gx VAULT_ADDR https://vault.sandbox.k8s.centrio.com:8200
-set -gx VAULT_HOST vault.sandbox.k8s.centrio.com:8200
 
 # Go variables
-# after go 1.13, maybe don't need this? https://go.dev/doc/code
-#set -x GO111MODULE auto # https://github.com/kubernetes/client-go/blob/master/INSTALL.md#enabling-go-modules
-set -x GOPATH $HOME/go
-set PATH $GOPATH/bin $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
+# If $GOPATH is not set, binaries are installe in $HOME/go/bin
+set PATH $HOME/go/bin $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
 
-# set -gx JIRA_API_TOKEN (cat ~/.jira_token)
+# Blend mismo service variables
+set -gx LDFLAGS "-L/usr/local/opt/libxml2/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/libxml2/include"
+set -gx CGO_ENABLED 1
+set -gx PATH $HOME/pact/bin $PATH
+
+set -gx PATH $HOME/.local/bin $PATH
+
 if test -d (brew --prefix)"/share/fish/completions"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
 end
@@ -58,6 +60,8 @@ abbr -a pjo pj open
 
 alias code "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
+alias lnt "golangci-lint run --config=./.golangci.yaml ./..."
+
 alias fsa "fisher add $argv"
 alias fsr "fisher remove (fisher list | fzf)"
 alias fsl "fisher list"
@@ -72,7 +76,6 @@ alias mr 'make run'
 alias nr 'npm run'
 alias chrome 'chrome -a \"Google Chrome\"'
 alias ssa 'ssh -A'
-alias aw 'aws-vault'
 alias gc 'gcloud'
 
 # Sourcing
@@ -245,20 +248,6 @@ function fcoc -d "Fuzzy-find and checkout a commit"
   git log --pretty=oneline --abbrev-commit --reverse | fzf --tac +s -e | awk '{print $1;}' | read -l result; and git checkout "$result"
 end
 
-# not really working
-function snag -d "Pick desired files from a chosen branch"
-  # use fzf to choose source branch to snag files FROM
-  set branch (git for-each-ref --format='%(refname:short)' refs/heads | fzf --height 20% --layout=reverse --border)
-  # avoid doing work if branch isn't set
-  if test -n "$branch"
-    # use fzf to choose files that differ from current branch
-    set files (git diff --name-only $branch | fzf --height 20% --layout=reverse --border --multi)
-  end
-  # avoid checking out branch if files aren't specified
-  if test -n "$files"
-    git checkout $branch $files
-  end
-end
 
 function fs -d "Switch tmux session"
   tmux list-sessions -F "#{session_name}" | fzf | read -l result; and tmux switch-client -t "$result"
@@ -276,3 +265,36 @@ end
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.inc' ]; . '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.inc'; end
+
+
+#
+#
+# Ansa specific configs
+#
+
+function sourceAnsa -d "sources ~/code/ansa-platform/env.sh"
+  nvm use v14.17.0
+  bass source ~/code/ansa-platform/env.sh
+end
+
+function runAnsaEventHandler -d "runs ansa event handler"
+  sourceAnsa
+  cd ~/code/ansa-platform
+  go run ansa-server/entrypoints/event_handler/event_handler.go $argv --port=8081
+end
+
+function runAnsaServer -d "runs ansa server"
+  sourceAnsa
+  cd ~/code/ansa-platform
+  go run ansa-server/entrypoints/ansa_server.go $argv --port=8080
+end
+
+function runWatchAnsaServer -d "runs ansa server"
+  sourceAnsa
+  cd ~/code/ansa-platform
+  watchexec -e go -c -r -s SIGKILL 'go run ansa-server/entrypoints/ansa_server.go --port=8080'
+end
+
+
+# https://github.com/fsnotify/fsnotify/issues/129
+ulimit -n 2048

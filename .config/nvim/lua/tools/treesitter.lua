@@ -45,6 +45,10 @@ require "nvim-treesitter.configs".setup {
       goto_node = "<cr>",
       show_help = "?"
     }
+  },
+  autotag = {
+    enable = true,
+    enable_close_on_slash = false
   }
 }
 

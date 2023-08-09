@@ -10,21 +10,11 @@ local util = require "formatter.util"
 require("formatter").setup(
   {
     filetype = {
-      css = {
-        -- prettier
-        function()
-          return {
-            exe = "prettierd",
-            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
-            stdin = true
-          }
-        end
-      },
       html = {
         -- prettier
         function()
           return {
-            exe = "prettierd",
+            exe = "prettier",
             args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
             stdin = true
           }
@@ -40,22 +30,52 @@ require("formatter").setup(
           }
         end
       },
-      yaml = {
+      css = {
         -- prettier
         function()
           return {
-            exe = "prettierd",
+            exe = "prettier",
             args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
             stdin = true
           }
         end
       },
+      yaml = {
+        -- prettier
+        function()
+          return {
+            exe = "prettier",
+            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            stdin = true
+          }
+        end
+      },
+      sql = {
+        function()
+          return {
+            exe = "pg_format",
+            args = {" --inplace -"},
+            stdin = true
+          }
+        end
+      },
       typescriptreact = {
-        require("formatter.defaults.prettierd")
+        require("formatter.defaults.prettier")
         -- prettier
         -- function()
         --   return {
-        --     exe = "prettierd",
+        --     exe = "prettier",
+        --     args = {"--stdin-filepath", util.escape_path(util.get_current_buffer_file_path())},
+        --     stdin = true
+        --   }
+        -- end
+      },
+      javascriptreact = {
+        require("formatter.defaults.prettier")
+        -- prettier
+        -- function()
+        --   return {
+        --     exe = "prettier",
         --     args = {"--stdin-filepath", util.escape_path(util.get_current_buffer_file_path())},
         --     stdin = true
         --   }
@@ -65,7 +85,7 @@ require("formatter").setup(
         -- prettier
         function()
           return {
-            exe = "prettierd",
+            exe = "prettier",
             args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
             stdin = true
           }
@@ -75,7 +95,7 @@ require("formatter").setup(
         -- prettier
         function()
           return {
-            exe = "prettierd",
+            exe = "prettier",
             args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
             stdin = true
           }

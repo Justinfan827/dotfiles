@@ -6,6 +6,32 @@
 
 -- Creating an autocommand in 0.7
 
+-- map is a wrapper around vim api to help set variables
+-- in a more vimscript way
+-- e.g. If we wanted to do:
+-- >> nnoremap <Leader>w :write<CR>
+-- we would need to do:
+-- >>> vim.api.nvim_set_keymap('n', '<Leader>w', ':write<CR>', {noremap = true})
+local map = function(key)
+  -- get the extra options
+  local opts = {noremap = true}
+  for i, v in pairs(key) do
+    if type(i) == "string" then
+      opts[i] = v
+    end
+  end
+
+  -- basic support for buffer-scoped keybindings
+  local buffer = opts.buffer
+  opts.buffer = nil
+
+  if buffer then
+    vim.api.nvim_buf_set_keymap(0, key[1], key[2], key[3], opts)
+  else
+    vim.api.nvim_set_keymap(key[1], key[2], key[3], opts)
+  end
+end
+
 -- auto format go code
 -- https://github.com/neovim/nvim-lspconfig/issues/115
 vim.api.nvim_create_autocmd(
@@ -68,8 +94,17 @@ vim.api.nvim_create_autocmd(
       -- function to get the effective shiftwidth value.
       vim.opt_local.shiftwidth = 8
       vim.opt.expandtab = false
+
+      -- fmt.Print from insert mode; Puts focus inside parentheses
+      map {"i", "fpp", "fmt.Println()<Esc>==f(a"}
+      map {"i", "fpq", 'fmt.Println("")<Esc>==f"a'}
+      -- Console log from visual mode on next line, puts visual selection inside parentheses
+      map {"v", "fpp", "yofpp<Esc>p"}
+      -- Console log from normal mode, inserted on next line with word your on inside parentheses
+      map {"n", "fpp", '"ayiwofmt.Println("LOGGING", <C-R>a)<Esc>'}
+      map {"i", "fpn", 'fmt.Printf("\\n\\n\\n")<Esc>==f(a'}
     end,
-    desc = "Set tabstop, softtabstop, shiftwidth for node development"
+    desc = "Set tabstop, softtabstop, shiftwidth for go development"
   }
 )
 
@@ -79,7 +114,7 @@ vim.api.nvim_create_autocmd(
 vim.api.nvim_create_autocmd(
   "FileType",
   {
-    pattern = "javascript,typescript,typescriptreact,css",
+    pattern = "javascript,javascriptreact,typescript,typescriptreact,css,md",
     callback = function()
       -- Number of spaces that a <Tab> in the file counts for.  Also see
       -- the |:retab| command, and the 'softtabstop' option.

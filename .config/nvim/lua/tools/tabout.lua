@@ -1,6 +1,6 @@
-local tabout = require("tabout")
-tabout.setup(
-  {
-    tabkey = "<Tab>"
-  }
-)
+-- local tabout = require("tabout")
+-- tabout.setup(
+--   {
+--     tabkey = "<Tab>"
+--   }
+-- )

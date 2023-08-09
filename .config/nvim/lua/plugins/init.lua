@@ -10,7 +10,8 @@ return {
   --- Editing
   ---
   "mbbill/undotree", -- undo tree is amazing
-  "zbirenbaum/copilot.lua", -- github copilot
+  -- "zbirenbaum/copilot.lua", -- github copilot
+  "github/copilot.vim",
   "lukas-reineke/indent-blankline.nvim",
   "windwp/nvim-ts-autotag", -- auto tag for closing react tags
   "windwp/nvim-autopairs", -- auto pairs
@@ -96,7 +97,7 @@ return {
   "ethanholz/nvim-lastplace", -- intelligently reopen files at your last edit position
   "JoosepAlviste/nvim-ts-context-commentstring", -- comment string based on context
   "numToStr/Comment.nvim", -- commenter
-  "abecodes/tabout.nvim", -- tab out of brackets, parens, etc (might be interferring with copilot)
+  -- "abecodes/tabout.nvim", -- tab out of brackets, parens, etc (might be interferring with copilot)
   -- surround stuff
   {
     "kylechui/nvim-surround",
@@ -166,7 +167,7 @@ return {
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lua",
   "hrsh7th/cmp-path",
-  "zbirenbaum/copilot-cmp",
+  -- "zbirenbaum/copilot-cmp",
   "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
   "rafamadriz/friendly-snippets", -- friendly snippets for a whole bunch of languages
   {"L3MON4D3/LuaSnip", tag = "v1.0.0"},
