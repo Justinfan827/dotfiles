@@ -1,5 +1,5 @@
 require("lsp.gopls_lsp")
-require('lsp.signature')
+require("lsp.signature")
 --require("lsp.nvim_lsp")
 --require("lsp.bashls_lsp")
 --require("lsp.eslint_lsp")

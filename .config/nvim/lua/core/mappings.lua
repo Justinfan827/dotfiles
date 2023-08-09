@@ -78,15 +78,6 @@ map {"n", "cll", '"ayiwoconsole.log({<C-R>a});<Esc>'}
 -- add new line in insert and normal mode
 map {"i", "cln", "console.log('\\n\\n\\n');<Esc>"}
 
--- fmt.Print from insert mode; Puts focus inside parentheses
-map {"i", "fpp", "fmt.Println()<Esc>==f(a"}
-map {"i", "fpq", 'fmt.Println("")<Esc>==f"a'}
--- Console log from visual mode on next line, puts visual selection inside parentheses
-map {"v", "fpp", "yofpp<Esc>p"}
--- Console log from normal mode, inserted on next line with word your on inside parentheses
-map {"n", "fpp", '"ayiwofmt.Println("LOGGING", <C-R>a)<Esc>'}
-map {"i", "fpn", 'fmt.Printf("\\n\\n\\n")<Esc>==f(a'}
-
 map {"n", "s*", ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn"}
 map {"x", "s*", "sy:let @/=@s<CR>cgn"}
 

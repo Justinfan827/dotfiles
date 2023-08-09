@@ -51,7 +51,7 @@ cmp.setup {
   sources = {
     {name = "nvim_lua"},
     {name = "luasnip"},
-    {name = "copilot"},
+    -- {name = "copilot"}, // i don't like copilot as part of cmp
     {name = "nvim_lsp", max_item_count = 6},
     {name = "nvim_lua"},
     {name = "path"},
