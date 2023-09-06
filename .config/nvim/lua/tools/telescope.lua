@@ -16,6 +16,8 @@ telescope.setup {
     }
   },
   defaults = {
+    layout_strategy = "flex",
+    layout_config = {height = 0.99, width = 0.99},
     file_ignore_patterns = {
       ".git/",
       "node_modules/*"
@@ -36,6 +38,7 @@ telescope.setup {
 }
 
 telescope.load_extension("harpoon")
+telescope.load_extension("git_worktree")
 telescope.load_extension("fzf")
 telescope.load_extension("projects")
 

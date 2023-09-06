@@ -10,6 +10,7 @@ return {
   --- Editing
   ---
   "mbbill/undotree", -- undo tree is amazing
+  "ThePrimeagen/git-worktree.nvim",
   -- "zbirenbaum/copilot.lua", -- github copilot
   "github/copilot.vim",
   "lukas-reineke/indent-blankline.nvim",
@@ -26,7 +27,10 @@ return {
     end
   },
   "svermeulen/vim-subversive", -- substitutions
-  "Pocco81/TrueZen.nvim", -- zen /focus mode
+  {
+    "folke/zen-mode.nvim",
+    opts = {}
+  },
   "windwp/nvim-spectre", --search and replace
   "tpope/vim-repeat", -- Allow vim to repeat commands from vim-surround!
   "tpope/vim-endwise", -- This is a simple plugin that helps to end certain structures automatically.
@@ -108,16 +112,25 @@ return {
     end
   },
   -- nerd tree alternative
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   version = "*",
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-tree/nvim-web-devicons"
+  --   },
+  --   config = function()
+  --     require("tools.nvim_tree").setup()
+  --   end
+  -- },
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
     dependencies = {
-      "nvim-tree/nvim-web-devicons"
-    },
-    config = function()
-      require("tools.nvim_tree").setup()
-    end
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim"
+    }
   },
   --
   -- LSP language support
