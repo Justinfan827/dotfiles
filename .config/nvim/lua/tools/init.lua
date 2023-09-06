@@ -3,12 +3,12 @@
 require("nvim-autopairs").setup {}
 
 -- enable plugins with more complex configs
-require("tools.truezen")
 require("tools.reload")
 require("tools.treesitter")
 require("tools.telescope")
 require("tools.formatter")
-require("tools.nvim_tree")
+require("tools.neo-tree")
+require("tools.git-worktree")
 require("tools.luasnip")
 require("tools.copilot")
 require("tools.renamer")

@@ -21,6 +21,7 @@ require "nvim-treesitter.configs".setup {
     "markdown",
     "yaml",
     "html",
+    "terraform",
     "scss"
   },
   query_linter = {

@@ -51,13 +51,8 @@ map {"n", "sv", ":vsplit<Return><C-w>w"}
 -- remap escape character to kj
 map {"i", "kj", "<ESC>"}
 
--- NVIMTree
--- NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
---map{'n','<C-n>' ,':NvimTreeToggle<CR>'}
-map {"n", "<leader>r", ":NvimTreeRefresh<CR>"}
-map {"n", "<C-n>", ":NvimTreeFindFileToggle<CR>"}
--- Toggle width of nvim tree
-map {"n", "<leader>n", '<cmd>:lua require("tools.nvim_tree").toggleWidth()<CR>', {silent = true}}
+-- Neo Tree
+map {"n", "<C-n>", ":Neotree filesystem reveal left toggle<CR>"}
 
 -- cd to directory of current file
 map {"n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>"}
@@ -107,12 +102,12 @@ map {"n", "<leader>ge", ":Gedit<CR>"}
 map {"n", "<leader>gl", ":silent! Git log<CR>"}
 map {"n", "<leader>go", ":Git checkout<Space>"}
 
--- move lines: https://vim.fandom.com/wiki/Moving_lines_up_or_down
 -- <A- means with the mac OS cmd key
-map {"n", "<A-j>", ":m .+1<CR>=="}
+-- move lines: https://vim.fandom.com/wiki/Moving_lines_up_or_down
 map {"i", "<A-j>", "<Esc>:m .+1<CR>==gi"}
-map {"n", "<A-k>", ":m .-2<CR>=="}
 map {"i", "<A-k>", "<Esc>:m .-2<CR>==gi"}
+map {"n", "<A-j>", ":m .+1<CR>=="}
+map {"n", "<A-k>", ":m .-2<CR>=="}
 map {"v", "<A-j>", ":m '>+1<CR>gv=gv"}
 map {"v", "<A-k>", ":m '<-2<CR>gv=gv"}
 
@@ -144,9 +139,7 @@ map {"n", "<leader>sa", ":set nolist!<CR>", {silent = true}}
 map {"n", "<leader>qr", '<cmd>:lua require("tools.telescope").reload()<CR>', {silent = true}}
 
 -- Run go imports
-map {"n", "<leader>gi", "<cmd>:lua GO_IMPORTS(1000)<CR>", {silent = true}}
-
--- folding
+-- map {"n", "<leader>gi", "<cmd>:lua GO_IMPORTS(1000)<CR>", {silent = true}}
 
 -- Search vimrc from anywhere
 map {"n", "<leader>vrc", '<cmd>:lua require("tools.telescope").search_nvim()<CR>', {silent = true}}
@@ -161,9 +154,13 @@ map {"n", "<leader>ct", "<cmd>TroubleToggle<CR>", {silent = true}}
 -- -- <Enter> - switches to that worktree
 -- <c-d> - deletes that worktree
 -- <c-D> - force deletes that worktree
--- map {"n", "<leader>wt", '<cmd>:lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {silent = true}}
---
+-- git worktrees
+map {"n", "<leader>tg", ':lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {silent = true}}
+map {"n", "<leader>tc", ':lua require("telescope").extensions.git_worktree.create_git_worktree()<CR>', {silent = true}}
+
+-- write
 map {"n", "<leader>w", "<cmd>w<cr>", {silent = true}}
+
 map {"n", "<C-p>", ":Telescope find_files <CR>"}
 vim.cmd(
   [[
@@ -197,7 +194,7 @@ map {"n", "<leader>m", '<cmd>:lua require("harpoon.ui").toggle_quick_menu()<CR>'
 --map {"n", "<leader>m", "<cmd>:Telescope harpoon marks<CR>", {silent = false}}
 --map {"n", "<leader>nn", '<cmd>:lua require("harpoon.ui").nav_next()<CR>', {silent = false}}
 --map {"n", "<leader>np", '<cmd>:lua require("harpoon.ui").nav_prev()<CR>', {silent = false}}
---map {"n", "<leader><space>", ":Telescope harpoon marks<CR>", {silent = true}}
+map {"n", "<leader><space>", ":Telescope harpoon marks<CR>", {silent = true}}
 --
 
 -- keep register when pasting. This is the greatest!
@@ -227,8 +224,6 @@ map {"n", "ff", ":Format<CR>", {silent = true}}
 --map {"v", "<leader>A", ":A<CR>", {silent = true}}
 --map {"v", "<leader>AS", ":AV<CR>", {silent = true}}
 
--- my own git branches with updated mappings
-map {"n", "<leader>tb", '<cmd>:lua require("tools.telescope").git_branches()<CR>', {silent = true}}
 
 -- focus mode
 --map {"n", "<leader>z", ":TZAtaraxis<CR>", {silent = true}}
@@ -245,93 +240,3 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- nice fun one to change the current word under the cursor
 vim.keymap.set("n", "<leader>vv", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
-
---
---  dap mappings for debugging
---
---vim.keymap.set(
---"n",
---"<Leader>dc",
---function()
---require("dap").continue()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>do",
---function()
---require("dap").step_over()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>di",
---function()
---require("dap").step_into()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>do",
---function()
---require("dap").step_out()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>db",
---function()
---require("dap").toggle_breakpoint()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>dB",
---function()
---require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>dr",
---function()
---require("dap").repl.open()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>dl",
---function()
---require("dap").run_last()
---end
---)
---vim.keymap.set(
---{"n", "v"},
---"<Leader>dh",
---function()
---require("dap.ui.widgets").hover()
---end
---)
---vim.keymap.set(
---{"n", "v"},
---"<Leader>dp",
---function()
---require("dap.ui.widgets").preview()
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>df",
---function()
---local widgets = require("dap.ui.widgets")
---widgets.centered_float(widgets.frames)
---end
---)
---vim.keymap.set(
---"n",
---"<Leader>ds",
---function()
---local widgets = require("dap.ui.widgets")
---widgets.centered_float(widgets.scopes)
---end
---)

@@ -54,21 +54,21 @@ require("formatter").setup(
         function()
           return {
             exe = "pg_format",
-            args = {" --inplace -"},
+            args = {" --inplace --wrap-after 40 - "},
             stdin = true
           }
         end
       },
       typescriptreact = {
-        require("formatter.defaults.prettier")
-        -- prettier
-        -- function()
-        --   return {
-        --     exe = "prettier",
-        --     args = {"--stdin-filepath", util.escape_path(util.get_current_buffer_file_path())},
-        --     stdin = true
-        --   }
-        -- end
+        -- require("formatter.defaults.prettier")
+        function()
+          return {
+            exe = "./node_modules/.bin/prettier",
+            -- exe = "prettier", -- idk why these are different? same version
+            args = {"--stdin-filepath", util.escape_path(util.get_current_buffer_file_path())},
+            stdin = true
+          }
+        end
       },
       javascriptreact = {
         require("formatter.defaults.prettier")
@@ -85,8 +85,9 @@ require("formatter").setup(
         -- prettier
         function()
           return {
-            exe = "prettier",
-            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+            exe = "./node_modules/.bin/prettier",
+            -- exe = "prettier", // idk why these are different? same version
+            args = {"--stdin-filepath", util.escape_path(util.get_current_buffer_file_path())},
             stdin = true
           }
         end
@@ -131,7 +132,7 @@ require("formatter").setup(
       json = {
         function()
           return {
-            exe = "prettier",
+            exe = "./node_modules/.bin/prettier",
             args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--double-quote"},
             stdin = true
           }
