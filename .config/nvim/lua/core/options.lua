@@ -198,13 +198,15 @@ end
 -- Using vim.cmd because there are still things we can't do with lua.
 -- Right now we can't create or call ex-commands, same goes for autocommands.
 vim.cmd [[
-  " a list of groups can be found at `:help nvim_tree_highlight`
-  highlight NvimTreeFolderIcon guibg=blue
   " abbreviate H on command line to ver h, vertical help
   cnoreabbrev H vert h
 ]]
 
 vim.cmd([[set t_Co=256]])
+
+-- background is transparent
+-- vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
+-- vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
 
 load_options()
 load_variables()

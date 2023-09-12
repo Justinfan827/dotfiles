@@ -75,9 +75,11 @@ alias mk 'make'
 alias mr 'make run'
 alias nr 'npm run'
 alias yr 'yarn run'
+alias p 'pnpm'
 alias chrome 'chrome -a \"Google Chrome\"'
 alias ssa 'ssh -A'
 alias gc 'gcloud'
+alias y 'yarn'
 
 # Sourcing
 alias sb 'source ~/.bashrc'
@@ -271,7 +273,6 @@ end
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.inc' ]; . '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.inc'; end
 
-
 #
 #
 # Ansa specific configs
@@ -308,3 +309,10 @@ end
 
 # https://github.com/fsnotify/fsnotify/issues/129
 ulimit -n 2048
+
+# pnpm
+set -gx PNPM_HOME "/Users/justinfan/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
