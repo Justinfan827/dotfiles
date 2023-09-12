@@ -15,7 +15,7 @@ ls.config.set_config(
       -- for when you cycle through choice nodes, virtual text to indicate you're in choice node
       [require("luasnip.util.types").choiceNode] = {
         active = {
-          virt_text = {{"●", "GruvboxOrange"}}
+          -- virt_text = {{"●", "GruvboxOrange"}} -- enable
         }
       }
     }
