@@ -29,14 +29,11 @@ mason_null_ls.setup(
     handlers = {
       -- mason automatically sets up anything that I haven't setup with a handler.
       -- in this case, for prettier, mason will call null_ls.builtins.formatting.prettier
-      -- function(source_name, methods)
-      --   -- all sources with no handler get passed here
-      --   -- Keep original functionality of `automatic_setup = true`
-      --   mason_automatic_setup(source_name, methods)
-      -- end,
-
-      function()
-      end, -- disables automatic setup of all null-ls sources
+      function(source_name, methods)
+        -- all sources with no handler get passed here
+        -- Keep original functionality of `automatic_setup = true`
+        mason_automatic_setup(source_name, methods)
+      end,
       -- special setup with stylua? maybe not needed here
       stylua = function()
         null_ls.register(null_ls.builtins.formatting.stylua)
