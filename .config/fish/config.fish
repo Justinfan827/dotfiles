@@ -74,6 +74,7 @@ alias grep 'grep --color'
 alias mk 'make'
 alias mr 'make run'
 alias nr 'npm run'
+alias yr 'yarn run'
 alias chrome 'chrome -a \"Google Chrome\"'
 alias ssa 'ssh -A'
 alias gc 'gcloud'
@@ -164,10 +165,14 @@ alias nn 'nvm use 16'
 set -gx FZF_DEFAULT_COMMAND 'ag -g ""'
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 set -gx FZF_ALT_C_COMMAND "$FZF_DEFAULT_COMMAND"
-# Helps with vims preview window
-set -gx BAT_THEME "TwoDark"
-
-set -gx FZF_DEFAULT_OPTS '--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168'
+# Helps with vims preview window (turn off if i want to use transparent
+# background)
+# set -gx BAT_THEME "TwoDark"
+# set -gx FZF_DEFAULT_OPTS '--color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168'
+# https://www.reddit.com/r/vim/comments/rqhurx/comment/hqav4ek/?utm_source=share&utm_medium=web2x&context=3
+# 
+# 
+set -gx FZF_DEFAULT_OPTS ' --color=gutter:-1,bg:-1 --color info:108,prompt:109,spinner:108,pointer:168,marker:168'
 
 # Uncomment the following line to disable fuzzy completion
 # export DISABLE_FZF_AUTO_COMPLETION="true"
@@ -283,10 +288,15 @@ function runAnsaEventHandler -d "runs ansa event handler"
   go run ansa-server/entrypoints/event_handler/event_handler.go $argv --port=8081
 end
 
-function runAnsaServer -d "runs ansa server"
+function ras -d "runs ansa server"
   sourceAnsa
   cd ~/code/ansa-platform
   go run ansa-server/entrypoints/ansa_server.go $argv --port=8080
+end
+
+function rad -d "runs ansa dash"
+  cd ~/code/ansa-dashboard-full-repo
+  yarn dev
 end
 
 function runWatchAnsaServer -d "runs ansa server"

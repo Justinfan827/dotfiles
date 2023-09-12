@@ -36,11 +36,15 @@ cmp.setup {
     }
     -- LEARN TO NOT USE TAB for moving
   },
-  -- window = {
-  --   -- consider this
-  --   -- completion = cmp.config.window.bordered(),
-  --   -- documentation = cmp.config.window.bordered()
-  -- },
+  window = {
+    -- consider this
+    completion = cmp.config.window.bordered(
+      {
+        winHighlight = "Normal:CmpNormal",
+      }
+    ),
+    documentation = cmp.config.window.bordered({winHighlight = "Normal:CmpNormal"})
+  },
   experimental = {
     ghost_text = false,
     native_menu = false

@@ -68,33 +68,23 @@ return {
   "kaicataldo/material.vim",
   -- Load gruvbox without lazy since it's my default colorscheme
   {
-    "luisiacc/gruvbox-baby"
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000
   },
   {
     "sainnhe/gruvbox-material",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
+      vim.g.gruvbox_material_transparent_background = 2
+      vim.cmd([[
+      set background=dark
+      colorscheme gruvbox-material
+      ]])
     end
   },
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("onedark").setup(
-  --       {
-  --         style = "warm"
-  --       }
-  --     )
-  --     require("onedark").load()
-  --     vim.cmd([[colorscheme onedark]])
-  --   end
-  -- },
   "ruanyl/vim-gh-line", -- link to git repo
-  "navarasu/onedark.nvim",
-  "drewtempelmeyer/palenight.vim",
   "brenoprata10/nvim-highlight-colors", -- colors for tailwind and stuff
   --"norcalli/nvim-colorizer.lua",
   "max397574/better-escape.nvim", -- a better escape
