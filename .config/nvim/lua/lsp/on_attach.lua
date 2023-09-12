@@ -16,13 +16,15 @@ M.on_attach = function(client, bufnr)
   -- setting up formatters
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
   -- https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ#i-see-multiple-formatting-options-and-i-want-a-single-server-to-format-how-do-i-do-this
-  -- if has_value({"tsserver", "emmet_language_server", "cssmodules_ls", "eslint", "tailwindcss"}, client.name) then
-  --   keymap(bufnr, "n", "gd", "<cmd>TypescriptGoToSourceDefinition<CR>", opts)
-  -- else
-  --   -- keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  --   keymap(bufnr, "n", "gd", "<cmd>TroubleToggle lsp_definitions<CR>", opts)
-  -- end
-  keymap(bufnr, "n", "gd", "<cmd>TroubleToggle lsp_definitions<CR>", opts)
+
+  if client.name == "tsserver" then
+    keymap(bufnr, "n", "gd", "<cmd>TypescriptGoToSourceDefinition<CR>", opts)
+    keymap(bufnr, "n", "<leader>or", "<cmd>TypescriptOrganizeImports<CR>", opts)
+    keymap(bufnr, "n", "<leader>rm", "<cmd>TypescriptRemoveUnused<CR>", opts)
+  else
+    -- keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    keymap(bufnr, "n", "gd", "<cmd>TroubleToggle lsp_definitions<CR>", opts)
+  end
 
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gt", "<cmd>Trouble lsp_type_definitions<CR>", opts)

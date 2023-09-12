@@ -24,8 +24,8 @@ lualine.setup {
   options = {
     globalstatus = true,
     icons_enabled = true,
-    --theme = "solarized_dark",
-    -- theme = "gruvbox-material",
+    --theme = "tokyonight",
+    theme = "gruvbox-material",
     component_separators = {left = "", right = ""},
     section_separators = {left = "", right = ""},
     disabled_filetypes = {"neo-tree-popup", "alpha", "NvimTree"}
