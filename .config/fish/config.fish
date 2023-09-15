@@ -127,6 +127,7 @@ alias viml 'cd ~/.config/nvim && vim'
 alias vimt 'vim ~/.tmux.conf'
 alias vimg 'vim ~/.gitconfig'
 alias vimf 'vim ~/.config/fish/config.fish'
+alias vimk 'vim ~/.config/kitty/kitty.conf'
 alias vaws 'vim ~/.aws/config'
 # leverage vim auto sessions by cding to project root first 
 alias vmon 'to gomono && vim'
@@ -278,7 +279,7 @@ if [ -f '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.in
 # Ansa specific configs
 #
 
-function sourceAnsa -d "sources ~/code/ansa-platform/env.sh"
+function sa -d "sources ~/code/ansa-platform/env.sh"
   nvm use v14.17.0
   bass source ~/code/ansa-platform/env.sh
 end
@@ -306,6 +307,10 @@ function runWatchAnsaServer -d "runs ansa server"
   watchexec -e go -c -r -s SIGKILL 'go run ansa-server/entrypoints/ansa_server.go --port=8080'
 end
 
+function rai -d "runs ansa api tests"
+  sourceAnsa
+  INTEGRATION=true go test -v -timeout 15m ./ansa-server/restapi/apitests/... -run="$argv[1]"
+end
 
 # https://github.com/fsnotify/fsnotify/issues/129
 ulimit -n 2048
@@ -316,3 +321,7 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+# fish in vi mode
+#fish_vi_key_bindings
+fish_default_key_bindings
