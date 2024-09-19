@@ -36,7 +36,16 @@ lualine.setup {
     lualine_a = {"mode"},
     lualine_b = {"branch", "diff"},
     lualine_c = {
-      {"filename", path = 1}
+      {"filename", path = 1},
+      -- function()
+      --   return require("nvim-treesitter").statusline(
+      --     {
+      --       indicator_size = 70,
+      --       type_patterns = {"class", "function", "method"},
+      --       separator = " -> "
+      --     }
+      --   )
+      -- end
     },
     lualine_x = {"diagnostics", getLsp, "encoding", "fileformat", "filetype"},
     lualine_y = {"progress"},
