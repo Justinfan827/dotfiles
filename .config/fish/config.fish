@@ -62,6 +62,7 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias code "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 
 alias lnt "golangci-lint run --config=./.golangci.yaml ./..."
+alias gma "go mod tidy && go mod vendor"
 alias nu "nvm use"
 
 alias fsa "fisher add $argv"
@@ -80,6 +81,7 @@ alias mk 'make'
 alias mr 'make run'
 alias nr 'npm run'
 alias yr 'yarn run'
+alias yff 'yarn run format:fix'
 alias p 'pnpm'
 alias chrome 'chrome -a \"Google Chrome\"'
 alias ssa 'ssh -A'
@@ -131,6 +133,7 @@ alias vim 'nvim'
 alias fv 'vim (fzf | xargs)'
 alias cv 'cd $(find * -type d | fzf)'
 alias gts 'gt m -a && gt ss'
+alias gtd 'gt diff'
 alias viml 'cd ~/.config/nvim && vim'
 alias vimt 'vim ~/.tmux.conf'
 alias vimg 'vim ~/.gitconfig'
@@ -142,7 +145,7 @@ alias tf 'terraform'
 alias ti 'AWS_PROFILE=jfan-indie terraform'
 alias tprod 'AWS_PROFILE=ansa-prod terraform'
 alias tstaging 'AWS_PROFILE=ansa-dev terraform'
-alias tcompass 'AWS_PROFILE=compass terraform'
+alias tappwest 'AWS_PROFILE=app-prod-west terraform'
 # leverage vim auto sessions by cding to project root first 
 alias vmon 'to gomono && vim'
 alias vin 'to in && vim'

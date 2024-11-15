@@ -130,9 +130,6 @@ return {
 	-- New NVIM rooter: this is problematic for new installs
 	{
 		"ahmedkhalf/project.nvim",
-		config = function(LazyPlugin)
-			require("tools.lsp_rooter").setup()
-		end,
 	},
 	"Wansmer/treesj",
 	keys = { "<space>m", "<space>j", "<space>s" },
