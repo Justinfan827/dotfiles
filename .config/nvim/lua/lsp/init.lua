@@ -52,7 +52,7 @@ masonLspConfig.setup({
 		"html",
 		"cssls",
 		"astro",
-		"yamlls",
+		-- "yamlls",
 		"taplo",
 		"marksman",
 		"dockerls",

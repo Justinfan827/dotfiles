@@ -22,12 +22,11 @@ set -gx EDITOR nvim
 set PATH $HOME/go/bin $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
 
 # Blend mismo service variables
-set -gx LDFLAGS "-L/usr/local/opt/libxml2/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/libxml2/include"
-set -gx CGO_ENABLED 1
-set -gx PATH $HOME/pact/bin $PATH
-
-set -gx PATH $HOME/.local/bin $PATH
+# set -gx LDFLAGS "-L/usr/local/opt/libxml2/lib"
+# set -gx CPPFLAGS "-I/usr/local/opt/libxml2/include"
+# set -gx CGO_ENABLED 1
+# set -gx PATH $HOME/pact/bin $PATH
+# set -gx PATH $HOME/.local/bin $PATH
 
 if test -d (brew --prefix)"/share/fish/completions"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
@@ -69,12 +68,14 @@ alias fsa "fisher add $argv"
 alias fsr "fisher remove (fisher list | fzf)"
 alias fsl "fisher list"
 
+
+alias vk='NVIM_APPNAME=nvim-kickstart nvim' # Kickstart
 alias tctl "docker exec temporal-admin-tools tctl"
 
 # blend nvm
-alias we 'watchexec -c -w ./'
-alias weg 'watchexec -c -w ./ go run'
-alias wet 'watchexec -c -w ./ go test'
+# alias we 'watchexec -c -w ./'
+# alias weg 'watchexec -c -w ./ go run'
+# alias wet 'watchexec -c -w ./ go test'
 
 alias grep 'grep --color'
 alias mk 'make'
@@ -131,9 +132,16 @@ alias vsp "tmux split-window -v"
 alias vi 'nvim'
 alias vim 'nvim'
 alias fv 'vim (fzf | xargs)'
+alias fk 'NVIM_APPNAME=nvim-kickstart nvim (fzf | xargs)'
 alias cv 'cd $(find * -type d | fzf)'
 alias gts 'gt m -a && gt ss'
 alias gtd 'gt diff'
+alias vikl 'cd ~/.config/nvim-kickstart && NVIM_APPNAME=nvim-kickstart nvim'
+alias vikt 'NVIM_APPNAME=nvim-kickstart nvim ~/.tmux.conf'
+alias vikg 'NVIM_APPNAME=nvim-kickstart nvim ~/.gitconfig'
+alias vikf 'NVIM_APPNAME=nvim-kickstart nvim ~/.config/fish/config.fish'
+alias vikk 'NVIM_APPNAME=nvim-kickstart nvim ~/.config/kitty/kitty.conf'
+alias vaws 'vim ~/.aws/config'
 alias viml 'cd ~/.config/nvim && vim'
 alias vimt 'vim ~/.tmux.conf'
 alias vimg 'vim ~/.gitconfig'
@@ -202,6 +210,27 @@ set -gx FZF_DEFAULT_OPTS ' --color=gutter:-1,bg:-1 --color info:108,prompt:109,s
 ## Helpful functions 
 
 #############################################################
+#
+function vv -d "open nvim with fzf"
+    # Assumes all configs exist in directories named ~/.config/nvim-*
+    set config (fd --max-depth 1 --glob 'nvim-*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
+ 
+    # If I exit fzf without selecting a config, don't open Neovim
+    if test -z "$config"
+        echo "No config selected"
+        return
+    end
+ 
+    # Open Neovim with the selected config
+    env NVIM_APPNAME=(basename $config) nvim $argv
+end
+
+function gsnag -d "snag a file from another branch"
+
+  # first arg is the branch name.
+  # 2nd arg is the file name
+  git show $argv[1]:$argv[2] > $argv[2]
+end
 
 function ghu
     set test ( git remote -v | grep push | awk '{ print $2;}')
@@ -406,3 +435,6 @@ end
 #fish_vi_key_bindings
 fish_default_key_bindings
 
+
+# Added by `rbenv init` on Tue Jan  7 16:54:32 PST 2025
+status --is-interactive; and rbenv init - --no-rehash fish | source

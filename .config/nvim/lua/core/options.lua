@@ -24,9 +24,8 @@ local function load_options()
 		mouse = "nv",
 		-- enable folding via treesitter + ufo
 		foldcolumn = "1",
-		foldlevel = 99,
-		foldlevelstart = -1,
-		--foldlevelstart = 99,
+		foldlevel = 99, -- using ufo provider needs to be a large value
+		foldlevelstart = 99,
 		foldenable = true,
 		errorbells = true,
 		visualbell = true,

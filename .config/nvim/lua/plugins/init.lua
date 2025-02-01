@@ -350,7 +350,7 @@ return {
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
 	"leoluz/nvim-dap-go",
 	-- folding
-	-- {"kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async"}
+	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 	-- personal plugins
 	-- "~/workbench/testy/testy.nvim"
 	--

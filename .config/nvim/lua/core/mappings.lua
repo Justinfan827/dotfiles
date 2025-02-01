@@ -237,3 +237,4 @@ vim.api.nvim_set_keymap(
 
 -- treesj (split and join lines)
 vim.api.nvim_set_keymap("n", "<C-s>", "<cmd>lua require('treesj').toggle()<CR>", { silent = true })
+
