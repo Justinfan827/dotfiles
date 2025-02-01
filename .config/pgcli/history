@@ -1,0 +1,3457 @@
+
+# 2023-03-10 15:58:32.952921
++\d
+
+# 2023-03-10 15:58:45.141459
++delete from job_postings
+
+# 2023-03-11 16:44:35.573892
++delete from input_job_urls
+
+# 2023-03-11 16:44:46.905024
++delete from job_postings
+
+# 2023-03-11 16:44:50.421770
++delete from input_job_urls
+
+# 2023-03-11 16:47:00.420583
++select * from input_job_urls
+
+# 2023-03-11 16:47:05.602078
++delete * from input_job_urls;
+
+# 2023-03-11 16:47:11.346094
++delete from input_job_urls;
+
+# 2023-03-11 19:21:34.960734
++select * from input_job_urls
+
+# 2023-03-12 14:01:13.571264
++delete from job_postings;
+
+# 2023-03-12 14:01:24.206151
++select * from input_job_urls
+
+# 2023-03-12 14:01:42.934019
++update input_job_urls set last_scraped_at = null where uuid = 'bd0b4f67-935e-45f9-9a2c-ba07a8933a80'
+
+# 2023-03-12 14:04:04.689784
++delete from job_postings;
+
+# 2023-03-12 14:05:06.748686
++update input_job_urls set last_scraped_at = null where uuid = 'bd0b4f67-935e-45f9-9a2c-ba07a8933a80'
+
+# 2023-03-12 14:06:41.995362
++delete from job_postings;
+
+# 2023-03-12 14:07:25.320130
++update input_job_urls set last_scraped_at = null where uuid = 'bd0b4f67-935e-45f9-9a2c-ba07a8933a80'
+
+# 2023-03-12 14:08:11.240157
++delete from job_postings;
+
+# 2023-03-12 14:14:19.496922
++update input_job_urls set last_scraped_at = null
+
+# 2023-03-12 14:14:23.370365
++delete from job_postings;
+
+# 2023-03-13 20:58:18.868931
++select * from input_job_urls order by created_at desc;
+
+# 2023-03-13 20:58:27.141407
++select created_at from input_job_urls order by created_at desc;
+
+# 2023-03-13 20:58:49.955570
++select created_at, last_scraped_at from input_job_urls order by created_at desc;
+
+# 2023-03-14 12:52:19.351730
++delete from job_postings;
+
+# 2023-03-14 15:14:24.690244
++select * from input_job_urls order by created_at desc;
+
+# 2023-03-14 15:14:44.146078
++select created_at from input_job_urls order by created_at desc;
+
+# 2023-03-14 15:14:48.495937
++select * from input_job_urls order by created_at desc;
+
+# 2023-03-14 15:17:57.090521
++delete from job_postings;
+
+# 2023-03-14 15:23:08.905956
++select * from gmail_history
+
+# 2023-03-14 15:54:43.981135
++select * from gmail_history order by created_at desc;
+
+# 2023-03-14 16:03:38.987143
++\x
+
+# 2023-03-14 16:03:40.043428
++\d
+
+# 2023-03-14 16:03:41.315631
++\x
+
+# 2023-03-14 16:03:43.383034
++\d
+
+# 2023-03-14 16:03:52.445618
++\d gmail_history
+
+# 2023-03-14 17:20:08.417549
++select * from gmail_history order by created_at desc;
+
+# 2023-03-14 17:21:40.642581
++delete from gmail_history where uuid = (select 1 from gmail_history order by gmail_history.created_at desc limit 1)
+
+# 2023-03-14 17:21:46.632010
++delete from gmail_history where uuid = (select uuid from gmail_history order by gmail_history.created_at desc limit 1)
+
+# 2023-03-14 17:23:53.979408
++select * from gmail_history order by created_at desc;
+
+# 2023-03-14 17:25:04.889595
++delete from gmail_history where uuid = (select uuid from gmail_history order by gmail_history.created_at desc limit 1)
+
+# 2023-03-14 17:25:15.987349
++select * from gmail_history order by created_at desc;
+
+# 2023-03-14 17:25:37.742193
++delete from gmail_history where uuid = (select uuid from gmail_history order by gmail_history.created_at desc limit 1)
+
+# 2023-03-14 17:37:49.004201
++select * from job_postings
+
+# 2023-03-16 14:44:05.719619
++select * from input_job_urls order by created_at desc;
+
+# 2023-03-16 14:44:21.906497
++select created_at from input_job_urls order by created_at desc;
+
+# 2023-03-16 14:44:35.442131
++select created_at, source from input_job_urls order by created_at desc;
+
+# 2023-03-16 14:50:22.016658
++select * from job_postings;
+
+# 2023-03-16 14:50:34.222260
++delete from job_postings
+
+# 2023-03-16 20:59:54.182960
++select * from job_postings;
+
+# 2023-03-16 20:59:57.444024
++delete from job_postings
+
+# 2023-03-16 21:00:08.756853
++select * from input_job_urls 
+
+# 2023-03-16 21:00:20.429290
++update input_job_urls set last_scraped_at = now();
+
+# 2023-03-16 21:00:35.835877
++update input_job_urls set last_scraped_at = null where uuid = '9323f2e8-db33-488a-9d2c-768d4ec73765'
+
+# 2023-03-16 21:00:44.500195
++select * from input_job_urls where last_scraped_at = null;
+
+# 2023-03-16 21:00:47.724869
++select * from input_job_urls where last_scraped_at is null;
+
+# 2023-03-16 21:04:20.844322
++delete from job_postings
+
+# 2023-03-16 21:06:27.726213
++update input_job_urls set last_scraped_at = null ;
+
+# 2023-03-16 21:33:30.602315
++delete from job_postings
+
+# 2023-03-16 21:33:37.145430
++update input_job_urls set last_scraped_at = null ;
+
+# 2023-03-16 21:37:12.094924
++delete from job_postings
+
+# 2023-03-16 22:14:48.943585
++select * from input_job_urls where last_scraped_at is not null;
+
+# 2023-03-16 22:15:06.167622
++select * from input_job_urls where last_scraped_at != null
+
+# 2023-03-16 22:15:56.863503
++delete from job_postings
+
+# 2023-03-16 22:26:45.799866
++select * from input_job_urls where last_errored_at != null
+
+# 2023-03-16 22:26:56.975058
++select * from input_job_urls where last_errored_at is not null
+
+# 2023-03-16 22:56:49.626225
++delete from job_postings
+
+# 2023-03-17 20:12:41.634625
++select * from job_postings where job_url = 'https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591'
+
+# 2023-03-17 20:13:00.880798
++\x
+
+# 2023-03-17 20:13:01.393347
++select * from job_postings where job_url = 'https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591'
+
+# 2023-03-17 20:13:20.272939
++select * from input_job_urls where uuid = '9b7cef37-0439-453f-bfac-358a59ca3a94'
+
+# 2023-03-17 20:15:19.040649
++select * from input_job_urls
+
+# 2023-03-17 20:19:42.422157
++select * from input_job_urls where job_url like '%glassdoor%'
+
+# 2023-03-17 20:19:54.566171
++select uuid, job_url from input_job_urls where job_url like '%glassdoor%'
+
+# 2023-03-17 20:20:02.781400
++\T csv
+
+# 2023-03-17 20:20:04.284015
++select uuid, job_url from input_job_urls where job_url like '%glassdoor%'
+
+# 2023-03-17 20:20:43.805360
++\o thingstochange
+
+# 2023-03-17 20:20:57.901520
++\c
+
+# 2023-03-17 20:20:59.995717
++select uuid, job_url from input_job_urls where job_url like '%glassdoor%'
+
+# 2023-03-17 20:21:09.722774
++\o thingstochange
+
+# 2023-03-17 20:21:14.853996
++\T csv
+
+# 2023-03-17 20:21:26.798445
++\o thingstochange
+
+# 2023-03-17 20:21:29.508946
++\T csv
+
+# 2023-03-17 20:21:31.238124
++select uuid, job_url from input_job_urls where job_url like '%glassdoor%'
+
+# 2023-03-17 20:24:41.632188
++\d input_job_urls
+
+# 2023-03-17 20:27:34.950809
++UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527177401' where uuid = '692c5316-35a7-4757-a5a7-09716da6fe6f';
++
+
+# 2023-03-17 20:28:16.348801
++UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755699' where uuid = 'bcd25f92-1308-4208-bf74-5f79cae9b879';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522902985' where uuid = '3bf1efa9-28b0-407f-92f7-a644fdaa54f4';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755676' where uuid = 'dc337a99-c1ee-405f-b162-d4f5e7035595';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591' where uuid = '9b7cef37-0439-453f-bfac-358a59ca3a94';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532505' where uuid = '89546af7-1a4b-4f9d-a9b6-708b086b69a2';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008531972355' where uuid = 'd869198a-9dba-4350-8816-0553e3de966e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522701655' where uuid = '9421c46d-8f0d-41aa-97e2-7d1ece9e212a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532533086' where uuid = '557183ee-9ac8-49b3-8f64-1aae2b1e99ed';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532967' where uuid = '2e13099d-03d9-4010-94c6-8512438fce9f';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532898' where uuid = 'e5f15043-7ae8-4549-88ce-ad5632e8027e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755767' where uuid = '5ae5e4cf-08f9-48ab-ad7e-8bdd5f4f3d61';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532774' where uuid = 'dfe8ad67-2d0c-42aa-892f-0ecd6b90bce4';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532501' where uuid = '7e490979-bb53-460b-aef1-30de2414da15';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591' where uuid = '07d59270-e307-4c5e-b114-1c22562f4b4c';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527796119' where uuid = 'dacc3287-4c8d-4ea9-916a-1e156314e4e5';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522902985' where uuid = '65e7980c-f5b4-4330-934d-0d59db3f4d3a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1136043&jobListingId=1008497374718' where uuid = '9382ce8a-4ef7-49ef-ae02-f4fe8e89f0f7';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008534286565' where uuid = '6461fabc-79e3-4175-9768-1908eb63e328';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008531972355' where uuid = '914a962e-3df8-423d-b5d1-39b34826dd99';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532664' where uuid = 'd376e5f5-9495-4a20-9ca1-ce725cd2122a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522701655' where uuid = '1f92644c-b1f3-445e-9d9f-68cdc0e3eef6';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532828' where uuid = '6637d5c0-1869-402f-9de9-1efcc145d95e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532745' where uuid = '382342c4-faf6-4d9c-827e-e585a7f73f91';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532535' where uuid = '76e9f60f-ba57-4d6a-bb17-23231115a2e0';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532612' where uuid = 'edcad740-82b2-4d52-b248-731ff910fe27';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499288914' where uuid = '828fd9af-87f0-4650-a569-a9f9cccf6834';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001241' where uuid = '11c99318-e429-42bd-9656-d1d1427c25a2';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001245' where uuid = '312e2f38-1f9f-49b7-9ac0-904b25cd2328';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695713' where uuid = 'bd0b4f67-935e-45f9-9a2c-ba07a8933a80';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532660' where uuid = '35cf28d2-f75a-4ec3-a729-f01a448a65df';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499290132' where uuid = 'd1f8b1c6-5cf9-40fd-9483-5eb31920d837';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500373459' where uuid = '2d32eb1f-3524-43e3-b6bf-4654c9cceb7f';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499290084' where uuid = '3a6bfa82-ca95-4de3-b705-94c1f4add8a5';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496528471' where uuid = '8411a5aa-5572-4e3b-9333-cf2799d53c28';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496527760' where uuid = '989cf058-ab73-4469-b079-d77dcb6282bb';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695720' where uuid = '46a29c99-ee99-4a53-b7f7-e07cc3aa9517';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755767' where uuid = '8d49139f-048f-4854-80ff-ca78065d48ca';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532815' where uuid = '804a76ad-82a0-4ed5-a789-1c1ec91e6216';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008494443952' where uuid = 'a486101b-0ae5-400c-bed5-223bd35d6333';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008490297565' where uuid = 'd6b4a183-5181-44fd-89ca-29e61e9e5dba';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496528420' where uuid = 'a9613802-e402-462b-ab45-fb5ece20fa8a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695438' where uuid = '52979b86-e44d-4c64-a57b-5fb2b53a55e3';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499290359' where uuid = '4551eb27-e2f1-48b7-a6fb-fa5829426df8';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695800' where uuid = 'bcc7baf7-a74b-483a-a3df-870c207152da';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499289066' where uuid = 'd6106e88-a7c2-4c75-be05-ec35cb4a7359';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500373315' where uuid = '8262f019-1b65-4ffd-9485-497db5aef340';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008520858894' where uuid = '0c8b5af6-c604-4c6f-9e16-3a0cbcaac7a1';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008494443949' where uuid = '6d8b0e5d-ecd3-40f8-8555-2013e76229e1';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499109817' where uuid = '796336c2-6a31-4292-9c54-58ee6b8f4315';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496527785' where uuid = '38dcada6-ed0e-4f15-96fd-2e931c58c593';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001244' where uuid = 'd7436e4a-9f48-4793-8675-d6a8044b3d70';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755703' where uuid = 'bb37add8-b58f-4743-a720-8afafec325f7';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527796119' where uuid = '5b89ce85-926e-4834-8cd6-8b4b3205bf43';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755689' where uuid = '3bdb5340-4a64-497e-b81e-b32710b0f505';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008520561432' where uuid = '7f572dc0-387c-411d-8fbf-4d7d52044aca';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001236' where uuid = '82d5c63e-aa40-411e-8612-c7516da41eb1';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522902997' where uuid = 'bd5c46fc-ba44-4a8e-826c-000bd77152f9';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008529573415' where uuid = '9f6bd271-2636-49af-82c9-143e72a47a92';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527177431' where uuid = '00dd497f-7bc2-4241-9357-fcaad9d58e2e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527177401' where uuid = '692c5316-35a7-4757-a5a7-09716da6fe6f';
++
+
+# 2023-03-17 20:28:41.756755
++delete from input_job_urls where job_url = 'https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591'
+
+# 2023-03-17 20:28:57.084467
++delete from job_postings where input_job_urls_uuid = '9b7cef37-0439-453f-bfac-358a59ca3a94'
+
+# 2023-03-17 20:28:59.173378
++delete from input_job_urls where job_url = 'https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591'
+
+# 2023-03-17 20:29:09.301196
++UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755699' where uuid = 'bcd25f92-1308-4208-bf74-5f79cae9b879';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522902985' where uuid = '3bf1efa9-28b0-407f-92f7-a644fdaa54f4';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755676' where uuid = 'dc337a99-c1ee-405f-b162-d4f5e7035595';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591' where uuid = '9b7cef37-0439-453f-bfac-358a59ca3a94';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532505' where uuid = '89546af7-1a4b-4f9d-a9b6-708b086b69a2';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008531972355' where uuid = 'd869198a-9dba-4350-8816-0553e3de966e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522701655' where uuid = '9421c46d-8f0d-41aa-97e2-7d1ece9e212a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532533086' where uuid = '557183ee-9ac8-49b3-8f64-1aae2b1e99ed';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532967' where uuid = '2e13099d-03d9-4010-94c6-8512438fce9f';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532898' where uuid = 'e5f15043-7ae8-4549-88ce-ad5632e8027e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755767' where uuid = '5ae5e4cf-08f9-48ab-ad7e-8bdd5f4f3d61';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532774' where uuid = 'dfe8ad67-2d0c-42aa-892f-0ecd6b90bce4';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532501' where uuid = '7e490979-bb53-460b-aef1-30de2414da15';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008524802591' where uuid = '07d59270-e307-4c5e-b114-1c22562f4b4c';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527796119' where uuid = 'dacc3287-4c8d-4ea9-916a-1e156314e4e5';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522902985' where uuid = '65e7980c-f5b4-4330-934d-0d59db3f4d3a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1136043&jobListingId=1008497374718' where uuid = '9382ce8a-4ef7-49ef-ae02-f4fe8e89f0f7';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008534286565' where uuid = '6461fabc-79e3-4175-9768-1908eb63e328';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008531972355' where uuid = '914a962e-3df8-423d-b5d1-39b34826dd99';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532664' where uuid = 'd376e5f5-9495-4a20-9ca1-ce725cd2122a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522701655' where uuid = '1f92644c-b1f3-445e-9d9f-68cdc0e3eef6';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532828' where uuid = '6637d5c0-1869-402f-9de9-1efcc145d95e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532745' where uuid = '382342c4-faf6-4d9c-827e-e585a7f73f91';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532535' where uuid = '76e9f60f-ba57-4d6a-bb17-23231115a2e0';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532612' where uuid = 'edcad740-82b2-4d52-b248-731ff910fe27';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499288914' where uuid = '828fd9af-87f0-4650-a569-a9f9cccf6834';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001241' where uuid = '11c99318-e429-42bd-9656-d1d1427c25a2';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001245' where uuid = '312e2f38-1f9f-49b7-9ac0-904b25cd2328';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695713' where uuid = 'bd0b4f67-935e-45f9-9a2c-ba07a8933a80';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532660' where uuid = '35cf28d2-f75a-4ec3-a729-f01a448a65df';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499290132' where uuid = 'd1f8b1c6-5cf9-40fd-9483-5eb31920d837';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500373459' where uuid = '2d32eb1f-3524-43e3-b6bf-4654c9cceb7f';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499290084' where uuid = '3a6bfa82-ca95-4de3-b705-94c1f4add8a5';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496528471' where uuid = '8411a5aa-5572-4e3b-9333-cf2799d53c28';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496527760' where uuid = '989cf058-ab73-4469-b079-d77dcb6282bb';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695720' where uuid = '46a29c99-ee99-4a53-b7f7-e07cc3aa9517';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755767' where uuid = '8d49139f-048f-4854-80ff-ca78065d48ca';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008532532815' where uuid = '804a76ad-82a0-4ed5-a789-1c1ec91e6216';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008494443952' where uuid = 'a486101b-0ae5-400c-bed5-223bd35d6333';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008490297565' where uuid = 'd6b4a183-5181-44fd-89ca-29e61e9e5dba';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496528420' where uuid = 'a9613802-e402-462b-ab45-fb5ece20fa8a';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695438' where uuid = '52979b86-e44d-4c64-a57b-5fb2b53a55e3';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499290359' where uuid = '4551eb27-e2f1-48b7-a6fb-fa5829426df8';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500695800' where uuid = 'bcc7baf7-a74b-483a-a3df-870c207152da';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499289066' where uuid = 'd6106e88-a7c2-4c75-be05-ec35cb4a7359';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008500373315' where uuid = '8262f019-1b65-4ffd-9485-497db5aef340';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008520858894' where uuid = '0c8b5af6-c604-4c6f-9e16-3a0cbcaac7a1';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008494443949' where uuid = '6d8b0e5d-ecd3-40f8-8555-2013e76229e1';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008499109817' where uuid = '796336c2-6a31-4292-9c54-58ee6b8f4315';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008496527785' where uuid = '38dcada6-ed0e-4f15-96fd-2e931c58c593';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001244' where uuid = 'd7436e4a-9f48-4793-8675-d6a8044b3d70';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755703' where uuid = 'bb37add8-b58f-4743-a720-8afafec325f7';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527796119' where uuid = '5b89ce85-926e-4834-8cd6-8b4b3205bf43';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008523755689' where uuid = '3bdb5340-4a64-497e-b81e-b32710b0f505';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008520561432' where uuid = '7f572dc0-387c-411d-8fbf-4d7d52044aca';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008521001236' where uuid = '82d5c63e-aa40-411e-8612-c7516da41eb1';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008522902997' where uuid = 'bd5c46fc-ba44-4a8e-826c-000bd77152f9';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008529573415' where uuid = '9f6bd271-2636-49af-82c9-143e72a47a92';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527177431' where uuid = '00dd497f-7bc2-4241-9357-fcaad9d58e2e';UPDATE input_job_urls set job_url='https://www.glassdoor.com/partner/jobListing.htm?ao=1110586&jobListingId=1008527177401' where uuid = '692c5316-35a7-4757-a5a7-09716da6fe6f';
++
+
+# 2023-03-17 20:31:10.134724
++delete from input_job_urls where source = 'GLASSDOOR'
+
+# 2023-03-17 20:31:14.828972
++delete from job_postings;
+
+# 2023-03-17 20:31:17.037628
++delete from input_job_urls where source = 'GLASSDOOR'
+
+# 2023-03-17 20:33:30.025448
++select * from input_job_urls
+
+# 2023-03-19 13:09:53.007735
++\x
+
+# 2023-03-19 13:09:53.687889
++select * from input_job_urls
+
+# 2023-03-19 13:10:16.511263
++select * from input_job_urls where job_url like '%glassdoor%'
+
+# 2023-04-28 21:14:34.895446
++\d
+
+# 2023-04-28 21:14:37.833836
++select * from input_job_urls
+
+# 2023-04-28 21:14:48.413675
++select * from input_job_urls order by created_at desc;
+
+# 2023-04-28 21:16:54.781634
++select * from input_job_urls order by created_at desc limit 2;
+
+# 2023-04-28 21:16:59.080116
++\x
+
+# 2023-04-28 21:16:59.580769
++select * from input_job_urls order by created_at desc limit 2;
+
+# 2023-05-12 16:32:18.422940
++;q
+
+# 2023-06-11 14:44:51.004840
++\d
+
+# 2023-06-11 14:44:58.000966
++\d check_location
+
+# 2023-06-11 14:45:14.005188
++\d check_instance_step
+
+# 2023-06-14 18:47:54.633003
++\d
+
+# 2023-06-14 18:47:56.832400
++\d check
+
+# 2023-06-14 18:47:58.826896
++\d checks
+
+# 2023-06-14 19:17:58.598933
++ls
+
+# 2023-06-14 19:17:59.657473
++\d
+
+# 2023-06-14 19:18:08.908462
++delete from check_instance;
+
+# 2023-06-14 19:47:21.008643
++select * from check_instance order by created_at desk;
+
+# 2023-06-14 19:47:22.383945
++select * from check_instance order by created_at desc
+
+# 2023-06-14 19:47:42.045123
++delete from check_instance;
+
+# 2023-06-14 19:48:16.932940
++select * from checks;
+
+# 2023-06-14 20:17:06.071899
++\d
+
+# 2023-06-14 20:17:09.204807
++select * from check_instance
+
+# 2023-06-14 20:17:13.991141
++select * from checks
+
+# 2023-06-14 20:28:10.728733
++select * from checksi
+
+# 2023-06-14 20:28:11.932363
++select * from checks
+
+# 2023-06-14 20:28:19.496681
++select * from check_instance
+
+# 2023-06-14 20:35:08.515083
++select * from checks
+
+# 2023-06-14 20:35:31.913551
++update checks set next_runtime_at = now();
+
+# 2023-06-14 20:35:33.384713
++select * from checks
+
+# 2023-06-14 20:35:38.778033
++\x
+
+# 2023-06-14 20:35:39.248534
++select * from checks
+
+# 2023-06-14 20:35:53.496418
++select * from check_instance
+
+# 2023-06-14 20:36:03.337195
++select results from check_instance
+
+# 2023-06-14 20:36:05.280860
++\d
+
+# 2023-06-14 20:36:15.137296
++\d check_instance
+
+# 2023-06-14 20:36:19.617682
++\x
+
+# 2023-06-14 20:36:23.752527
++select * from results
+
+# 2023-06-14 20:36:36.383242
++vim
+
+# 2023-06-14 20:38:36.429655
++update checks set next_runtime_at = now();
+
+# 2023-06-14 20:38:38.710224
++delete from check_instance;
+
+# 2023-06-14 20:38:42.210651
++select * from results
+
+# 2023-06-14 20:38:44.642305
++select * from check_instance
+
+# 2023-06-14 20:38:47.044277
++select * from checks
+
+# 2023-06-14 20:38:50.739273
++\x
+
+# 2023-06-14 20:38:51.201487
++select * from checks
+
+# 2023-06-16 14:32:49.583448
++\d
+
+# 2023-06-16 14:33:11.408620
++update check_instance set user_id = '477be47f-d7f0-4da2-85e6-91c744734756'
+
+# 2023-06-20 19:47:49.988967
++select * from 
+
+# 2023-06-20 19:47:51.220332
++\d
+
+# 2023-06-20 19:47:53.972706
++select * from job_postings
+
+# 2023-06-20 19:48:03.548745
++select * from company order by created_at desc;
+
+# 2023-06-20 19:48:54.891023
++update company set logo_path = 'logos/no-logo.png' where uuid = '0285cb98-3471-4d63-b0e7-6b5f3c974a4e'
+
+# 2023-06-20 19:49:01.070718
++\d
+
+# 2023-06-20 19:49:03.597600
++\d+
+
+# 2023-06-20 19:49:07.459046
++\d company
+
+# 2023-06-20 19:50:21.615536
++alter table drop constraint company_logo_path_key
+
+# 2023-06-20 19:50:27.901869
++alter table drop index company_logo_path_key
+
+# 2023-06-20 19:50:56.266141
++alter table company drop constraint company_logo_path_key
+
+# 2023-06-20 19:51:02.161059
++update company set logo_path = 'logos/no-logo.png' where uuid = '0285cb98-3471-4d63-b0e7-6b5f3c974a4e'
+
+# 2023-06-20 20:07:50.456235
++select *
++from job_postings
++inner join company
++on company.uuid = job_postings.company_uuid
++
+
+# 2023-06-20 20:07:54.665263
++select *
++from job_postings
++inner join company
++on company.uuid = job_postings.company_uuid
+
+# 2023-06-20 20:09:12.968034
++select *
++from job_postings
++inner join company
++on company.uuid = job_postings.company_uuid
++where (job_postings.created_at, job_postings.uuid) < (now(), 'random_uuid')
++order by job_postings.created_at, job_postings.uuid;
+
+# 2023-06-20 20:09:30.665161
++select *
++from job_postings
++inner join company
++on company.uuid = job_postings.company_uuid
++where (job_postings.created_at, job_postings.uuid) < (now(), 'b4b0d5b3-ab38-48be-b67f-411dd434962a')
++order by job_postings.created_at, job_postings.uuid;
+
+# 2023-06-20 20:09:52.712524
++select *
++from job_postings
++inner join company
++on company.uuid = job_postings.company_uuid
++where (job_postings.created_at, job_postings.uuid) < (now(), 'b4b0d5b3-ab38-48be-b67f-411dd434962a')
++order by job_postings.created_at, job_postings.uuid limit 20;
+
+# 2023-06-20 20:13:24.761072
++CREATE FUNCTION get_job_postings(
++  p_date timestampz,
++  p_uuid uuid,
++  p_limit integer
++) 
++RETURNS TABLE (
++  job_posting_id integer,
++  created_at timestampz,
++  uuid uuid,
++  company_uuid uuid
++) AS $$
++BEGIN
++  RETURN QUERY
++  SELECT
++    *
++  FROM
++    job_postings jp
++    INNER JOIN company c ON c.uuid = jp.company_uuid
++  WHERE
++    (jp.created_at, jp.uuid) < (p_date, p_uuid)
++  ORDER BY
++    jp.created_at,
++    jp.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:13:30.761172
++CREATE FUNCTION get_job_postings(
++  p_date timestamp,
++  p_uuid uuid,
++  p_limit integer
++) 
++RETURNS TABLE (
++  job_posting_id integer,
++  created_at timestampz,
++  uuid uuid,
++  company_uuid uuid
++) AS $$
++BEGIN
++  RETURN QUERY
++  SELECT
++    *
++  FROM
++    job_postings jp
++    INNER JOIN company c ON c.uuid = jp.company_uuid
++  WHERE
++    (jp.created_at, jp.uuid) < (p_date, p_uuid)
++  ORDER BY
++    jp.created_at,
++    jp.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:16:17.626269
++\d company
+
+# 2023-06-20 20:16:22.935895
++\d job_postings
+
+# 2023-06-20 20:17:08.699328
++describe table 
++
++;
+
+# 2023-06-20 20:17:13.495099
++describe job_postings;
+
+# 2023-06-20 20:17:22.419788
++\d+ job_postings
+
+# 2023-06-20 20:17:24.408416
++;
+
+# 2023-06-20 20:18:00.901538
++\d+ company;
+
+# 2023-06-20 20:18:06.386819
++\d company;
+
+# 2023-06-20 20:18:42.479159
++CREATE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT *
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:19:12.880874
++select * from get_job_postings(
++    p_date  := now(),
++    p_uuid  := '',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:19:42.987886
++select * from job_postings order by (created_at, uuid) desc;
+
+# 2023-06-20 20:19:55.992027
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc;
+
+# 2023-06-20 20:20:04.307899
++select * from get_job_postings(
++    p_date  := now(),
++    p_uuid  := '49eab68f-e47c-4915-b5ae-012b303d8f02',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:20:26.736429
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT *
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:20:34.989810
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:22:08.547500
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:22:20.425558
++select * from get_job_postings(
++    p_date  := now(),
++    p_uuid  := '49eab68f-e47c-4915-b5ae-012b303d8f02',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:22:41.253183
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:22:47.464051
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:22:52.187265
++select * from get_job_postings(
++    p_date  := now(),
++    p_uuid  := '49eab68f-e47c-4915-b5ae-012b303d8f02',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:23:05.133572
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := now(),
++    p_uuid  := '49eab68f-e47c-4915-b5ae-012b303d8f02',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:23:21.592965
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := 2023-03-18 03:36:32.291423+00,
++    p_uuid  := '49eab68f-e47c-4915-b5ae-012b303d8f02',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:23:29.127073
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:36:32.291423+00',
++    p_uuid  := '49eab68f-e47c-4915-b5ae-012b303d8f02',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:24:17.204818
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:36:42.237595+00',
++    p_uuid  := '60b2cb69-8cca-428e-b587-647e4382aed7',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:24:31.789166
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:25:03.996152
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid desc
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:25:18.770582
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc;
+
+# 2023-06-20 20:25:50.205329
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid desc
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:26:09.292882
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:42:26.220067+00',
++    p_uuid  := '81810ccf-0d7e-4718-b1ab-81b866c534a7',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:26:38.918284
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY job_postings.created_at, job_postings.uuid desc
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:26:41.227766
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:42:26.220067+00',
++    p_uuid  := '81810ccf-0d7e-4718-b1ab-81b866c534a7',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:26:58.550848
++CREATE OR REPLACE FUNCTION get_job_postings(
++  p_date timestamp with time zone,
++  p_uuid uuid,
++  p_limit integer
++)
++RETURNS TABLE (
++  uuid uuid,
++  created_at timestamp with time zone,
++  job_url text,
++  job_description text,
++  job_title text,
++  salary_range_top numeric,
++  salary_range_bottom numeric,
++  salary_currency text,
++  source text,
++  input_job_urls_uuid uuid,
++  company_uuid uuid,
++  notion_page_id text,
++  name text,
++  logo_path text,
++  revenue_bottom numeric,
++  size_bottom numeric,
++  size_top numeric,
++  revenue_top numeric,
++  founded_year numeric
++)
++AS $$
++BEGIN
++  RETURN QUERY
++  SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++ 
++  FROM job_postings
++  INNER JOIN company
++  ON company.uuid = job_postings.company_uuid
++  WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++  ORDER BY (job_postings.created_at, job_postings.uuid) desc
++  LIMIT p_limit;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2023-06-20 20:27:00.674125
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:42:26.220067+00',
++    p_uuid  := '81810ccf-0d7e-4718-b1ab-81b866c534a7',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:27:32.139765
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:37:02.644372+00',
++    p_uuid  := 'f6c414d3-255d-4d2f-a43d-ebe2ee97c11b',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:27:59.176331
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-06-21 00:06:28.779748+00',
++    p_uuid  := 'dee6bd25-b138-4eb8-b2a1-5758f3993948',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:28:38.119374
++select created_at, uuid, job_title from get_job_postings(
++    p_date  := '2023-03-18 03:42:26.220067+00',
++    p_uuid  := '81810ccf-0d7e-4718-b1ab-81b866c534a7',
++    p_limit := 10
++   
++);
+
+# 2023-06-20 20:32:42.962258
++CREATE OR REPLACE FUNCTION get_job_postings(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.sal
++ ary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, com
++ pany.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++   ORDER BY (job_postings.created_at, job_postings.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
++CREATE OR REPLACE FUNCTION get_job_postings_first_page(p_limit integer)
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.sal
++ ary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, com
++ pany.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   ORDER BY (job_postings.created_at, job_postings.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:33:02.109105
++CREATE OR REPLACE FUNCTION get_job_postings_first_page(p_limit integer)
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.sal
++ ary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, com
++ pany.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   ORDER BY (job_postings.created_at, job_postings.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:33:57.374190
++CREATE OR REPLACE FUNCTION get_job_postings(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   WHERE (job_postings.created_at, job_postings.uuid) < (p_date, p_uuid)
++   ORDER BY (job_postings.created_at, job_postings.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:34:09.672091
++CREATE OR REPLACE FUNCTION get_job_postings_first_page(p_limit integer)
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, com pany.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   ORDER BY (job_postings.created_at, job_postings.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:35:23.831960
++CREATE OR REPLACE FUNCTION get_job_postings_first_page(p_limit integer)
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   ORDER BY (job_postings.created_at, job_postings.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:45:51.587673
++CREATE OR REPLACE FUNCTION get_single_listing(p_uuid uuid)
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++   FROM job_postings
++   INNER JOIN company
++   ON company.uuid = job_postings.company_uuid
++   WHERE job_postings.uuid = p_uuid
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:46:18.733268
++CREATE OR REPLACE FUNCTION get_single_listing(p_uuid uuid)
++ RETURNS TABLE (
++   uuid uuid,
++   created_at timestamp with time zone,
++   job_url text,
++   job_description text,
++   job_title text,
++   salary_range_top numeric,
++   salary_range_bottom numeric,
++   salary_currency text,
++   source text,
++   input_job_urls_uuid uuid,
++   company_uuid uuid,
++   notion_page_id text,
++   name text,
++   logo_path text,
++   revenue_bottom numeric,
++   size_bottom numeric,
++   size_top numeric,
++   revenue_top numeric,
++   founded_year numeric
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT job_postings.uuid, job_postings.created_at, job_postings.job_url, job_postings.job_description, job_postings.job_title, job_postings.salary_range_top, job_postings.salary_range_bottom, job_postings.salary_currency, job_postings.source, job_postings.input_job_urls_uuid, job_postings.company_uuid, job_postings.notion_page_id, company.name, company.logo_path, company.revenue_bottom, company.size_bottom, company.size_top, company.revenue_top, company.founded_year
++   FROM job_postings
++   INNER JOIN company ON company.uuid = job_postings.company_uuid
++   WHERE job_postings.uuid = p_uuid;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-06-20 20:58:18.340356
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc;
+
+# 2023-06-20 21:00:10.236683
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc limit 20;
+
+# 2023-06-20 21:08:36.430212
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc limit 21;
+
+# 2023-06-20 21:09:23.802094
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc offset 20 limit 20;
+
+# 2023-06-20 21:11:44.205412
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc limit 20;
+
+# 2023-06-20 21:11:49.793511
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc offset 20 limit 20;
+
+# 2023-06-20 21:11:56.933359
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc limit 22;
+
+# 2023-06-20 21:12:32.022911
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc limit 25;
+
+# 2023-06-20 21:18:15.187369
++select uuid, created_at, job_title from job_postings order by (created_at, uuid) desc offset 20 limit 20;
+
+# 2023-06-20 21:25:17.276453
++select * from company
++;
+
+# 2023-06-20 21:28:06.866463
++select * from job_postings where uuid = '9decf1b5-f776-47e0-9eb3-a4558a36824e';;
+
+# 2023-06-20 21:28:09.638855
++\x
+
+# 2023-06-20 21:28:10.929518
++select * from job_postings where uuid = '9decf1b5-f776-47e0-9eb3-a4558a36824e';;
+
+# 2023-06-20 21:28:24.239605
++select * from company where uuid = 'a62a30d5-3bae-4e40-bacf-dacb1e3609fc'
++;
+
+# 2023-06-20 21:29:06.652511
++delete from job_postings where uuid =  '9decf1b5-f776-47e0-9eb3-a4558a36824e';
+
+# 2023-06-20 21:29:53.605421
++select * from job_postings where logo_path = 'logos/.jpeg';
+
+# 2023-06-20 21:30:00.438274
++select * from job_postings inner join company ON company.uuid = job_postings.company_uuid where logo_path = 'logos/.jpeg';
+
+# 2023-06-20 21:30:11.595856
++select uuid, company.uuid from job_postings inner join company ON company.uuid = job_postings.company_uuid where logo_path = 'logos/.jpeg';
+
+# 2023-06-20 21:30:17.485501
++select company.uuid from job_postings inner join company ON company.uuid = job_postings.company_uuid where logo_path = 'logos/.jpeg';
+
+# 2023-06-20 21:30:29.676499
++select company.uuid , job_postings.uuid from job_postings inner join company ON company.uuid = job_postings.company_uuid where logo_path = 'logos/.jpeg';
+
+# 2023-06-20 21:30:37.033585
++delete from job_postings where uuid =  '36a98cc7-a515-45d9-82f4-e4535e3de696';
+
+# 2023-06-21 18:16:59.558035
++select * from job_postings order by created_at desc;
+
+# 2023-06-22 18:19:06.826126
++\d
+
+# 2023-06-22 18:19:13.038615
++select * from job_postings order by created_at desc limit 10;
+
+# 2023-06-22 18:19:28.639787
++select *from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-22 18:19:36.129874
++\x
+
+# 2023-06-22 18:19:36.951995
++select *from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 21:15:40.449690
++\d
+
+# 2023-06-23 21:15:43.209210
++select *from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 21:15:51.176596
++select job_url from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 21:16:09.473211
++select job_url , created_at from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 21:56:00.248767
++\d
+
+# 2023-06-23 21:56:02.984870
++select * from job_postings order by created_at desc limit 10;
+
+# 2023-06-23 21:56:06.255763
++\x
+
+# 2023-06-23 21:56:07.055523
++select * from job_postings order by created_at desc limit 10;
+
+# 2023-06-23 21:56:29.469436
++select * from input_job_urls order by created_at desc limit 2;
+
+# 2023-06-23 21:56:31.833052
++select * from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 21:56:34.574437
++\x
+
+# 2023-06-23 21:56:35.274218
++select * from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 21:57:09.070017
++select * from job_postings where uuid = '5c6ee53e-783a-4ab3-b99a-6c990740f272'
+
+# 2023-06-23 21:57:14.606811
++select * from input_job_urls where uuid = '5c6ee53e-783a-4ab3-b99a-6c990740f272'
+
+# 2023-06-23 21:57:44.081656
++select * from job_postings inner join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid where job_postings.input_job_urls_uuid = '5c6ee53e-783a-4ab3-b99a-6c990740f272'
+
+# 2023-06-23 21:57:51.758787
++select * from job_postings inner join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid where input_job_urls.uuid = '5c6ee53e-783a-4ab3-b99a-6c990740f272'
+
+# 2023-06-23 21:58:15.318372
++\x
+
+# 2023-06-23 21:58:43.649811
++select * from job_postings left join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid order by input_job_urls.created_at desc limit 20;
+
+# 2023-06-23 21:59:03.812508
++select job_postings.uuid, input_job_urls.created_at from job_postings left join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid order by input_job_urls.created_at desc limit 20;
+
+# 2023-06-23 22:00:24.473870
++select job_postings.uuid, input_job_urls.created_at from job_postings right join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid order by input_job_urls.created_at desc limit 20;
+
+# 2023-06-23 22:00:37.237868
++select job_postings.uuid, input_job_urls.created_at from job_postings right join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid  where input_job_urls.last_scraped_at is not null order by input_job_urls.created_at desc limit 20;
+
+# 2023-06-23 22:01:17.786296
++select input_job_urls.*, input_job_urls.created_at from job_postings right join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid  where input_job_urls.last_scraped_at is not null order by input_job_urls.created_at desc limit 20;
+
+# 2023-06-23 22:01:38.377955
++select input_job_urls.*, input_job_urls.created_at from job_postings right join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid  where input_job_urls.last_scraped_at is not null and job_postings.job_description is null order by input_job_urls.created_at desc limit 20;
+
+# 2023-06-23 22:01:48.071547
++select input_job_urls.*, input_job_urls.created_at from job_postings right join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid  where input_job_urls.last_scraped_at is not null and job_postings.job_description is null order by input_job_urls.created_at desc limit 10;
+
+# 2023-06-23 22:02:27.904431
++select input_job_urls.*, input_job_urls.created_at from job_postings right join input_job_urls ON input_job_urls.uuid = job_postings.input_job_urls_uuid  where input_job_urls.last_scraped_at is not null and job_postings.job_description is null order by input_job_urls.created_at desc limit 9;
+
+# 2023-06-23 22:03:11.292142
++select * from job_postings order by created_at desc limit 10;
+
+# 2023-06-23 22:03:25.786506
++select input_job_urls_uuid  from job_postings order by created_at desc limit 10;
+
+# 2023-06-23 22:03:31.292300
++select input_job_urls from job_postings order by created_at desc limit 10;
+
+# 2023-06-23 22:03:34.725944
++select input_job_url  from job_postings order by created_at desc limit 10;
+
+# 2023-06-23 22:03:41.508226
++select * from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-23 22:03:44.178436
++\x
+
+# 2023-06-23 22:03:45.050276
++select * from input_job_urls order by created_at desc limit 10;
+
+# 2023-06-27 15:38:03.397327
++delete from artists
+
+# 2023-06-27 21:34:10.644254
++delete from images;
+
+# 2023-06-27 21:34:14.310160
++\d
+
+# 2023-06-27 21:34:17.976861
++delete from images;
+
+# 2023-06-27 21:34:22.886687
++select * from images
+
+# 2023-06-27 21:35:50.407913
++delete from artists;
+
+# 2023-06-28 19:04:54.317374
++\copy zip_codes FROM '/path/to/csv/ZIP_CODES.txt' DELIMITER ',' CSV
++
+
+# 2023-06-28 19:05:23.647111
++\copy artists FROM './src/testdata/artists.csv' DELIMITER ',' CSV
++
+
+# 2023-06-29 21:24:35.574515
++\d
+
+# 2023-06-29 21:24:44.362557
++select count(*) from artists 
+
+# 2023-06-29 21:27:03.644714
++select count(*) from artists inner join images ON images.artist_uuid = artists.uuid 
+
+# 2023-06-29 21:29:21.336673
++delete from artists;
+
+# 2023-06-30 08:42:19.131014
++select * from artists inner join countries ON countries.id = artists.country_id
+
+# 2023-06-30 08:42:23.355432
++\x
+
+# 2023-06-30 08:42:24.473582
++select * from artists inner join countries ON countries.id = artists.country_id
+
+# 2023-07-01 10:20:11.303816
++select * from artists inner join countries ON countries.id = artists.country_id where countries.code = 'us'
+
+# 2023-07-01 10:20:46.315744
++update artists set city = 'san francisco' where uuid in (select artists.uuid from artists inner join countries ON countries.id = artists.country_id where countries.code = 'us')
+
+# 2023-07-02 14:38:19.442673
++select * from artists inner join countries ON countries.id = artists.country_id where countries.code = 'us'
+
+# 2023-07-02 14:39:47.786628
++\x
+
+# 2023-07-02 14:39:48.415875
++select * from artists inner join countries ON countries.id = artists.country_id where countries.code = 'us'
+
+# 2023-07-02 14:42:39.449160
++select * from countries where id = 228
+
+# 2023-07-02 14:45:00.443575
++select * from artists where uuid = 24fa347c-6549-46ea-bcee-56a3df617bc4
+
+# 2023-07-02 14:45:04.648510
++select * from artists where uuid = '24fa347c-6549-46ea-bcee-56a3df617bc4'
+
+# 2023-07-02 14:45:14.703184
++select * from artists inner join countries ON countries.id = artists.country_id where uuid = '24fa347c-6549-46ea-bcee-56a3df617bc4' 
+
+# 2023-07-03 09:12:53.965950
++delete from artists;
+
+# 2023-07-03 14:39:45.152663
++delete from artists add column city_location location geography(POINT)
+
+# 2023-07-03 14:39:51.910479
++alter table artists add column city_location location geography(POINT)
+
+# 2023-07-03 14:40:06.170037
++\d extensions
+
+# 2023-07-03 14:40:09.341322
++\d
+
+# 2023-07-03 14:40:50.616661
++delete from artists add column city_location geography(POINT)
+
+# 2023-07-03 14:40:59.789515
++alter table artists add column city_location geography(POINT)
+
+# 2023-07-03 14:46:35.697013
++update artists set city_location = st_point(-73.946823, 40.807416)
+
+# 2023-07-03 16:32:10.132252
++select * from storage.buckets
+
+# 2023-07-03 16:32:17.292027
++select * from storage.objects;
+
+# 2023-07-03 16:32:19.145347
++\x
+
+# 2023-07-03 16:32:19.842952
++select * from storage.objects;
+
+# 2023-07-03 16:32:36.957238
++\d storage.objects;
+
+# 2023-07-05 15:36:43.871197
++delete from images
+
+# 2023-07-05 21:09:34.014069
++del
+
+# 2023-07-05 21:09:35.937777
++delete from images
+
+# 2023-07-06 20:26:27.689994
++\d artists
+
+# 2023-07-06 20:32:29.429548
++[29;1R[29;1R[200~CREATE OR REPLACE FUNCTION get_artist_images_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        image_uuid uuid,
++        image_path text,
++        country_id numeric,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON images.artist_uuid = artists.uuid
++   INNER JOIN countries c
++   ON c.id = artists.country_id
++   WHERE (artists.created_at, artists.uuid) < (p_date, p_uuid)
++   ORDER BY (artists.created_at, artists.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
+
+# 2023-07-06 20:32:37.876562
++CREATE OR REPLACE FUNCTION get_artist_images_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        image_uuid uuid,
++        image_path text,
++        country_id numeric,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON images.artist_uuid = artists.uuid
++   INNER JOIN countries c
++   ON c.id = artists.country_id
++   WHERE (artists.created_at, artists.uuid) < (p_date, p_uuid)
++   ORDER BY (artists.created_at, artists.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 20:33:23.302886
++CREATE OR REPLACE FUNCTION get_artist_images_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        image_uuid uuid,
++        image_path text,
++        country_id numeric,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON images.artist_uuid = artists.uuid
++   INNER JOIN countries c
++   ON c.id = artists.country_id
++   WHERE (artists.created_at, artists.uuid) < (p_date, p_uuid)
++   ORDER BY (artists.created_at, artists.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 20:34:05.658933
++select * from get_artist_images_paginated(
++    p_date  := now() ,
++    p_uuid  := '',
++    p_limit := 10
++)
+
+# 2023-07-06 20:34:19.843767
++select * from get_artist_images_paginated(
++    p_date  := now() ,
++    p_uuid  := '20882893-F8B5-4414-A540-39F4EF84F1AD',
++    p_limit := 10
++)
+
+# 2023-07-06 20:34:32.399960
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON images.artist_uuid = artists.uuid
++   INNER JOIN countries c
++   ON c.id = artists.country_id
++   WHERE (artists.created_at, artists.uuid) < (p_date, p_uuid)
++   ORDER BY (artists.created_at, artists.uuid) desc
++   LIMIT p_limit;
++
+
+# 2023-07-06 20:34:52.780392
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON i.artist_uuid = a.uuid
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++
+
+# 2023-07-06 20:35:05.284191
++CREATE OR REPLACE FUNCTION get_artist_images_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        image_uuid uuid,
++        image_path text,
++        country_id numeric,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON i.artist_uuid = a.uuid
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 20:35:19.898826
++select * from get_artist_images_paginated(
++    p_date  := now() ,
++    p_uuid  := '20882893-F8B5-4414-A540-39F4EF84F1AD',
++    p_limit := 10
++)
+
+# 2023-07-06 20:36:20.428735
++\d countries
+
+# 2023-07-06 20:36:48.411878
++CREATE OR REPLACE FUNCTION get_artist_images_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        image_uuid uuid,
++        image_path text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON i.artist_uuid = a.uuid
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 20:37:01.325531
++ DROP FUNCTION get_artist_images_paginated(timestamp with time zone,uuid,integer)
+
+# 2023-07-06 20:37:04.090892
++CREATE OR REPLACE FUNCTION get_artist_images_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        image_uuid uuid,
++        image_path text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        i.uuid as image_uuid,
++        i.image_path,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN images i
++   ON i.artist_uuid = a.uuid
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 20:37:09.064685
++select * from get_artist_images_paginated(
++    p_date  := now() ,
++    p_uuid  := '20882893-F8B5-4414-A540-39F4EF84F1AD',
++    p_limit := 10
++)
+
+# 2023-07-06 21:01:06.100327
++\d artists
+
+# 2023-07-06 21:17:52.323226
++CREATE OR REPLACE FUNCTION get_artists_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 21:18:01.531529
++select * from artists order by created_at desc;
+
+# 2023-07-06 21:19:01.584487
++select * from artists order by created_at desc limit 20;
+
+# 2023-07-06 21:26:14.174636
++CREATE OR REPLACE FUNCTION get_artists_paginated_first(
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-06 21:26:29.296086
++select * from get_artist_images_paginated_first(10)
+
+# 2023-07-06 21:26:44.201475
++select * from get_artists_paginated_first(10)
+
+# 2023-07-06 21:26:59.518044
++select * from artists order by created_at, uuid desc;
+
+# 2023-07-06 21:27:11.595935
++select * from artists order by (created_at, uuid) desc;
+
+# 2023-07-06 21:27:17.560824
++select * from artists order by (created_at, uuid) desc limit 10;
+
+# 2023-07-06 21:27:23.999289
++select * from get_artists_paginated_first(10)
+
+# 2023-07-06 21:33:41.775999
++select * from get_artists_paginated_first(20))
+
+# 2023-07-06 21:33:43.904480
++select * from get_artists_paginated_first(20)
+
+# 2023-07-06 21:36:00.796091
++select * from get_artist_images_paginated(
++    p_date  :='2023-07-07 07:09:55.521672+00' ,
++    p_uuid  := 'f51326e4-b42b-4bc9-bd48-eb90fe32a761',
++    p_limit := 2
++)
+
+# 2023-07-06 21:36:44.662367
++delete function get_artist_images_paginated
+
+# 2023-07-06 21:36:51.589517
++drop function get_artist_images_paginated
++
+
+# 2023-07-06 21:36:56.707407
++\d 
+
+# 2023-07-06 21:37:00.694924
++\df
+
+# 2023-07-06 21:38:22.993806
++select * from get_artists_paginated_first(20)
+
+# 2023-07-06 21:38:39.942113
++select * from get_artists_paginated(
++    p_date  :='2023-07-07 07:09:55.521672+00' ,
++    p_uuid  := 'f51326e4-b42b-4bc9-bd48-eb90fe32a761',
++    p_limit := 2
++)
+
+# 2023-07-06 21:38:48.895203
++select * from get_artists_paginated_first(21)
+
+# 2023-07-06 21:42:14.922892
++delete from artists where name like 'test-%'
+
+# 2023-07-07 14:21:42.061074
++delete from artists
+
+# 2023-07-07 14:21:45.782092
++delete from images
+
+# 2023-07-07 14:21:49.910081
++delete from countries
+
+# 2023-07-07 20:18:46.923692
++select * from images
+
+# 2023-07-07 20:19:21.520556
++select * from artists
+
+# 2023-07-07 20:21:17.491270
++select * from images
+
+# 2023-07-08 15:15:35.535742
++--
++-- NON LOCATION SPECIFIC
++--
++CREATE OR REPLACE FUNCTION get_artists_paginated(
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
++CREATE OR REPLACE FUNCTION get_artists_paginated_first(
++   p_limit integer
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
++
++--
++-- LOCATION SPECIFIC
++--
++
++CREATE OR REPLACE FUNCTION get_artists_paginated_first_in_location(
++   p_limit integer,
++   country_code text,
++   formatted_address text
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE c.code = country_code AND a.formatted_address = formatted_address
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
++CREATE OR REPLACE FUNCTION get_artists_paginated_in_location(
++   p_limit integer,
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   country_code text,
++   formatted_address text
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE 
++     c.code = country_code AND
++     a.formatted_address = formatted_address AND 
++     (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
++
+
+# 2023-07-08 15:16:06.047449
++select n.nspname as function_schema,
++       p.proname as function_name,
++       l.lanname as function_language,
++       case when l.lanname = 'internal' then p.prosrc
++            else pg_get_functiondef(p.oid)
++            end as definition,
++       pg_get_function_arguments(p.oid) as function_arguments,
++       t.typname as return_type
++from pg_proc p
++left join pg_namespace n on p.pronamespace = n.oid
++left join pg_language l on p.prolang = l.oid
++left join pg_type t on t.oid = p.prorettype 
++where n.nspname not in ('pg_catalog', 'information_schema')
++order by function_schema,
++         function_name;
+
+# 2023-07-08 15:17:03.301729
++CREATE OR REPLACE FUNCTION get_artists_paginated_first_in_location(
++   p_limit integer,
++   country_code text,
++   formatted_address text
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE c.code = country_code AND a.formatted_address = formatted_address
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-08 15:17:48.588969
++CREATE OR REPLACE FUNCTION get_artists_paginated_first_in_location(
++   p_limit integer,
++   p_country_code text,
++   p_formatted_address text
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE c.code = p_country_code AND a.formatted_address = p_formatted_address
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
+
+# 2023-07-08 15:18:17.199456
++CREATE OR REPLACE FUNCTION get_artists_paginated_in_location(
++   p_limit integer,
++   p_date timestamp with time zone,
++   p_uuid uuid,
++   p_country_code text,
++   p_formatted_address text
++ )
++ RETURNS TABLE (
++        artist_uuid uuid,
++        artist_created_at timestamp with time zone,
++        user_uuid uuid,
++        artist_name text,
++        city text,
++        formatted_address text,
++        instagram_handle text,
++        country_id smallint,
++        country_name text,
++        country_flag text,
++        country_code text
++ )
++ AS $$
++ BEGIN
++   RETURN QUERY
++   SELECT 
++        a.uuid as artist_uuid, 
++        a.created_at as artist_created_at, 
++        a.user_uuid, 
++        a.name as artist_name,
++        a.city,
++        a.formatted_address,
++        a.instagram_handle,
++        c.id as country_id,
++        c.name as country_name,
++        c.flag as country_flag,
++        c.code as country_code
++
++   FROM artists a 
++   INNER JOIN countries c
++   ON c.id = a.country_id
++   WHERE 
++     c.code = p_country_code AND
++     a.formatted_address = p_formatted_address AND 
++     (a.created_at, a.uuid) < (p_date, p_uuid)
++   ORDER BY (a.created_at, a.uuid) desc
++   LIMIT p_limit;
++ END;
++ $$ LANGUAGE plpgsql;
++
++
+
+# 2023-07-08 15:28:06.552178
++select * from artists
+
+# 2023-07-08 15:28:30.658223
++select * from get_artists_paginated_first_in_location(
++    p_limit             := 10,
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco',
++)
+
+# 2023-07-08 15:28:36.571995
++select * from get_artists_paginated_first_in_location(
++    p_limit             := 10,
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco'
++)
+
+# 2023-07-08 15:28:42.066942
++\zx
+
+# 2023-07-08 15:28:43.807991
++\x
+
+# 2023-07-08 15:28:46.605287
++select * from artists
+
+# 2023-07-08 15:28:56.460675
++select * from get_artists_paginated_first_in_location(
++    p_limit             := 10,
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America'
++)
+
+# 2023-07-08 15:29:04.051801
++select * from get_artists_paginated_first_in_location(
++    p_limit             := 1,
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America'
++)
+
+# 2023-07-08 15:29:34.340414
++select * from get_artists_paginated_in_location(
++    p_limit             := 1,
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America',
++)
+
+# 2023-07-08 15:30:40.304738
++select * from get_artists_paginated_in_location(get_artists_paginated_in_location(
++    p_limit             := 1,
++    p_date              := '2023-07-08 21:58:06.13357+00',
++    p_uuid              := 'fb7368ae-c63d-482a-a724-d8dad7c055f7',
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America'
++);
+
+# 2023-07-08 15:30:49.694598
++select * from get_artists_paginated_in_location(get_artists_paginated_in_location(
++    p_limit             := 1,
++    p_date              := '2023-07-08 21:58:06.13357+00',
++    p_uuid              := 'fb7368ae-c63d-482a-a724-d8dad7c055f7',
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America');
+
+# 2023-07-08 15:30:55.244650
++select * from get_artists_paginated_in_location(get_artists_paginated_in_location(
++    p_limit             := 1,
++    p_date              := '2023-07-08 21:58:06.13357+00',
++    p_uuid              := 'fb7368ae-c63d-482a-a724-d8dad7c055f7',
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America')
++    ;
+
+# 2023-07-08 15:31:02.917332
++select * from get_artists_paginated_in_location(get_artists_paginated_in_location(
++    p_limit             := 1,
++    p_date              := '2023-07-08 21:58:06.13357+00',
++    p_uuid              := 'fb7368ae-c63d-482a-a724-d8dad7c055f7',
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America')
++    
+
+# 2023-07-08 15:31:14.521582
++select * from get_artists_paginated_in_location(
++    p_limit             := 1,
++    p_date              := '2023-07-08 21:58:06.13357+00',
++    p_uuid              := 'fb7368ae-c63d-482a-a724-d8dad7c055f7',
++    p_country_code      := 'US',
++    p_formatted_address := 'San Francisco, CA, United States of America')
++    
+
+# 2023-07-10 09:47:14.916209
++CREATE OR REPLACE FUNCTION public.create_user(
++    email text,
++    password text
++) RETURNS void AS $$
++  declare
++  user_id uuid;
++  encrypted_pw text;
++BEGIN
++  user_id := gen_random_uuid();
++  encrypted_pw := crypt(password, gen_salt('bf'));
++  
++  INSERT INTO auth.users
++    (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, recovery_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token)
++  VALUES
++    ('00000000-0000-0000-0000-000000000000', user_id, 'authenticated', 'authenticated', email, encrypted_pw, '2023-05-03 19:41:43.585805+00', '2023-04-22 13:10:03.275387+00', '2023-04-22 13:10:31.458239+00', '{"provider":"email","providers":["email"]}', '{}', '2023-05-03 19:41:43.580424+00', '2023-05-03 19:41:43.585948+00', '', '', '', '');
++  
++  INSERT INTO auth.identities (id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
++  VALUES
++    (gen_random_uuid(), user_id, format('{"sub":"%s","email":"%s"}', user_id::text, email)::jsonb, 'email', '2023-05-03 19:41:43.582456+00', '2023-05-03 19:41:43.582497+00', '2023-05-03 19:41:43.582497+00');
++END;
++$$ LANGUAGE plpgsql;
++
+
+# 2023-07-10 09:47:22.882100
++select public.create_user('test@example.com', 'qwerty');
+
+# 2023-07-10 09:47:27.707958
++select * from auth.users
+
+# 2023-07-10 09:56:59.761096
++\d auth.users
+
+# 2023-07-10 09:57:11.350170
++select * from auth.users
+
+# 2023-07-10 09:57:12.732711
++\x
+
+# 2023-07-10 09:57:13.556536
++select * from auth.users
+
+# 2023-07-10 10:02:58.350759
++-- https://github.com/supabase-community/supabase-custom-claims/blob/main/install.sql
+
+# 2023-07-10 10:02:58.369007
++CREATE OR REPLACE FUNCTION is_claims_admin() RETURNS "bool"
+
+# 2023-07-10 10:02:59.569830
++  LANGUAGE "plpgsql" 
+
+# 2023-07-10 10:02:59.837137
++  AS $$
+
+# 2023-07-10 10:03:00.073315
++  BEGIN
+
+# 2023-07-10 10:03:00.366368
++    IF session_user = 'authenticator' THEN
+
+# 2023-07-10 10:03:00.545395
++      --------------------------------------------
+
+# 2023-07-10 10:03:00.558140
++      -- To disallow any authenticated app users
+
+# 2023-07-10 10:03:00.568241
++      -- from editing claims, delete the following
+
+# 2023-07-10 10:03:00.576078
++      -- block of code and replace it with:
+
+# 2023-07-10 10:03:00.581453
++      -- RETURN FALSE;
+
+# 2023-07-10 10:03:00.588154
++      --------------------------------------------
+
+# 2023-07-10 10:03:00.600603
++      IF extract(epoch from now()) > coalesce((current_setting('request.jwt.claims', true)::jsonb)->>'exp', '0')::numeric THEN
+
+# 2023-07-10 10:03:00.893321
++        return false; -- jwt expired
+
+# 2023-07-10 10:03:01.082993
++      END IF; 
+
+# 2023-07-10 10:03:01.294831
++      IF coalesce((current_setting('request.jwt.claims', true)::jsonb)->'app_metadata'->'claims_admin', 'false')::bool THEN
+
+# 2023-07-10 10:03:01.501731
++        return true; -- user has claims_admin set to true
+
+# 2023-07-10 10:03:01.671537
++      ELSE
+
+# 2023-07-10 10:03:01.943780
++        return false; -- user does NOT have claims_admin set to true
+
+# 2023-07-10 10:03:02.127841
++      END IF;
+
+# 2023-07-10 10:03:02.336800
++      --------------------------------------------
+
+# 2023-07-10 10:03:02.355169
++      -- End of block 
+
+# 2023-07-10 10:03:02.368819
++      --------------------------------------------
+
+# 2023-07-10 10:03:02.379686
++    ELSE -- not a user session, probably being called from a trigger or something
+
+# 2023-07-10 10:03:02.653334
++      return true;
+
+# 2023-07-10 10:03:03.148914
++    END IF;
+
+# 2023-07-10 10:03:03.374671
++  END;
+
+# 2023-07-10 10:03:03.663114
++$$;
+
+# 2023-07-10 10:03:03.857623
++CREATE OR REPLACE FUNCTION get_my_claims() RETURNS "jsonb"
+
+# 2023-07-10 10:24:57.367014
++select get_my_claims()
+
+# 2023-07-10 10:25:03.030058
++current_user
+
+# 2023-07-10 10:25:05.170202
++current_user(_)
+
+# 2023-07-10 10:25:09.172347
++select current_user()
+
+# 2023-07-10 10:25:45.113760
++select * from current_setting()
+
+# 2023-07-10 10:25:56.009870
++current_setting('request.jwt.claims', true)
+
+# 2023-07-10 10:25:58.609208
++select current_setting('request.jwt.claims', true)
+
+# 2023-07-10 10:32:34.144525
++-- https://github.com/supabase-community/supabase-custom-claims/blob/main/install.sql
++CREATE OR REPLACE FUNCTION is_claims_admin() RETURNS "bool"
++  LANGUAGE "plpgsql" 
++  AS $$
++  BEGIN
++    IF session_user = 'authenticator' THEN
++      --------------------------------------------
++      -- To disallow any authenticated app users
++      -- from editing claims, delete the following
++      -- block of code and replace it with:
++      -- RETURN FALSE;
++      --------------------------------------------
++      return FALSE;
++      -- IF extract(epoch from now()) > coalesce((current_setting('request.jwt.claims', true)::jsonb)->>'exp', '0')::numeric THEN
++        -- return false; -- jwt expired
++      -- END IF; 
++      -- IF coalesce((current_setting('request.jwt.claims', true)::jsonb)->'app_metadata'->'claims_admin', 'false')::bool THEN
++        -- return true; -- user has claims_admin set to true
++      -- ELSE
++        -- return false; -- user does NOT have claims_admin set to true
++      -- END IF;
++      --------------------------------------------
++      -- End of block 
++      --------------------------------------------
++    ELSE -- not a user session, probably being called from a trigger or something
++      return true;
++    END IF;
++  END;
++$$;
++
+
+# 2023-07-10 10:32:59.589091
++CREATE OR REPLACE FUNCTION is_claims_admin() RETURNS "bool"
++  LANGUAGE "plpgsql" 
++  AS $$
++  BEGIN
++    IF session_user = 'authenticator' THEN
++      --------------------------------------------
++      -- To disallow any authenticated app users
++      -- from editing claims, delete the following
++      -- block of code and replace it with:
++      -- RETURN FALSE;
++      --------------------------------------------
++      return FALSE;
++      -- IF extract(epoch from now()) > coalesce((current_setting('request.jwt.claims', true)::jsonb)->>'exp', '0')::numeric THEN
++        -- return false; -- jwt expired
++      -- END IF; 
++      -- IF coalesce((current_setting('request.jwt.claims', true)::jsonb)->'app_metadata'->'claims_admin', 'false')::bool THEN
++        -- return true; -- user has claims_admin set to true
++      -- ELSE
++        -- return false; -- user does NOT have claims_admin set to true
++      -- END IF;
++      --------------------------------------------
++      -- End of block 
++      --------------------------------------------
++    ELSE -- not a user session, probably being called from a trigger or something
++      return true;
++    END IF;
++  END;
++$$;
++
+
+# 2023-07-10 10:33:04.391846
++select is_claims_admin()
+
+# 2023-07-10 10:33:17.305986
++\du
+
+# 2023-07-10 10:34:21.558912
++select set_claim('', 'claims_admin', 'true');
+
+# 2023-07-10 10:34:41.438095
++select id from auth.users where email = 'justinfan827@gmail.com'
+
+# 2023-07-10 10:34:48.910966
++select set_claim(select id from auth.users where email = 'justinfan827@gmail.com', 'claims_admin', 'true');
+
+# 2023-07-10 10:35:04.866717
++select set_claim( '16e8e5af-f4be-42ee-8aa2-00e0a0fa5dda', 'claims_admin', 'true');
+
+# 2023-07-10 10:35:16.926212
++select is_claims_admin()
+
+# 2023-07-10 10:35:31.707801
++\df is_claims_admin()
+
+# 2023-07-10 10:35:33.774197
++\df is_claims_admin
+
+# 2023-07-10 10:35:36.853600
++\df+ is_claims_admin
+
+# 2023-07-10 10:36:22.035129
++select set_claim( '16e8e5af-f4be-42ee-8aa2-00e0a0fa5dda', 'claims_admin', 'false');
+
+# 2023-07-10 10:38:12.212804
++\df+ current_setting
+
+# 2023-07-10 10:38:19.424486
++\x
+
+# 2023-07-10 10:38:20.169822
++\df+ current_setting
+
+# 2023-07-10 10:41:04.928547
++\df+ is_claims_admin
+
+# 2023-07-10 10:41:07.545696
++\df+ current_setting
+
+# 2023-07-10 10:41:54.539523
++select set_claim( '16e8e5af-f4be-42ee-8aa2-00e0a0fa5dda', 'TATTOO_PROEJCT_USERROLE', 'ADMIN');
+
+# 2023-07-10 10:42:00.523776
++select set_claim( '16e8e5af-f4be-42ee-8aa2-00e0a0fa5dda', 'TATTOO_PROEJCT_USERROLE', '"ADMIN"');
+
+# 2023-07-10 10:42:10.771754
++select * from auth.users
+
+# 2023-07-10 11:25:21.351068
++select set_claim( '16e8e5af-f4be-42ee-8aa2-00e0a0fa5dda', 'TATTOO_PROJECT_USERROLE', '"ADMIN"');
+
+# 2023-07-10 11:39:03.463067
++create table public.users (
++  uuid uuid not null primary key, -- UUID from auth.users
++  email text
++  first_name text,
++  last_name text
++);
++comment on table public.users is 'Profile data for each user.';
++comment on column public.users.id is 'References the internal Supabase Auth user.';
+
+# 2023-07-10 11:39:10.479692
++create table public.users (
++  uuid uuid not null primary key,
++  email text
++  first_name text,
++  last_name text
++);
++comment on table public.users is 'Profile data for each user.';
++comment on column public.users.id is 'References the internal Supabase Auth user.';
+
+# 2023-07-10 11:39:16.662441
++create table public.users (
++  uuid uuid not null primary key,
++  email text,
++  first_name text,
++  last_name text
++);
++comment on table public.users is 'Profile data for each user.';
++comment on column public.users.id is 'References the internal Supabase Auth user.';
+
+# 2023-07-10 11:39:25.678102
++create table public.users (
++  uuid uuid not null primary key,
++  email text,
++  first_name text,
++  last_name text
++);
++comment on table public.users is 'Profile data for each user.';
++comment on column public.users.uuid is 'References the internal Supabase Auth user.';
+
+# 2023-07-10 11:39:29.860725
++\d users
+
+# 2023-07-10 11:39:39.958029
++ comment on table public.users is 'Profile data for each user.';
++ comment on column public.users.uuid is 'References the internal Supabase Auth user.';
++
+
+# 2023-07-10 11:39:42.380641
++\d
+
+# 2023-07-10 11:39:44.932894
++\d users
+
+# 2023-07-10 11:40:38.301703
++create or replace function public.handle_new_user() 
++returns trigger as $$
++begin
++  insert into public.users (id, email)
++  values (new.id, new.email);
++  return new;
++end;
++$$ language plpgsql security definer
+
+# 2023-07-10 11:40:54.990391
++create trigger on_auth_user_created
++  after insert on auth.users
++  for each row execute procedure public.handle_new_user();
++
+
+# 2023-07-10 11:40:56.306033
++\d
+
+# 2023-07-10 11:41:40.807076
++create or replace function public.handle_new_user() 
++returns trigger as $$
++begin
++  insert into public.users (uuid, email)
++  values (new.id, new.email);
++  return new;
++end;
++$$ language plpgsql security definer;
++
+
+# 2023-07-10 11:41:46.364583
++select * from auth.users
+
+# 2023-07-10 11:42:01.381651
++select (id, email) from auth.users
+
+# 2023-07-10 11:42:13.749723
++insert into users (select id, email from auth.users)
+
+# 2023-07-10 11:42:18.731166
++select * from users;
+
+# 2023-07-10 14:17:49.821444
++select * from artists
+
+# 2023-07-10 14:18:01.143601
++\d artists
+
+# 2023-07-10 14:19:46.299085
++select * from artists inner join users where users.email = 'justinfan827@gmail.com'
+
+# 2023-07-10 14:19:51.310647
++select * from artists inner join users on users.uuid = artists.user_uuid users.email = 'justinfan827@gmail.com'
+
+# 2023-07-10 14:19:55.915155
++select * from artists inner join users on users.uuid = artists.user_uuid where users.email = 'justinfan827@gmail.com'
+
+# 2023-07-10 14:31:23.902969
++\d artists
+
+# 2023-07-10 18:29:30.781713
++ select public.create_user('test+bittersweetly.tattoo@example.com', 'qwerty');
++ select public.create_user('test+dimkymn@example.com', 'qwerty');
++ select public.create_user('test+hansantattoo@example.com', 'qwerty');
++ select public.create_user('test+horror_tattoo@example.com', 'qwerty');
++ select public.create_user('test+hwyl.tattoo@example.com', 'qwerty');
++ select public.create_user('test+olottletattoos@example.com', 'qwerty');
++ select public.create_user('test+ornot_tattoo@example.com', 'qwerty');
++ select public.create_user('test+ovenlee.tattoo@example.com', 'qwerty');
++ select public.create_user('test+paw.tattoo@example.com', 'qwerty');
++ select public.create_user('test+strokin@example.com', 'qwerty');
++ select public.create_user('test+tattooist_giho_@example.com', 'qwerty');
++ select public.create_user('test+tattooist_usol@example.com', 'qwerty');
++
+
+# 2023-07-10 18:29:43.329046
++select * from users
+
+# 2023-07-10 18:30:06.507132
++delete from users where email = 'test@example.com
+
+# 2023-07-10 18:30:10.426831
++delete from users where email = 'test@example.com'
+
+# 2023-07-10 18:30:13.683046
++select * from users
+
+# 2023-07-10 18:36:53.989374
++select * from users where email = 'test+bittersweetly.tattoo@example.com'
+
+# 2023-07-10 18:37:17.674837
++select * from artists;
+
+# 2023-07-10 18:38:37.713613
++\d artists
+
+# 2023-07-10 18:41:03.570610
++select * from users;
+
+# 2023-07-10 18:42:28.015065
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'random', 1, 'random', users.uuid, 'name', 'name'
++FROM users where email = 'test+bittersweetly.tattoo@example.com'
++
+
+# 2023-07-10 18:43:56.304325
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'random', 1, 'random', users.uuid, 'name', 'name'
++FROM users where email = 'test+dimkymn@example.com'
++
+
+# 2023-07-10 18:46:30.190169
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'hansantattoo', 1, 'something', users.uuid, 'hansantattoo', 'asdf'
++FROM users where email = 'test+hansantattoo@example.com'
++
+
+# 2023-07-10 18:48:12.048501
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'horror_tattoo', 1, 'something', users.uuid, 'horror_tattoo', 'asdf'
++FROM users where email = 'test+horror_tattoo@example.com'
++
+
+# 2023-07-10 18:49:13.211864
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+olottletattoos@example.com'
++
+
+# 2023-07-10 18:49:22.400636
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+ornot_tattoo@example.com'
++
+
+# 2023-07-10 18:49:36.387911
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'ttest+ovenlee.tattoo@example.com'
++;
+
+# 2023-07-10 18:49:37.608771
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+ovenlee.tattoo@example.com'
++
+
+# 2023-07-10 18:49:46.755747
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+paw.tattoo@example.com'
++
+
+# 2023-07-10 18:49:56.172654
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+strokin@example.com'
+
+# 2023-07-10 18:50:00.474224
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+tattooist_giho_@example.com'
+
+# 2023-07-10 18:50:08.499700
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'olottletattoos', 1, 'something', users.uuid, 'olottletattoos', 'asdf'
++FROM users where email = 'test+tattooist_usol@example.com'
++
+
+# 2023-07-10 18:51:15.511112
++INSERT INTO artists (instagram_handle, country_id, city, user_uuid, name, formatted_address)
++SELECT 'random', 1, 'random', users.uuid, 'name', 'name'
++FROM users where email = 'test+hwyl.tattoo@example.com'
++
+
+# 2023-07-10 19:05:59.356566
++select * from users;
+
+# 2023-07-17 20:20:24.777559
++\d artist_
+
+# 2023-07-17 20:20:25.645674
++\d
+
+# 2023-07-17 20:20:30.417878
++\d artists_travel_dates
+
+# 2024-12-07 03:44:40.696098
++\d
+
+# 2024-12-07 03:44:42.630413
++\d workout_plans
+
+# 2024-12-07 03:44:45.862650
++select * from workout_plans
+
+# 2024-12-07 03:44:56.661991
++select json_pretty(workout_json) from workout_plans
+
+# 2024-12-07 03:45:00.587251
++select jsonb_pretty(workout_json) from workout_plans
+
+# 2024-12-18 08:35:57.439939
++\d
+
+# 2024-12-22 11:18:22.572025
++\d exercises
+
+# 2024-12-22 12:03:40.568352
++CREATE EXTENSION pg_trgm;
+
+# 2024-12-22 12:11:18.595252
++\d exercises
+
+# 2024-12-22 12:12:04.527271
++CREATE INDEX idx_exercises_name_trgm ON exercises USING gist (name gist_trgm_ops);
+
+# 2024-12-22 12:13:59.437556
++CREATE OR REPLACE FUNCTION search_exercises_by_name(exercise_name text)
++RETURNS TABLE(id uuid, created_at timestamp with time zone, name text, target_muscles jsonb, skill text, range_of_motion text, body_region text, owner_id uuid, modifiers jsonb, sim_score float) AS
++$$
++BEGIN
++    RETURN QUERY
++    SELECT id, created_at, name, target_muscles, skill, range_of_motion, body_region, owner_id, modifiers, similarity(name, exercise_name) AS sim_score
++    FROM exercises
++    WHERE similarity(name, exercise_name) > 0.3
++    ORDER BY sim_score DESC;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2024-12-22 12:14:03.648446
++SELECT * FROM search_exercises_by_name('pushup');
+
+# 2024-12-22 12:14:11.726231
++\d
+
+# 2024-12-22 12:14:14.120572
++\d exercises
+
+# 2024-12-22 12:14:42.449709
++SELECT * FROM search_exercises_by_name('pushup');
+
+# 2024-12-22 12:15:05.406531
++CREATE OR REPLACE FUNCTION search_exercises_by_name(exercise_name text, threshold float)
++RETURNS TABLE(id uuid, created_at timestamp with time zone, name text, target_muscles jsonb, skill text, range_of_motion text, body_region text, owner_id uuid, modifiers jsonb, sim_score float) AS
++$$
++BEGIN
++    RETURN QUERY
++    SELECT e.id, e.created_at, e.name, e.target_muscles, e.skill, e.range_of_motion, e.body_region, e.owner_id, e.modifiers, similarity(e.name, exercise_name) AS sim_score
++    FROM exercises e
++    WHERE similarity(e.name, exercise_name) > threshold
++    ORDER BY sim_score DESC;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2024-12-22 12:15:08.836586
++
++CREATE FUNCTION
++
+
+# 2024-12-22 12:15:13.871436
++SELECT * FROM search_exercises_by_name('pushup', 0.3);
+
+# 2024-12-22 12:15:39.372586
++CREATE OR REPLACE FUNCTION search_exercises_by_name(exercise_name text, threshold double precision)
++RETURNS TABLE(id uuid, created_at timestamp with time zone, name text, target_muscles jsonb, skill text, range_of_motion text, body_region text, owner_id uuid, modifiers jsonb, sim_score double precision) AS
++$$
++BEGIN
++    RETURN QUERY
++    SELECT e.id, e.created_at, e.name, e.target_muscles, e.skill, e.range_of_motion, e.body_region, e.owner_id, e.modifiers, 
++           similarity(e.name, exercise_name)::double precision AS sim_score
++    FROM exercises e
++    WHERE similarity(e.name, exercise_name) > threshold
++    ORDER BY sim_score DESC;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2024-12-22 12:15:40.647320
++SELECT * FROM search_exercises_by_name('pushup', 0.3);
+
+# 2024-12-22 12:16:39.212345
++SELECT * FROM search_exercises_by_name('pull', 0.3);
+
+# 2024-12-22 12:16:42.269699
++SELECT * FROM search_exercises_by_name('pullup', 0.3);
+
+# 2024-12-22 12:16:46.923006
++SELECT * FROM search_exercises_by_name('up', 0.3);
+
+# 2024-12-22 12:17:15.572531
++SELECT * FROM search_exercises_by_name('pull up', 0.3);
+
+# 2024-12-22 12:17:20.894058
++SELECT * FROM search_exercises_by_name('pull up', 0.2);
+
+# 2024-12-22 12:17:26.697515
++SELECT * FROM search_exercises_by_name('pullup', 0.2);
+
+# 2024-12-22 12:17:38.747282
++\x
+
+# 2024-12-22 12:17:39.340759
++SELECT * FROM search_exercises_by_name('pullup', 0.2);
+
+# 2024-12-22 12:18:00.248769
++SELECT * FROM search_exercises_by_name('pullup', 0.23);
+
+# 2024-12-22 12:18:10.090812
++SELECT * FROM search_exercises_by_name('pull up', 0.23);
+
+# 2024-12-22 12:18:12.139324
++\x
+
+# 2024-12-22 12:18:12.756858
++SELECT * FROM search_exercises_by_name('pull up', 0.23);
+
+# 2024-12-22 12:18:59.735319
++CREATE OR REPLACE FUNCTION search_exercises_by_name(exercise_name text, threshold double precision)
++RETURNS TABLE(id uuid, created_at timestamp with time zone, name text, target_muscles jsonb, skill text, range_of_motion text, body_region text, owner_id uuid, modifiers jsonb, sim_score double precision) AS
++$$
++BEGIN
++    RETURN QUERY
++    SELECT e.id, e.created_at, e.name, e.target_muscles, e.skill, e.range_of_motion, e.body_region, e.owner_id, e.modifiers, 
++           similarity(
++               LOWER(REGEXP_REPLACE(e.name, '[^a-zA-Z]', '', 'g')), 
++               LOWER(REGEXP_REPLACE(exercise_name, '[^a-zA-Z]', '', 'g'))
++           )::double precision AS sim_score
++    FROM exercises e
++    WHERE similarity(
++              LOWER(REGEXP_REPLACE(e.name, '[^a-zA-Z]', '', 'g')), 
++              LOWER(REGEXP_REPLACE(exercise_name, '[^a-zA-Z]', '', 'g'))
++          ) > threshold
++    ORDER BY sim_score DESC;
++END;
++$$ LANGUAGE plpgsql;
+
+# 2024-12-22 12:19:00.440288
++SELECT * FROM search_exercises_by_name('pull up', 0.23);
+
+# 2024-12-22 12:19:07.127418
++SELECT name, score FROM search_exercises_by_name('pull up', 0.23);
+
+# 2024-12-22 12:19:09.791628
++\x
+
+# 2024-12-22 12:19:11.260785
++SELECT * FROM search_exercises_by_name('pull up', 0.23);
+
+# 2024-12-22 12:19:17.139125
++SELECT name, sim_score FROM search_exercises_by_name('pull up', 0.23);
+
+# 2024-12-22 12:19:26.967518
++SELECT name, sim_score FROM search_exercises_by_name('pull up', 0.2);
+
+# 2024-12-22 12:19:31.807551
++SELECT name, sim_score FROM search_exercises_by_name('pull', 0.2);
+
+# 2024-12-22 12:19:43.731677
++SELECT name, sim_score FROM search_exercises_by_name('pus', 0.2);
+
+# 2024-12-22 12:19:47.852263
++SELECT name, sim_score FROM search_exercises_by_name('sq', 0.2);
+
+# 2024-12-22 12:19:51.290060
++SELECT name, sim_score FROM search_exercises_by_name('squat', 0.2);
+
+# 2024-12-22 12:19:58.263296
++SELECT name, sim_score FROM search_exercises_by_name('squat char', 0.2);

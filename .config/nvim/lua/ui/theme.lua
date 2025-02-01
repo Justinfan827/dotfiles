@@ -31,5 +31,11 @@
 --   }
 -- )
 
-vim.api.nvim_set_hl(0, "CmpNormal", {bg = "#FF0000"})
--- vim.cmd [[ colorscheme tokyonight-night ]]
+-- trying to make things transparent
+-- vim.cmd("au ColorScheme * hi Normal ctermbg=none guibg=none")
+-- vim.cmd("au ColorScheme * hi SignColumn ctermbg=none guibg=none")
+-- vim.cmd("au ColorScheme * hi NormalNC ctermbg=none guibg=none")
+-- vim.cmd("au ColorScheme * hi MsgArea ctermbg=none guibg=none")
+-- vim.cmd("au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none")
+-- vim.cmd("au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none")
+-- vim.cmd("let &fcs='eob: '")

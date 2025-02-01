@@ -40,7 +40,7 @@ require("formatter").setup(
           }
         end
       },
-      css = {
+      markdown = {
         -- prettier
         function()
           return {
@@ -63,8 +63,8 @@ require("formatter").setup(
       sql = {
         function()
           return {
-            exe = "pg_format",
-            args = {" --inplace --wrap-after 40 - "},
+            exe = "prettier",
+            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
             stdin = true
           }
         end
@@ -139,15 +139,15 @@ require("formatter").setup(
           }
         end
       },
-      json = {
-        function()
-          return {
-            exe = "./node_modules/.bin/prettier",
-            args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--double-quote"},
-            stdin = true
-          }
-        end
-      }
+      -- json = {
+      --   function()
+      --     return {
+      --       exe = "./node_modules/.bin/prettier",
+      --       args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--double-quote"},
+      --       stdin = true
+      --     }
+      --   end
+      -- }
     }
   }
 )

@@ -1,6 +1,6 @@
 -- following options are the default
 
-require("nvim-autopairs").setup {}
+require("nvim-autopairs").setup({})
 
 -- enable plugins with more complex configs
 require("tools.reload")
@@ -16,15 +16,12 @@ require("tools.lsp_rooter")
 require("tools.cmp")
 require("tools.dap_go")
 require("tools.dap_ui")
-require("tools.neodev")
+-- require("tools.neodev")
 require("tools.gitsigns")
 require("tools.tabout")
 require("tools.lastplace")
 require("tools.commenter")
 require("tools.whichkey")
 require("tools.increname")
-require("better_escape").setup(
-  {
-    mapping = {"kj"}
-  }
-)
+require("tools.gitlinker")
+require("tools.ufo")
