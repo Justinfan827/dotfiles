@@ -214,6 +214,28 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- Function to check if a floating dialog exists and if not
+-- then check for diagnostics under the cursor
+local function OpenDiagnosticIfNoFloat()
+  for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.api.nvim_win_get_config(winid).zindex then
+      return
+    end
+  end
+  -- THIS IS FOR BUILTIN LSP
+  vim.diagnostic.open_float({ bufnr = 0 }, {
+    scope = 'cursor',
+    focusable = false,
+    close_events = {
+      'CursorMoved',
+      'CursorMovedI',
+      'BufHidden',
+      'InsertCharPre',
+      'WinLeave',
+    },
+  })
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -403,7 +425,8 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      -- vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -509,6 +532,28 @@ require('lazy').setup({
             mode = mode or 'n'
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
+
+          vim.api.nvim_create_autocmd({ 'CursorHold' }, {
+            pattern = '*',
+            callback = function()
+              for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.api.nvim_win_get_config(winid).zindex then
+                  return
+                end
+              end
+              vim.diagnostic.open_float {
+                scope = 'cursor',
+                focusable = false,
+                close_events = {
+                  'CursorMoved',
+                  'CursorMovedI',
+                  'BufHidden',
+                  'InsertCharPre',
+                  'WinLeave',
+                },
+              }
+            end,
+          })
 
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
@@ -616,7 +661,6 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -625,9 +669,9 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
-
+        tailwindcss = {},
+        ts_ls = {},
+        gopls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -837,24 +881,6 @@ require('lazy').setup({
     end,
   },
 
-  -- { -- You can easily change to a different colorscheme.
-  --   -- Change the name of the colorscheme plugin below, and then
-  --   -- change the command in the config to whatever the name of that colorscheme is.
-  --   --
-  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   init = function()
-  --     -- Load the colorscheme here.
-  --     -- Like many other themes, this one has different styles, and you could load
-  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --     vim.cmd.colorscheme 'tokyonight-night'
-  --
-  --     -- You can configure highlights by doing something like:
-  --     vim.cmd.hi 'Comment gui=none'
-  --   end,
-  -- },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -867,14 +893,18 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      -- require('mini.ai').setup { n_lines = 1000 }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      require('mini.surround').setup {
+        n_lines = 1000,
+      }
+
+      require('mini.comment').setup {}
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -901,10 +931,29 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'hurl' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'hurl',
+        'typescript',
+        'tsx',
+        'css',
+        'javascript',
+        'terraform',
+        'go',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -951,6 +1000,8 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
+
+  install = { colorscheme = { 'catpuccin-mocha' } },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -974,3 +1025,4 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
