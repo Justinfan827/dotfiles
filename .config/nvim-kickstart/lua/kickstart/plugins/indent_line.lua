@@ -8,7 +8,9 @@ return {
     ---@type ibl.config
     opts = {
       enabled = true,
-      indent = { char = '|' },
+      indent = {
+        char = { '│' },
+      },
     },
   },
 }

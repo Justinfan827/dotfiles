@@ -99,7 +99,7 @@ vim.g.have_nerd_font = true
 --  For more options, you can see `:help option-list`
 
 -- Make line numbers default
--- vim.opt.number = true
+vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
@@ -146,9 +146,9 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 -- Set the char for the indent line
-vim.g.indentline_char = '|'
+vim.g.indentline_char = ''
 -- By default I am using space style indentation and 2 spaces for it
-vim.o.listchars = 'trail:•,extends:#,nbsp:.,precedes:❮,extends:❯,tab:› ,leadmultispace:' .. vim.g.indentline_char .. '  '
+vim.o.listchars = 'trail:•,extends:#,nbsp:.,precedes:❮,extends:❯,tab:│ ,leadmultispace:' .. vim.g.indentline_char .. '  '
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -562,9 +562,10 @@ require('lazy').setup({
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- trouble
+          map('gr', '<cmd>Trouble lsp_references toggle<CR>', '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -916,7 +917,7 @@ require('lazy').setup({
         n_lines = 1000,
       }
 
-      require('mini.comment').setup {}
+      -- require('mini.comment').setup {}
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
