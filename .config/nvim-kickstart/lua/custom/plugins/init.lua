@@ -4,6 +4,13 @@
 -- See the kickstart.nvim README for more information
 
 vim.o.wrap = false
+-- auto-session requirement for highlighting
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+-- open repo in browser
+vim.g.gh_line_map = '<leader>bg'
+
+-- fzf history
+vim.g.fzf_history_dir = '~/.local/share/fzf-history'
 
 vim.keymap.set('n', ';', ':', { desc = 'Remap : to ;' })
 vim.keymap.set('n', '<CR>', 'G', { desc = 'Jump to line number with 123<CR>' })
@@ -28,12 +35,36 @@ vim.keymap.set('n', '<Leader>gr', ':Gread<CR>')
 vim.keymap.set('n', '<Leader>gb', ':Git blame<CR>')
 
 --
+-- auto import go packages
+--
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.go' },
+  callback = function()
+    local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding(0))
+    params.context = { only = { 'source.organizeImports' } }
+
+    local result = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params, 3000)
+    for _, res in pairs(result or {}) do
+      for _, r in pairs(res.result or {}) do
+        if r.edit then
+          vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding(0))
+        else
+          vim.lsp.buf.execute_command(r.command)
+        end
+      end
+    end
+  end,
+})
+
+--
 -- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
 -- set spacing / indents for go projects
 --
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'go',
   callback = function()
+    -- idk why this is needed but it is.
+    vim.cmd 'TSBufEnable highlight'
     -- Insert mode: Add fmt.Println() and place cursor inside parentheses
     vim.keymap.set('i', 'fpp', 'fmt.Println()<Esc>==f(a', { desc = 'Insert fmt.Println() with cursor inside parentheses' })
 
@@ -75,6 +106,22 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 return {
+  'ruanyl/vim-gh-line', -- link to git repo
+  {
+
+    'junegunn/fzf.vim', -- fzf
+    config = function()
+      vim.keymap.set('n', ',/', ':Ag!<CR>', { desc = 'live grep' })
+      vim.keymap.set('n', ',ag', ':Ag! <C-R><C-W><CR>', { silent = true, desc = 'Search for word under cursor' })
+    end,
+  },
+  {
+    -- Fzf for vim: fuzzy search (ESSENTIAL)
+    'junegunn/fzf',
+    run = function()
+      vim.fn['fzf#install']()
+    end,
+  },
   -- automatically close tags e.g. in html.
   {
 
@@ -143,17 +190,17 @@ return {
       }
     end,
   },
-  -- {
-  --   'sainnhe/gruvbox-material',
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.g.gruvbox_material_transparent_background = 2
-  --     vim.cmd [[ colorscheme gruvbox-material ]]
-  --     -- You can configure highlights by doing something like:
-  --     vim.cmd.hi 'Comment gui=none'
-  --   end,
-  -- },
+  {
+    'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_transparent_background = 2
+      -- vim.cmd.colorscheme 'gruvbox-material'
+      -- You can configure highlights by doing something like:
+      vim.cmd.hi 'Comment gui=none'
+    end,
+  },
   -- colorscheme for transparent background
   {
     'catppuccin/nvim',

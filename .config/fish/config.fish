@@ -19,7 +19,8 @@ set -gx EDITOR nvim
 
 # Go variables
 # If $GOPATH is not set, binaries are installe in $HOME/go/bin
-set PATH $HOME/go/bin $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
+set -Ux ANDROID_HOME $HOME/Library/Android/sdk
+set PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/emulator $HOME/go/bin $HOME/tools/lua-language-server/bin/macOS $HOME/Library/Python/3.8/bin ~/bin/openapitools $PATH
 
 # Blend mismo service variables
 # set -gx LDFLAGS "-L/usr/local/opt/libxml2/lib"
