@@ -564,17 +564,46 @@ require('lazy').setup({
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           -- Find references for the word under your cursor.
           -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          -- trouble
-          map('gr', '<cmd>Trouble lsp_references toggle<CR>', '[G]oto [R]eferences')
+
+          -- Alternative (use trouble)
+
+          -- jump to next and previous item
+          local function troubleJump(direction, mode)
+            local trouble = require 'trouble'
+            if trouble.is_open(mode) then
+              print 'is open'
+              if direction == 'next' then
+                print 'jumping next'
+                ---@diagnostic disable-next-line: missing-parameter
+                trouble.next { jump = true }
+              else
+                print 'jumping prev'
+                ---@diagnostic disable-next-line: missing-parameter
+                trouble.prev { jump = true }
+              end
+            else
+              print 'Trouble is not open'
+            end
+          end
+
+          -- Trouble keymaps to jump to the next/previous references
+          map(']r', function()
+            troubleJump('next', 'lsp_references')
+          end, 'Next [r]eference')
+          map('[r', function()
+            troubleJump('prev', 'lsp_references')
+          end, 'Previous [r]eference')
+
+          map('gr', '<cmd>Trouble lsp_references toggle auto_refresh=false<CR>', '[G]oto [R]eferences (trouble.nvim)')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gt', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -916,6 +945,8 @@ require('lazy').setup({
       require('mini.surround').setup {
         n_lines = 1000,
       }
+
+      require('mini.bracketed').setup {}
 
       -- require('mini.comment').setup {}
 
