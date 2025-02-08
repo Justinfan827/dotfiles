@@ -18,33 +18,45 @@ return {
   -- typescript plugins
   require 'custom.plugins.webdev',
   require 'custom.plugins.golang',
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      'MunifTanjim/nui.nvim',
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      'rcarriga/nvim-notify',
-    },
-  },
-  {
-    'rcarriga/nvim-notify',
-    opts = {
-      background_colour = '#000000',
-    },
-  },
+  -- ehhh this is not the best
+  -- {
+  --   'folke/noice.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     -- add any options here
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     'MunifTanjim/nui.nvim',
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     -- 'rcarriga/nvim-notify',
+  --   },
+  -- },
+  -- {
+  --   'rcarriga/nvim-notify',
+  --   filter = {
+  --     event = 'msg_show',
+  --     any = {
+  --       { find = '%d+L, %d+B' },
+  --       { find = '; after #%d+' },
+  --       { find = '; before #%d+' },
+  --       { find = '%d fewer lines' },
+  --       { find = '%d more lines' },
+  --     },
+  --   },
+  --   opts = {
+  --     skip = true,
+  --     background_colour = '#000000',
+  --   },
+  -- },
   'ruanyl/vim-gh-line', -- link to git repo
   {
     'junegunn/fzf.vim', -- fzf
     config = function()
-      vim.keymap.set('n', ',/', ':Ag!<CR>', { desc = 'live grep' })
-      vim.keymap.set('n', ',ag', ':Ag! <C-R><C-W><CR>', { silent = true, desc = 'Search for word under cursor' })
+      vim.keymap.set('n', ',/', '<cmd>Ag!<CR>', { desc = 'live grep' })
+      vim.keymap.set('n', ',ag', '<cmd>Ag! <C-R><C-W><CR>', { silent = true, desc = 'Search for word under cursor' })
     end,
   },
   {

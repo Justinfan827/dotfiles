@@ -68,6 +68,7 @@ alias nu "nvm use"
 alias fsa "fisher add $argv"
 alias fsr "fisher remove (fisher list | fzf)"
 alias fsl "fisher list"
+alias cl "clear"
 
 
 alias vk='NVIM_APPNAME=nvim-kickstart nvim' # Kickstart
