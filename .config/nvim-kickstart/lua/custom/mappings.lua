@@ -28,3 +28,4 @@ vim.keymap.set('n', '<Leader>gr', ':Gread<CR>', { desc = 'Git read (useful in di
 vim.keymap.set('n', '<Leader>gb', ':Git blame<CR>', { desc = 'Git blame' })
 
 vim.keymap.set('n', '-', '<CMD>Oil --float<CR>', { desc = 'Open Oil file explorer' })
+vim.keymap.set('n', '<leader>nd', '<cmd>NoiceDismiss<CR>', { desc = '[N]oice delete messages' })

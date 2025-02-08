@@ -18,9 +18,29 @@ return {
   -- typescript plugins
   require 'custom.plugins.webdev',
   require 'custom.plugins.golang',
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      'MunifTanjim/nui.nvim',
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      'rcarriga/nvim-notify',
+    },
+  },
+  {
+    'rcarriga/nvim-notify',
+    opts = {
+      background_colour = '#000000',
+    },
+  },
   'ruanyl/vim-gh-line', -- link to git repo
   {
-
     'junegunn/fzf.vim', -- fzf
     config = function()
       vim.keymap.set('n', ',/', ':Ag!<CR>', { desc = 'live grep' })

@@ -571,18 +571,15 @@ require('lazy').setup({
           local function troubleJump(direction, mode)
             local trouble = require 'trouble'
             if trouble.is_open(mode) then
-              print 'is open'
               if direction == 'next' then
-                print 'jumping next'
                 ---@diagnostic disable-next-line: missing-parameter
                 trouble.next { jump = true }
               else
-                print 'jumping prev'
                 ---@diagnostic disable-next-line: missing-parameter
                 trouble.prev { jump = true }
               end
             else
-              print 'Trouble is not open'
+              vim.notify('Trouble is not open', vim.log.levels.INFO)
             end
           end
 
