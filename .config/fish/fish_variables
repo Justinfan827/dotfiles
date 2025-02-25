@@ -64,7 +64,7 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/opt/homebrew/opt/postgresql\x4016/bin\x1e/opt/homebrew/bin\x1e/Users/justinfan/\x2epyenv/bin\x1e/Users/justinfan/\x2epoetry/bin\x1e/opt/homebrew/opt/fzf/bin
+SETUVAR fish_user_paths:/opt/homebrew/opt/libpq/bin\x1e/opt/homebrew/opt/postgresql\x4016/bin\x1e/opt/homebrew/bin\x1e/Users/justinfan/\x2epyenv/bin\x1e/Users/justinfan/\x2epoetry/bin\x1e/opt/homebrew/opt/fzf/bin
 SETUVAR nvm_data:/Users/justinfan/\x2elocal/share/nvm
 SETUVAR nvm_default_version:v19\x2e7\x2e0
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

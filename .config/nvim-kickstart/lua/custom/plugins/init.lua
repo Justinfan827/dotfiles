@@ -180,7 +180,7 @@ return {
     priority = 1000,
     config = function()
       vim.g.gruvbox_material_transparent_background = 2
-      -- vim.cmd.colorscheme 'gruvbox-material'
+      vim.cmd.colorscheme 'gruvbox-material'
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
@@ -195,7 +195,7 @@ return {
     },
     init = function()
       -- Load the colorscheme here.
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      -- vim.cmd.colorscheme 'catppuccin-mocha'
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,

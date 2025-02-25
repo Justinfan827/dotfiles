@@ -703,6 +703,25 @@ require('lazy').setup({
         tailwindcss = {},
         ts_ls = {},
         gopls = {},
+        pylsp = {
+          settings = {
+
+            pylsp = {
+              plugins = {
+                pycodestyle = {
+                  ignore = { 'W391' },
+                  maxLineLength = 100,
+                },
+                autopep8 = {
+                  enabled = false,
+                },
+                yapf = {
+                  enabled = false, -- let conform do the formatting
+                },
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -787,7 +806,9 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        python = {
+          'yapf',
+        },
         javascript = { 'prettierd' },
         yaml = { 'prettierd' },
         go = { 'gopls' },
