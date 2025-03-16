@@ -592,7 +592,7 @@ require('lazy').setup({
             troubleJump('prev', 'lsp_references')
           end, 'Previous [r]eference')
 
-          map('gr', '<cmd>Trouble lsp_references toggle auto_refresh=false<CR>', '[G]oto [R]eferences (trouble.nvim)')
+          map('gr', '<cmd>Trouble lsp_references toggle auto_refresh=false auto_jump=true<CR>', '[G]oto [R]eferences (trouble.nvim)')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -701,7 +701,14 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         tailwindcss = {},
-        ts_ls = {},
+        ts_ls = {
+          root_dir = require('lspconfig').util.root_pattern { 'package.json', 'tsconfig.json' },
+          single_file_support = false,
+        },
+        denols = {
+          root_dir = require('lspconfig').util.root_pattern { 'deno.json', 'deno.jsonc' },
+          single_file_support = false,
+        },
         gopls = {},
         pylsp = {
           settings = {
@@ -943,7 +950,7 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  -- { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -991,9 +998,23 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
+  {
+    'sainnhe/gruvbox-material',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.g.gruvbox_material_transparent_background = 2
+      vim.cmd.colorscheme 'gruvbox-material'
+      -- You can configure highlights by doing something like:
+      -- vim.cmd.hi 'Comment gui=none'
+    end,
+  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    -- DO NOT REMOVE THIS LINE
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
@@ -1064,7 +1085,7 @@ require('lazy').setup({
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
 
-  install = { colorscheme = { 'catpuccin-mocha' } },
+  install = { colorscheme = { 'gruvbox-material' } },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table

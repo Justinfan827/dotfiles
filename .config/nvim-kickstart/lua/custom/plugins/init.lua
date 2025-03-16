@@ -18,40 +18,10 @@ return {
   -- typescript plugins
   require 'custom.plugins.webdev',
   require 'custom.plugins.golang',
-  -- ehhh this is not the best
-  -- {
-  --   'folke/noice.nvim',
-  --   event = 'VeryLazy',
-  --   opts = {
-  --     -- add any options here
-  --   },
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     'MunifTanjim/nui.nvim',
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     -- 'rcarriga/nvim-notify',
-  --   },
-  -- },
-  -- {
-  --   'rcarriga/nvim-notify',
-  --   filter = {
-  --     event = 'msg_show',
-  --     any = {
-  --       { find = '%d+L, %d+B' },
-  --       { find = '; after #%d+' },
-  --       { find = '; before #%d+' },
-  --       { find = '%d fewer lines' },
-  --       { find = '%d more lines' },
-  --     },
-  --   },
-  --   opts = {
-  --     skip = true,
-  --     background_colour = '#000000',
-  --   },
-  -- },
-  'ruanyl/vim-gh-line', -- link to git repo
+
+  -- link to git repo
+  'ruanyl/vim-gh-line',
+
   {
     'junegunn/fzf.vim', -- fzf
     config = function()
@@ -182,22 +152,19 @@ return {
       vim.g.gruvbox_material_transparent_background = 2
       vim.cmd.colorscheme 'gruvbox-material'
       -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
-  -- colorscheme for transparent background
+  -- commenting
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
+    'numToStr/Comment.nvim',
     opts = {
-      transparent_background = true,
+      -- add any options here
     },
-    init = function()
-      -- Load the colorscheme here.
-      -- vim.cmd.colorscheme 'catppuccin-mocha'
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+    config = function()
+      require('Comment').setup {
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      }
     end,
   },
 }
