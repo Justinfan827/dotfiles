@@ -6,22 +6,150 @@
 vim.o.wrap = false
 -- auto-session requirement for highlighting
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
--- open repo in browser
-vim.g.gh_line_map = '<leader>bg'
 -- fzf history
 vim.g.fzf_history_dir = '~/.local/share/fzf-history'
 
+-- open repo in browser
+vim.g.gh_line_map = '<leader>bg'
+-- blame line
+vim.g.gh_line_blame_map = ',<leader>bg'
+
 -- require my custom mappings
 require 'custom.mappings'
+require 'custom.plugins.webdev'
+require 'custom.plugins.golang'
+
+--
+-- auto import go packages
+--
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.go' },
+  callback = function()
+    local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding(0))
+    params.context = { only = { 'source.organizeImports' } }
+
+    local result = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', params, 3000)
+    for _, res in pairs(result or {}) do
+      for _, r in pairs(res.result or {}) do
+        if r.edit then
+          vim.lsp.util.apply_workspace_edit(r.edit, vim.lsp.util._get_offset_encoding(0))
+        else
+          vim.lsp.buf.execute_command(r.command)
+        end
+      end
+    end
+  end,
+})
+
+--
+-- https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+-- set spacing / indents for go projects
+--
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
+  callback = function()
+    -- idk why this is needed but it is.
+    vim.cmd 'TSBufEnable highlight'
+    -- Insert mode: Add fmt.Println() and place cursor inside parentheses
+    vim.keymap.set('i', 'fpp', 'fmt.Println()<Esc>==f(a', { desc = 'Insert fmt.Println() with cursor inside parentheses' })
+
+    -- Insert mode: Add fmt.Println("") and place cursor inside quotes
+    vim.keymap.set('i', 'fpq', 'fmt.Println("")<Esc>==f"a', { desc = 'Insert fmt.Println("") with cursor inside quotes' })
+
+    -- Visual mode: Console log selection on next line, placing selection inside parentheses
+    vim.keymap.set('v', 'fpp', 'yofpp<Esc>p', { desc = 'Console log visual selection on next line' })
+
+    -- Normal mode: Console log on next line with "LOGGING" and word under cursor
+    vim.keymap.set('n', 'fpp', '"ayiwofmt.Println("LOGGING", <C-R>a)<Esc>', { desc = 'Console log word under cursor on next line' })
+
+    -- Insert mode: Add fmt.Printf("\\n\\n\\n") and place cursor inside parentheses
+    vim.keymap.set('i', 'fpn', 'fmt.Printf("\\n\\n\\n")<Esc>==f(a', { desc = 'Insert fmt.Printf("\\n\\n\\n") with cursor inside parentheses' })
+  end,
+  desc = 'Set tabstop, softtabstop, shiftwidth for go development',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'gomod',
+  callback = function()
+    -- idk why this is needed but it is.
+    vim.cmd 'TSBufEnable highlight'
+  end,
+  desc = 'enable treesitter highlighting for gomod files',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'javascript,javascriptreact,typescript,typescriptreact,css,md',
+  callback = function()
+    -- JSON.stringify from insert mode; Puts focus inside parentheses
+    vim.keymap.set('i', 'clj', 'console.log(JSON.stringify(,null, 2))<Esc>==f,i')
+    -- JSON.stringify from visual mode on next line, puts visual selection inside parentheses
+    vim.keymap.set('v', 'clj', 'yocll<Esc>p')
+    -- JSON.stringify from normal mode, inserted on next line with word under cursor inside parentheses
+    vim.keymap.set('n', 'clj', 'yiwoclj<Esc>p')
+    -- Console log from insert mode; Puts focus inside parentheses
+    vim.keymap.set('i', 'cll', 'console.log({});<Esc>==f{a')
+    -- Console log from visual mode on next line, puts visual selection inside parentheses
+    vim.keymap.set('v', 'cll', "\"ayoconsole.log('<C-R>a:', <C-R>a);<Esc>")
+    -- Console log from normal mode, inserted on next line with word under cursor inside parentheses
+    vim.keymap.set('n', "cl'", "\"ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>")
+    vim.keymap.set('n', 'cll', '"ayiwoconsole.log({<C-R>a});<Esc>')
+    -- Add new line in insert and normal mode
+    vim.keymap.set('i', 'cln', "console.log('\\n\\n\\n');<Esc>")
+  end,
+  desc = 'Set tabstop, softtabstop, shiftwidth for node development',
+})
 
 return {
   -- typescript plugins
   require 'custom.plugins.webdev',
   require 'custom.plugins.golang',
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local harpoon = require 'harpoon'
 
-  -- link to git repo
-  'ruanyl/vim-gh-line',
+      harpoon:setup()
 
+      vim.keymap.set('n', '<leader>a', function()
+        harpoon:list():add()
+      end, { desc = "Add current file to Harpoon's list" })
+      vim.keymap.set('n', '<C-e>', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = 'Toggle Harpoon list' })
+
+      vim.keymap.set('n', '<leader>1', function()
+        harpoon:list():select(1)
+      end, { desc = 'Select Harpoon list item 1' })
+      vim.keymap.set('n', '<leader>2', function()
+        harpoon:list():select(2)
+      end, { desc = 'Select Harpoon list item 2' })
+      vim.keymap.set('n', '<leader>3', function()
+        harpoon:list():select(3)
+      end, { desc = 'Select Harpoon list item 3' })
+      vim.keymap.set('n', '<leader>4', function()
+        harpoon:list():select(4)
+      end, { desc = 'Select Harpoon list item 4' })
+
+      -- -- Toggle previous & next buffers stored within Harpoon list
+      -- vim.keymap.set('n', '<C-S-P>', function()
+      --   harpoon:list():prev()
+      -- end)
+      -- vim.keymap.set('n', '<C-S-N>', function()
+      --   harpoon:list():next()
+      -- end)
+    end,
+  },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    opt = {
+      enable_autocmd = false,
+    },
+  },
+  {
+    'ruanyl/vim-gh-line', -- link to git repo
+  },
   {
     'junegunn/fzf.vim', -- fzf
     config = function()

@@ -1,4 +1,5 @@
 -- core QOL improvements
+vim.keymap.set('v', '<leader>p', '"_dP', { silent = true, desc = '[P]aste without replacing register' })
 vim.keymap.set('n', ';', ':', { desc = 'Remap : to ;' })
 vim.keymap.set('n', '<CR>', 'G', { desc = 'Jump to line number with 123<CR>' })
 vim.keymap.set({ 'n', 'v' }, 'H', '^', { desc = 'Move to the start of the line' })

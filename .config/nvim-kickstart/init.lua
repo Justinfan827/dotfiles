@@ -404,17 +404,39 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+        --   -- mappings = {
+        --   --   i = {
+        --   --     -- ['<c-enter>'] = 'to_fuzzy_refine',
+        --   --     ['<C-Down>'] = actions.cycle_history_next,
+        --   --     ['<C-Up>'] = actions.cycle_history_prev,
+        --   --   },
+        --   -- },
+        --   vimgrep_arguments = {
+        --     'ag',
+        --     '--nocolor',
+        --     '--noheading',
+        --     '--numbers',
+        --     '--column',
+        --     '--smart-case',
+        --     '--silent',
+        --     '--vimgrep',
         --   },
         -- },
         -- pickers = {}
         extensions = {
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+          },
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
@@ -596,7 +618,8 @@ require('lazy').setup({
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          -- map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('gi', '<cmd>Trouble lsp_implementations toggle<CR>', '[G]oto [i]mplementation (Trouble.nvim)')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
@@ -824,6 +847,7 @@ require('lazy').setup({
         css = { 'prettierd' },
         sql = { 'pg_format' },
         json = { 'prettierd' },
+        terraform = { 'terraform_fmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -950,7 +974,7 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  -- { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -1013,13 +1037,14 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    -- DO NOT REMOVE THIS LINE
+    -- DO NOT REMOVE THIS LINE. BREAKS TREESITTER
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = {
+        'mdx',
         'bash',
+        'gomod',
         'c',
         'diff',
         'html',
@@ -1047,8 +1072,40 @@ require('lazy').setup({
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = false, disable = { 'ruby' } },
     },
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        textobjects = {
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<leader>a'] = '@parameter.inner',
+            },
+            swap_previous = {
+              ['<leader>A'] = '@parameter.inner',
+            },
+          },
+          select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['ap'] = '@parameter.outer',
+              ['ip'] = '@parameter.inner',
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@call.outer',
+              ['ic'] = '@call.inner',
+              ['as'] = '@statement.outer',
+              ['iv'] = '@variable',
+              ['av'] = '@variable',
+            },
+          },
+        },
+      }
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
@@ -1084,7 +1141,6 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
-
   install = { colorscheme = { 'gruvbox-material' } },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
