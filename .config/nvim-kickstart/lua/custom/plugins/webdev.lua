@@ -30,6 +30,18 @@ vim.api.nvim_create_autocmd('FileType', {
   desc = 'Set key mappings for Node development',
 })
 
+--
+-- https://phelipetls.github.io/posts/mdx-syntax-highlight-treesitter-nvim/
+-- support mdx
+--
+vim.filetype.add {
+  extension = {
+    mdx = 'mdx',
+  },
+}
+-- local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+-- ft_to_parser.mdx = 'markdown'
+
 return {
   { 'dmmulroy/ts-error-translator.nvim' },
   {

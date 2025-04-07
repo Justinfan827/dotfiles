@@ -156,6 +156,7 @@ alias ti 'AWS_PROFILE=jfan-indie terraform'
 alias tprod 'AWS_PROFILE=ansa-prod terraform'
 alias tstaging 'AWS_PROFILE=ansa-dev terraform'
 alias tappwest 'AWS_PROFILE=app-prod-west terraform'
+alias tappeast 'AWS_PROFILE=app-prod-east terraform'
 # leverage vim auto sessions by cding to project root first 
 alias vmon 'to gomono && vim'
 alias vin 'to in && vim'
@@ -326,19 +327,18 @@ if [ -f '/Users/justinfan/Documents/code-workbench/google-cloud-sdk/path.fish.in
 #
 # Ansa specific configs
 #
-#
 function gaj -d "checkout a new branch for jfan dev work"
   git checkout -b jfan/ANSA-$argv
 end
 
-function sa -d "sources ~/code/ANSA/ansa-platform/env.sh"
+function sa -d "sources ~/Developer/ansa-code/ansa-platform/env.sh"
   nvm use v14.17.0
-  bass source ~/code/ANSA/ansa-platform/env.sh
+  bass source ~/Developer/ansa-code/ansa-platform/env.sh
 end
 
-function si -d "sources ~/code/ANSA/ansa-platform/env.sh"
+function si -d "sources ~/Developer/ansa-code/ansa-platform/env.sh"
   nvm use latest
-  bass source ~/code/ANSA/ansa-platform/env.sh
+  bass source ~/Developer/ansa-code/ansa-platform/env.sh
 end
 
 function vj -d "open vim temp file"
@@ -350,25 +350,25 @@ end
 
 function runAnsaEventHandler -d "runs ansa event handler"
   sa
-  cd ~/code/ANSA/ansa-platform
+  cd ~/Developer/ansa-code/ansa-platform
   go run ansa-server/entrypoints/event_handler/event_handler.go $argv --port=8081
 end
 
 function ras -d "runs ansa server"
   sa
-  cd ~/code/ANSA/ansa-platform
+  cd ~/Developer/ansa-code/ansa-platform
   go run ansa-server/entrypoints/ansa_server.go $argv --port=8087
 end
 
 function rap -d "runs ansa portal"
-  cd ~/code/ANSA/ansa-portal
+  cd /Users/justinfan/Developer/ansa-code/ansa-portal
   nvm use 
   yarn dev
 end
 
 function runWatchAnsaServer -d "runs ansa server"
   sa
-  cd ~/code/ANSA/ansa-platform
+  cd /Users/justinfan/Developer/ansa-code/ansa-platform
   watchexec -e go -c -r -s SIGKILL 'go run ansa-server/entrypoints/ansa_server.go --port=8080'
 end
 
