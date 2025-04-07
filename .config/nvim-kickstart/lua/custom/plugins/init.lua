@@ -119,23 +119,23 @@ return {
   {
     'github/copilot.vim',
   },
-  {
-    'rmagatti/auto-session',
-    lazy = false,
-    ---enables autocomplete for opts
-    ---@module "auto-session"
-    ---@type AutoSession.Config
-    opts = {
-      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      -- log_level = 'debug',
-    },
-    keys = {
-      -- Will use Telescope if installed or a vim.ui.select picker otherwise
-      { '<leader>ls', '<cmd>SessionSearch<CR>', desc = 'Session search' },
-      { '<leader>ll', '<cmd>SessionSave<CR>', desc = 'Save session' },
-      -- { '<leader>la', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
-    },
-  },
+  -- {
+  --   'rmagatti/auto-session',
+  --   lazy = false,
+  --   ---enables autocomplete for opts
+  --   ---@module "auto-session"
+  --   ---@type AutoSession.Config
+  --   opts = {
+  --     suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+  --     -- log_level = 'debug',
+  --   },
+  --   keys = {
+  --     -- Will use Telescope if installed or a vim.ui.select picker otherwise
+  --     { '<leader>ls', '<cmd>SessionSearch<CR>', desc = 'Session search' },
+  --     { '<leader>ll', '<cmd>SessionSave<CR>', desc = 'Save session' },
+  --     -- { '<leader>la', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
+  --   },
+  -- },
   {
     'Wansmer/treesj',
     dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
