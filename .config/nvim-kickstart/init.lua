@@ -732,7 +732,13 @@ require('lazy').setup({
           root_dir = require('lspconfig').util.root_pattern { 'deno.json', 'deno.jsonc' },
           single_file_support = false,
         },
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              buildFlags = { '-tags=integration,tools' },
+            },
+          },
+        },
         pylsp = {
           settings = {
 
@@ -817,12 +823,12 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = { c = true, cpp = true, sql = true }
         local lsp_format_opt
         if disable_filetypes[vim.bo[bufnr].filetype] then
           lsp_format_opt = 'never'
@@ -840,7 +846,7 @@ require('lazy').setup({
           'yapf',
         },
         javascript = { 'prettierd' },
-        yaml = { 'prettierd' },
+        -- yaml = { 'prettierd' },
         go = { 'gopls' },
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
@@ -877,12 +883,13 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+              require('luasnip.loaders.from_vscode').lazy_load { paths = { './custom-snippets' } }
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -1080,10 +1087,10 @@ require('lazy').setup({
           swap = {
             enable = true,
             swap_next = {
-              -- ['<leader>a'] = '@parameter.inner',
+              ['<leader>ta'] = '@parameter.inner',
             },
             swap_previous = {
-              -- ['<leader>A'] = '@parameter.inner',
+              ['<leader>tA'] = '@parameter.inner',
             },
           },
           select = {

@@ -1,0 +1,89 @@
+{
+  "window.commandCenter": true,
+  "workbench.iconTheme": "gruvbox-material-icon-theme",
+  "vim.useSystemClipboard": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["k", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [";"],
+      "after": [":"]
+    },
+    {
+      "before": ["H"],
+      "after": ["^"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.nextInFiles"],
+      "silent": true
+    },
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.prevInFiles"],
+      "silent": true
+    }
+  ],
+  "editor.cursorBlinking": "solid",
+  "editor.lineNumbers": "relative",
+  "editor.fontFamily": "Geist Mono",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // https://github.com/getcursor/cursor/issues/1570
+  "workbench.activityBar.orientation": "vertical",
+  "go.toolsManagement.autoUpdate": true,
+  // I use "goimports" instead of "gofmt"
+  // because it does the same thing but also formats imports
+  "go.formatTool": "goimports",
+  // go-specific settings
+  "gopls": {
+    "ui.semanticTokens": false,
+    "build.buildFlags": ["-tags=integration"]
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  },
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    },
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[go.mod]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
+  // Open in github!
+  "openInGitHub.github.protocol": "https", // Custom URL protocol
+  "openInGitHub.github.domain": "github.com", // Custom GitHub domain
+  "openInGitHub.remote.name": "origin", // Name of the remote repository
+  "openInGitHub.remote.branch": "main", // Name of the remote branch
+  "openInGitHub.useLocalDomain": true, // Use the local domain instead of the fixed github domain
+  "openInGitHub.useLocalBranch": true, // Use the local branch instead of the fixed remote branch
+  "openInGitHub.useLocalRange": true, // Highlight the local selection range, if there's one
+  "openInGitHub.useLocalLine": false,
+  "gruvboxMaterial.italicKeywords": true,
+  "files.autoSave": "afterDelay",
+  "workbench.colorCustomizations": {},
+  "terminal.integrated.gpuAcceleration": "off",
+  "window.systemColorTheme": "dark",
+  "window.autoDetectColorScheme": false,
+  "window.titleBarStyle": "custom",
+  "workbench.colorTheme": "Gruvbox Material Dark" // Highlight the local line if there's no selection range
+}

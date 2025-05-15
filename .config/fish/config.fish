@@ -144,6 +144,7 @@ alias vikg 'NVIM_APPNAME=nvim-kickstart nvim ~/.gitconfig'
 alias vikf 'NVIM_APPNAME=nvim-kickstart nvim ~/.config/fish/config.fish'
 alias vikk 'NVIM_APPNAME=nvim-kickstart nvim ~/.config/kitty/kitty.conf'
 alias vaws 'vim ~/.aws/config'
+alias awsprod 'AWS_PROFILE=ansa-prod aws'
 alias viml 'cd ~/.config/nvim && vim'
 alias vimt 'vim ~/.tmux.conf'
 alias vimg 'vim ~/.gitconfig'
@@ -155,8 +156,8 @@ alias tf 'terraform'
 alias ti 'AWS_PROFILE=jfan-indie terraform'
 alias tprod 'AWS_PROFILE=ansa-prod terraform'
 alias tstaging 'AWS_PROFILE=ansa-dev terraform'
-alias tappwest 'AWS_PROFILE=app-prod-west terraform'
-alias tappeast 'AWS_PROFILE=app-prod-east terraform'
+alias tappwest 'AWS_PROFILE=app-west terraform'
+alias tappeast 'AWS_PROFILE=app-east terraform'
 # leverage vim auto sessions by cding to project root first 
 alias vmon 'to gomono && vim'
 alias vin 'to in && vim'
@@ -228,11 +229,10 @@ function vv -d "open nvim with fzf"
     env NVIM_APPNAME=(basename $config) nvim $argv
 end
 
-function gsnag -d "snag a file from another branch"
-
+function gsnag -d "snag from another branch"
   # first arg is the branch name.
   # 2nd arg is the file name
-  git show $argv[1]:$argv[2] > $argv[2]
+  git checkout $argv[1] -- $argv[2]
 end
 
 function ghu
@@ -374,7 +374,7 @@ end
 
 function rai -d "runs ansa api tests"
   sa
-  INTEGRATION=true go test -v -timeout 15m ./ansa-server/restapi/apitests/... -run="$argv[1]"
+  go test -v --tags=integration -timeout 15m ./ansa-server/restapi/apitests/... -run="$argv[1]"
 end
 
 #!/usr/bin/env fish
