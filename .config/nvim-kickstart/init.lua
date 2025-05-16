@@ -1041,17 +1041,15 @@ require('lazy').setup({
       -- vim.cmd.hi 'Comment gui=none'
     end,
   },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    -- DO NOT REMOVE THIS LINE. BREAKS TREESITTER
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = {
-        'mdx',
         'bash',
-        'gomod',
         'c',
         'diff',
         'html',
@@ -1062,9 +1060,12 @@ require('lazy').setup({
         'query',
         'vim',
         'vimdoc',
-        'hurl',
         'typescript',
         'tsx',
+        -- Additional languages from the old config
+        -- 'mdx',
+        'gomod',
+        'hurl',
         'css',
         'javascript',
         'terraform',
@@ -1079,40 +1080,37 @@ require('lazy').setup({
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = false, disable = { 'ruby' } },
-    },
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        textobjects = {
-          swap = {
-            enable = true,
-            swap_next = {
-              ['<leader>ta'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['<leader>tA'] = '@parameter.inner',
-            },
+      indent = { enable = true, disable = { 'ruby' } },
+      -- Add textobjects configuration from the old config
+      textobjects = {
+        swap = {
+          enable = true,
+          swap_next = {
+            ['<leader>ta'] = '@parameter.inner',
           },
-          select = {
-            enable = true,
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['ap'] = '@parameter.outer',
-              ['ip'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@call.outer',
-              ['ic'] = '@call.inner',
-              ['as'] = '@statement.outer',
-              ['iv'] = '@variable',
-              ['av'] = '@variable',
-            },
+          swap_previous = {
+            ['<leader>tA'] = '@parameter.inner',
           },
         },
-      }
-    end,
+        select = {
+          enable = true,
+          -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = true,
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['ap'] = '@parameter.outer',
+            ['ip'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@call.outer',
+            ['ic'] = '@call.inner',
+            ['as'] = '@statement.outer',
+            ['iv'] = '@variable',
+            ['av'] = '@variable',
+          },
+        },
+      },
+    },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
