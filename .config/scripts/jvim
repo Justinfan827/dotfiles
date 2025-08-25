@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+
+show_help() {
+    cat <<'EOF'
+jvim - Fuzzy select NVIM config and launch
+Usage:
+  jvim [nvim args...]
+Options:
+  --help      Show this help message
+Example:
+  my-nvim.sh foo.txt
+EOF
+    exit 0
+}
+
+# ---------- Parse arguments ----------
+if [[ "$1" == "--help" ]]; then
+    show_help
+fi
+
+# ---------- Parse arguments ----------
+if [[ "$1" == "--help" ]]; then
+    show_help
+fi
+
+nvimappname=$(printf "%s\n" ~/.config/nvims/* | xargs -n1 basename | fzf --height 10)
+[ -z "$nvimappname" ] && exit 1
+NVIM_APPNAME=$nvimappname nvim "$@"
+

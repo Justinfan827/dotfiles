@@ -31,3 +31,5 @@ vim.keymap.set('n', '<Leader>gb', '<cmd>Git blame<CR>', { desc = 'Git blame' })
 vim.keymap.set('n', '-', '<CMD>Oil --float<CR>', { desc = 'Open Oil file explorer' })
 vim.keymap.set('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = 'Disable CoPilot' })
 vim.keymap.set('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = 'Enable CoPilot' })
+
+vim.keymap.set('n', '<leader>rf', '<cmd>luafile %<CR>', { desc = '[R]run current file' })

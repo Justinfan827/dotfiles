@@ -1,5 +1,4 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
+-- You can add your own plugins here or in other files in this directory! I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
 
@@ -102,10 +101,25 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 return {
+  -- custom plugins i'm developping locally
+  require 'custom.plugins.dev',
   -- typescript plugins
   require 'custom.plugins.webdev',
   require 'custom.plugins.golang',
-
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+  { -- mdx support
+    'davidmh/mdx.nvim',
+    config = true,
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
   -- center buffers
   {
     {
@@ -268,9 +282,9 @@ return {
     -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     lazy = false,
   },
-  {
-    'github/copilot.vim',
-  },
+  -- {
+  --   'github/copilot.vim',
+  -- },
   -- {
   --   'rmagatti/auto-session',
   --   lazy = false,
