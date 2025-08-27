@@ -27,6 +27,14 @@ return {
     },
     routes = {
       {
+        filter = { event = 'msg_show', kind = 'list_cmd' },
+        view = 'messages',
+      },
+      {
+        filter = { event = 'msg_show', kind = 'lua_print' },
+        view = 'messages',
+      },
+      {
         filter = {
           event = 'msg_show',
           kind = 'search_count',
