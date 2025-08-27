@@ -1,20 +1,26 @@
+-- [[ Auto Commands ]]
+-- Helper functions for creating autogroups and autocommands
 local augroup = function(name)
-  vim.api.nvim_create_augroup(name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 local autocmd = vim.api.nvim_create_autocmd
 
+-- [[ Highlight on Yank ]]
+-- Briefly highlight copied text
 autocmd('TextYankPost', {
-  desc = 'highlight on yank',
+  desc = 'Highlight on yank',
+  group = augroup 'yank_highlight',
+  pattern = '*',
   callback = function()
     vim.hl.on_yank()
   end,
-  group = augroup 'yank_highlight',
-  pattern = '*',
 })
 
+-- [[ Close Special Buffers with q ]]
+-- Allow quick closing of special buffer types
 autocmd('FileType', {
-  desc = 'close some filetypes with <q>',
+  desc = 'Close some filetypes with <q>',
   group = augroup 'close_with_q',
   pattern = {
     'OverseerForm',
@@ -36,15 +42,59 @@ autocmd('FileType', {
   },
   callback = function(e)
     vim.bo[e.buf].buflisted = false
-    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = e.buf, silent = true, desc = 'Close buffer' })
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', {
+      buffer = e.buf,
+      silent = true,
+      desc = 'Close buffer',
+    })
   end,
 })
 
---
+-- [[ Auto Format Options ]]
+-- Prevent automatic comment insertion on new lines
 autocmd('BufWinEnter', {
-  desc = 'avoid auto insert comment on newline',
+  desc = 'Avoid auto insert comment on newline',
   group = augroup 'auto_format_options',
   callback = function()
     vim.cmd 'set formatoptions-=cro'
   end,
+})
+
+-- [[ Go File Auto Import ]]
+-- Automatically organize imports when saving Go files
+autocmd('BufWritePre', {
+  desc = 'Auto import and organize Go packages',
+  group = augroup 'go_imports',
+  pattern = '*.go',
+  callback = function()
+    -- Use modern LSP API to organize imports
+    vim.lsp.buf.code_action {
+      context = { only = { 'source.organizeImports' } },
+      apply = true,
+    }
+  end,
+})
+
+-- [[ Language-specific Treesitter ]]
+-- Enable treesitter highlighting for specific file types
+autocmd('FileType', {
+  desc = 'Enable treesitter highlighting for Go files',
+  group = augroup 'treesitter_go',
+  pattern = { 'go', 'gomod' },
+  callback = function()
+    vim.cmd 'TSBufEnable highlight'
+  end,
+})
+
+autocmd('CmdlineEnter', {
+  desc = 'enable hlsearch when entering cmdline',
+  pattern = '/,?',
+  group = augroup 'auto_hlsearch',
+  command = 'set hlsearch',
+})
+autocmd('CmdlineLeave', {
+  desc = 'disable hlsearch when leaving cmdline',
+  pattern = '/,?',
+  group = augroup 'auto_hlsearch',
+  command = 'set nohlsearch',
 })

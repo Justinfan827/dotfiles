@@ -13,7 +13,11 @@ vim.opt.signcolumn = 'yes' -- Always show sign column
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.showmode = false -- Don't show mode (status line shows it)
 vim.opt.list = true -- Show whitespace characters
-vim.g.indentline_char = '' -- Character for indent guides
+vim.opt.wrap = false -- Don't wrap lines
+vim.opt.laststatus = 3 -- Global statusline (required for some plugins)
+
+-- Whitespace character configuration
+vim.g.indentline_char = ''
 vim.o.listchars = 'trail:•,extends:#,nbsp:.,precedes:❮,extends:❯,tab:│ ,leadmultispace:' .. vim.g.indentline_char .. '  '
 
 -- [[ Editor Behavior ]]
@@ -39,3 +43,15 @@ vim.opt.timeoutlen = 300 -- Time to wait for mapped sequence
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus' -- Sync with system clipboard
 end)
+
+-- [[ Session Options ]]
+-- Required for auto-session and proper state restoration
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
+-- [[ Plugin-specific Options ]]
+-- FZF history directory
+vim.g.fzf_history_dir = '~/.local/share/fzf-history'
+
+-- vim-gh-line plugin keybindings
+vim.g.gh_line_map = '<leader>bg' -- Open repo in browser
+vim.g.gh_line_blame_map = ',<leader>bg' -- Blame line
