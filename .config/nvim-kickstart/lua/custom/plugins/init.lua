@@ -15,8 +15,6 @@ vim.g.gh_line_map = '<leader>bg'
 -- blame line
 vim.g.gh_line_blame_map = ',<leader>bg'
 
--- require my custom mappings
-require 'custom.mappings'
 require 'custom.plugins.webdev'
 require 'custom.plugins.golang'
 

@@ -1,9 +1,0 @@
-{
-"executionEnvironments": [
-    {
-      "root": "fabfile",
-      "pythonVersion": "3.8.13",
-      "extraPaths": [ ]
-    },
-    "venvPath": "~/repo/git.blendlabs.com/blend/lending/venv-py3"
-}

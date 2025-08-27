@@ -35,6 +35,10 @@ map('n', 's*', ":let @/'\\<'.expand('<cword>').'\\>'<CR>cgn", { desc = 'Replace 
 map('x', 's*', 'sy:let @/=@s<CR>cgn', { desc = 'Replace selection and repeat' })
 map('n', '<C-s>', "<cmd>lua require('treesj').toggle()<CR>", { silent = true, desc = 'Toggle split/join' })
 
+-- Move only sideways in command mode. Using `silent = false` makes movements to be immediately shown.
+map('c', '<M-h>', '<Left>', { silent = false, desc = 'Left' })
+map('c', '<M-l>', '<Right>', { silent = false, desc = 'Right' })
+
 -- [[ Diagnostics ]]
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic quickfix' })
 
