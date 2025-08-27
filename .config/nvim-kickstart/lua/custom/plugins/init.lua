@@ -90,10 +90,10 @@ vim.api.nvim_create_autocmd('FileType', {
     -- Console log from insert mode; Puts focus inside parentheses
     vim.keymap.set('i', 'cll', 'console.log({});<Esc>==f{a')
     -- Console log from visual mode on next line, puts visual selection inside parentheses
-    vim.keymap.set('v', 'cll', "\"ayoconsole.log('<C-R>a:', <C-R>a);<Esc>")
     -- Console log from normal mode, inserted on next line with word under cursor inside parentheses
     vim.keymap.set('n', "cl'", "\"ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>")
     vim.keymap.set('n', 'cll', '"ayiwoconsole.log({<C-R>a});<Esc>')
+    vim.keymap.set('v', 'clp', "\"ayoconsole.log('<C-R>a:', <C-R>a);<Esc>")
     -- Add new line in insert and normal mode
     vim.keymap.set('i', 'cln', "console.log('\\n\\n\\n');<Esc>")
   end,
@@ -179,6 +179,10 @@ return {
       --
     end,
   },
+  { -- custom status line
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
     opt = {
@@ -194,6 +198,48 @@ return {
       vim.keymap.set('n', ',/', '<cmd>Ag!<CR>', { desc = 'live grep' })
       vim.keymap.set('n', ',ag', '<cmd>Ag! <C-R><C-W><CR>', { silent = true, desc = 'Search for word under cursor' })
     end,
+  },
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+      routes = {
+        {
+          filter = {
+            event = 'msg_show',
+            kind = '',
+            find = '',
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = 'msg_show',
+            kind = 'search_count',
+          },
+          opts = { skip = true },
+        },
+      },
+      cmdline = {
+        format = {
+          search_down = {
+            view = 'cmdline',
+          },
+          search_up = {
+            view = 'cmdline',
+          },
+        },
+      },
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      'MunifTanjim/nui.nvim',
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      -- 'rcarriga/nvim-notify',
+    },
   },
   {
     -- Fzf for vim: fuzzy search (ESSENTIAL)
