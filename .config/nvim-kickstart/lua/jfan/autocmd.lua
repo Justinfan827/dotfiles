@@ -98,3 +98,11 @@ autocmd('CmdlineLeave', {
   group = augroup 'auto_hlsearch',
   command = 'set nohlsearch',
 })
+
+autocmd('ColorScheme', {
+  callback = function()
+    vim.api.nvim_set_hl(0, 'BlinkCmpMenu', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'BlinkCmpMenuBorder', { bg = 'NONE', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'BlinkCmpMenuSelection', { bg = 'NONE' })
+  end,
+})

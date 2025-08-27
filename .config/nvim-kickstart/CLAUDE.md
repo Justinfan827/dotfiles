@@ -4,91 +4,127 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a customized Neovim configuration based on kickstart.nvim. It's a single-file Neovim configuration that serves as a starting point for development across multiple languages including Go, TypeScript/JavaScript, Python, and Lua.
+This is a customized Neovim configuration based on kickstart.nvim, evolved into a highly modular and organized setup. It supports cross-platform development with primary focus on Go, TypeScript/JavaScript, Python, and Lua.
 
 ## Architecture
 
 ### Core Structure
-- `init.lua` - Main configuration file containing all plugin definitions and LSP setup
-- `lua/custom/` - Custom configurations and plugins
-  - `lua/custom/plugins/` - Custom plugin configurations organized by language/purpose
-  - `lua/custom/mappings.lua` - Custom keybindings and quality-of-life improvements
-  - `lua/custom/diagnostics.lua` - Custom diagnostic configurations
-- `lua/kickstart/` - Kickstart.nvim base plugins
-- `custom-snippets/` - Custom VSCode-style snippets for various languages
 
-### Plugin Management
-Uses Lazy.nvim as the plugin manager. All plugins are defined in `init.lua` with additional custom plugins loaded from `lua/custom/plugins/`.
+- `init.lua` - Main entry point that requires all jfan modules
+- `lua/jfan/` - Core configuration modules (options, keymaps, autocmds, diagnostics, health)
+- `lua/plugins/` - Modular plugin system where each plugin has its own file
+- `lua/plugins/registry.lua` - Central plugin registry using require statements
 
-### Language Support
-- **Go**: Uses `gopls` LSP server, `ray-x/go.nvim` plugin, and custom formatting/import organization
-- **TypeScript/JavaScript**: Uses `ts_ls` and `denols` (context-dependent), `biome` for formatting
-- **Python**: Uses `pylsp` with custom settings
-- **Lua**: Uses `lua_ls` with Neovim-specific configurations
+### Plugin Management Philosophy
+
+Uses a "require-based" approach where:
+
+- Each complex plugin has its own dedicated file in `lua/plugins/`
+- Each plugin file returns a complete plugin specification table
+- `registry.lua` imports all plugins via require statements
+- Simple plugins with minimal config remain inline in registry.lua
+- Language-specific configurations are in separate modules (`webdev.lua`, `golang.lua`)
+
+### Language Support Architecture
+
+- **Go**: Uses `gopls` LSP, `ray-x/go.nvim`, automatic import organization on save
+- **TypeScript/JavaScript**: Dual LSP setup - `ts_ls` for Node.js projects, `denols` for Deno projects
+- **Python**: Uses `pylsp` with custom settings and `yapf` formatting
+- **Lua**: Uses `lua_ls` with Neovim-specific configurations and `stylua` formatting
 
 ## Common Development Commands
 
 ### Plugin Management
-- `:Lazy` - View plugin status and manage plugins
+
+- `:Lazy` - View and manage plugins
 - `:Lazy update` - Update all plugins
-- `:Mason` - Manage LSP servers and tools
+- `:Mason` - Manage LSP servers, formatters, and linters
 
-### LSP and Diagnostics
-- `:checkhealth` - Check Neovim health and plugin status
-- `:LspInfo` - View LSP server information for current buffer
+### Health Checks
 
-### Language-Specific Tools
-- Go files automatically organize imports on save via LSP
-- Conform.nvim handles formatting on save for most file types
-- Custom snippets available for Go, Lua, and general use
+- `:checkhealth` - Check Neovim and plugin health
+- `:checkhealth jfan` - Custom health check for this configuration
+- `:LspInfo` - View LSP server status for current buffer
+
+### Configuration Debugging
+
+- `:Noice history` - View all recent messages with their event types and kinds
+- `:Telescope find_files cwd=~/.config/nvim-kickstart` - Search configuration files
+
+### Development Workflow
+
+- Use Harpoon (`<leader>a` to add, `<C-e>` to toggle menu) for quick file navigation
+- Oil file manager opens with `-` key in floating window
+- Trouble.nvim provides unified interface for diagnostics and LSP navigation
 
 ## Key Customizations
 
-### Custom Keybindings (from `lua/custom/mappings.lua`)
-- `kj` - Exit insert mode
-- `,w` - Quick save
-- `ss` / `sv` - Split windows horizontally/vertically
-- `-` - Open Oil file explorer in floating window
-- Various Git operations with `<leader>g` prefix
-- Language-specific shortcuts (e.g., `fpp` for Go `fmt.Println()`)
+### Modular Plugin System
 
-### Development Workflow Features
-- **Harpoon** for quick file navigation
-- **Telescope** for fuzzy finding with FZF integration
-- **Trouble.nvim** for diagnostics and LSP reference management
-- **Oil.nvim** as file manager
-- **Auto-session** capabilities (currently commented out)
-- **No-neck-pain** for centered editing experience
+Each plugin in `lua/plugins/` follows this pattern:
 
-### Formatting and Linting
-- Uses Conform.nvim for formatting with language-specific formatters:
-  - Go: `gopls`
-  - TypeScript/JavaScript: `biome-check`
-  - Python: `yapf`
-  - Lua: `stylua`
-  - Markdown: `prettierd`
+```lua
+return {
+  'plugin/name',
+  dependencies = { ... },
+  opts = { ... },
+  config = function() ... end,
+}
+```
 
-### Theme and UI
-- Uses `gruvbox-material` colorscheme with transparent background
-- Mini.nvim statusline with custom configuration
-- Barbecue winbar for VSCode-like breadcrumbs
-- Alpha.nvim start screen
+### Language-specific Integrations
 
-## Language-Specific Notes
+- Go files automatically organize imports on save via LSP
+- Custom keybindings for quick logging in Go (`fpp`, `fpq`) and JS/TS (`cll`, `clj`)
+- TypeScript/JavaScript projects use Biome for formatting and linting
+- Context-aware LSP server selection (ts_ls vs denols based on project files)
 
-### Go Development
-- Automatic import organization on save
-- Custom keybindings for `fmt.Println()` variations
-- Uses `ray-x/go.nvim` for enhanced Go tooling
-- Treesitter highlighting explicitly enabled for Go files
+### UI and UX Enhancements
 
-### TypeScript/JavaScript
-- Supports both Node.js projects (ts_ls) and Deno projects (denols) based on configuration files
-- Custom console.log shortcuts and JSON.stringify helpers
-- Biome for formatting and linting
+- Noice.nvim provides enhanced UI for messages, notifications, and cmdline
+- Gruvbox Material theme with transparent background
+- Global statusline configuration for better plugin compatibility
+- Custom diagnostic configurations with modern sign column styling
 
-### Python
-- Uses pylsp with custom settings (ignoring W391, 100 char line length)
-- YAPF for formatting
+### Development Tools Integration
 
-This configuration is designed for cross-platform development with a focus on Go and web technologies while maintaining the educational and readable nature of kickstart.nvim.
+- FZF integration for fuzzy searching (`fzf.vim` and native telescope-fzf)
+- Git integration via fugitive, gitsigns, and vim-gh-line for GitHub linking
+- Debug adapter protocol support via `nvim-dap`
+- Formatting on save via Conform.nvim with language-specific formatters
+
+## File Organization Patterns
+
+### Core Configuration Modules
+
+- `lua/jfan/options.lua` - All vim options organized by category
+- `lua/jfan/autocmd.lua` - Autocommands for editor behavior and file-specific actions
+- `lua/jfan/keymaps.lua` - Global keybindings
+- `lua/jfan/diagnostics.lua` - LSP diagnostic configuration
+
+### Plugin File Structure
+
+- One plugin per file for complex configurations (>10 lines)
+- Plugin files return complete lazy.nvim specifications
+- Simple plugins remain in `registry.lua` for easy management
+- Language-specific plugin groupings in dedicated files
+
+### Custom Configurations
+
+- Custom health checker in `lua/jfan/health.lua` verifies setup requirements
+- Silent Go import organization on save using modern LSP APIs
+- Noice routes configured to suppress common noise (search counts, empty messages)
+
+## External Dependencies
+
+### Required Tools
+
+- `git`, `make`, `unzip`, `rg` (ripgrep), `fzf`, `ag` (the_silver_searcher)
+- Language-specific: `gopls`, `node`/`npm`, `python3`, `lua-language-server`
+- Formatters: `stylua`, `yapf`, `biome`, `prettierd`
+
+### Optional but Recommended
+
+- Nerd Font for proper icon display (configured via `vim.g.have_nerd_font = true`)
+- System clipboard integration for cross-application copy/paste
+
