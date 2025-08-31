@@ -2,6 +2,11 @@ return {
   'folke/noice.nvim',
   event = 'VeryLazy',
   opts = {
+    lsp = {
+      signature = {
+        enabled = false,
+      },
+    },
     presets = {
       bottom_search = true, -- use a classic bottom cmdline for search
       command_palette = true, -- position the cmdline and popupmenu together
@@ -11,19 +16,19 @@ return {
         replace = true,
         merge = true,
       },
-      -- hover = {
-      --   border = {
-      --     style = 'rounded',
-      --   },
-      --   position = { row = 2, col = 2 },
-      --   win_options = {
-      --     winblend = 0,
-      --     winhighlight = {
-      --       Normal = 'TransparentNormal', -- Use our transparent group
-      --       FloatBorder = 'TransparentBorder', -- Use our transparent border group
-      --     },
-      --   },
-      -- },
+      hover = {
+        border = {
+          style = 'rounded',
+        },
+        position = { row = 2, col = 2 },
+        win_options = {
+          winblend = 0,
+          winhighlight = {
+            Normal = 'TransparentNormal', -- Use our transparent group
+            FloatBorder = 'TransparentBorder', -- Use our transparent border group
+          },
+        },
+      },
     },
     routes = {
       {

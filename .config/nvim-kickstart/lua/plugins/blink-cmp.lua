@@ -45,8 +45,10 @@ return { -- Autocompletion
       documentation = {
         auto_show = false,
         auto_show_delay_ms = 500,
-        winblend = 0,
-        winhighlight = 'Normal:TransparentNormal,FloatBorder:TransparentBorder,CursorLine:CursorLine,Search:None,BlinkCmpSource:TransparentNormal',
+        window = {
+          winblend = 0,
+          winhighlight = 'Normal:TransparentNormal,FloatBorder:TransparentBorder,CursorLine:CursorLine,Search:None,BlinkCmpSource:TransparentNormal',
+        },
       },
       menu = {
         border = 'rounded',
@@ -89,6 +91,6 @@ return { -- Autocompletion
     -- See :h blink-cmp-config-fuzzy for more information
     fuzzy = { implementation = 'lua' },
     -- Shows a signature help window while you type arguments for a function
-    signature = { enabled = true },
+    signature = { enabled = false },
   },
 }

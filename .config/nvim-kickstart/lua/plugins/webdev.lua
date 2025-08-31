@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', 'clj', 'yiwoclj<Esc>p')
     -- Console log from insert mode; Puts focus inside parentheses
     vim.keymap.set('i', 'cll', 'console.log({});<Esc>==f{a')
+    vim.keymap.set('i', 'clt', 'console.log();<Esc>==f(a')
     -- Console log from visual mode on next line, puts visual selection inside parentheses
     vim.keymap.set('v', 'cll', "\"ayoconsole.log('<C-R>a:', <C-R>a);<Esc>")
     -- Console log from normal mode, inserted on next line with word under cursor inside parentheses

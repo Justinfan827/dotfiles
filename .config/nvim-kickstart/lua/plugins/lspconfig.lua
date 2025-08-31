@@ -1,67 +1,56 @@
 return {
-  -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for Neovim
-    -- Mason must be loaded before its dependents so we need to set it up here.
-    -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
     { 'williamboman/mason.nvim', opts = {}, tag = 'v1.11.0' },
     {
       'williamboman/mason-lspconfig.nvim',
       tag = 'v1.32.0',
     },
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP. (currently using noice)
-    -- { 'j-hui/fidget.nvim', opts = {} },
-
-    -- Allows extra capabilities provided by blink.cmp
     'saghen/blink.cmp',
-    -- -- Allows extra capabilities provided by nvim-cmp
-    -- 'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
-    -- Brief aside: **What is LSP?**
-    --
-    -- LSP is an initialism you've probably heard, but might not understand what it is.
-    --
-    -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-    -- and language tooling communicate in a standardized fashion.
-    --
-    -- In general, you have a "server" which is some tool built to understand a particular
-    -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-    -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-    -- processes that communicate with some "client" - in this case, Neovim!
-    --
-    -- LSP provides Neovim with features like:
-    --  - Go to definition
-    --  - Find references
-    --  - Autocompletion
-    --  - Symbol Search
-    --  - and more!
-    --
-    -- Thus, Language Servers are external tools that must be installed separately from
-    -- Neovim. This is where `mason` and related plugins come into play.
-    --
-    -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-    -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-    --  This function gets run when an LSP attaches to a particular buffer.
-    --    That is to say, every time a new file is opened that is associated with
-    --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-    --    function will be executed to configure the current buffer
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        -- NOTE: Remember that Lua is a real programming language, and as such it is possible
-        -- to define small helper and utility functions so you don't have to repeat yourself.
-        --
-        -- In this case, we create a function that lets us more easily define mappings specific
-        -- for LSP related items. It sets the mode, buffer and description for us each time.
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
+
+        local function styled_diagnostic_goto(direction) -- Custom diagnostic navigation with styled floating windows
+          return function() -- Navigate to next/previous diagnostic
+            if direction == 'next' then
+              vim.diagnostic.jump { count = 1 }
+            else
+              vim.diagnostic.jump { count = -1 }
+            end
+
+            local _, winid = vim.diagnostic.open_float {
+              scope = 'cursor',
+              source = true,
+              focusable = false,
+              border = 'rounded',
+              close_events = {
+                'CursorMoved',
+                'CursorMovedI',
+                'BufHidden',
+                'InsertCharPre',
+                'WinLeave',
+              },
+            }
+            if winid then -- Apply the same styling as CursorHold autocommand
+              vim.api.nvim_win_set_config(winid, {
+                border = 'rounded',
+                style = 'minimal',
+              })
+              vim.api.nvim_set_option_value('winhighlight', 'NormalFloat:TransparentNormal,FloatBorder:TransparentBorder', { win = winid })
+            end
+          end
+        end
+
+        map(']d', styled_diagnostic_goto 'next', 'Styled Next diagnostic')
+        map('[d', styled_diagnostic_goto 'prev', 'Styled Previous diagnostic')
 
         vim.api.nvim_create_autocmd({ 'CursorHold' }, {
           pattern = '*',
@@ -71,9 +60,12 @@ return {
                 return
               end
             end
-            vim.diagnostic.open_float {
+            -- Open diagnostic float and capture window ID
+            local _, winid = vim.diagnostic.open_float {
               scope = 'cursor',
+              source = true,
               focusable = false,
+              border = 'rounded',
               close_events = {
                 'CursorMoved',
                 'CursorMovedI',
@@ -82,18 +74,24 @@ return {
                 'WinLeave',
               },
             }
+
+            if winid then -- override window styles to get transparent effect
+              vim.api.nvim_win_set_config(winid, {
+                border = 'rounded',
+                style = 'minimal',
+              })
+              vim.api.nvim_set_option_value('winhighlight', 'NormalFloat:TransparentNormal,FloatBorder:TransparentBorder', { win = winid })
+            end
           end,
         })
 
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+        map('gd', require('telescope.builtin').lsp_definitions, 'Telescope [G]oto [D]efinition')
         -- Find references for the word under your cursor.
         -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
         -- Alternative (use trouble)
-
         -- jump to next and previous item
         local function troubleJump(direction, mode)
           local trouble = require 'trouble'
@@ -188,18 +186,43 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oggle Inlay [H]ints')
         end
+
+        -- When the client is Biome, add an automatic event on
+        -- save that runs Biome's "source.fixAll.biome" code action.
+        -- This takes care of things like JSX props sorting and
+        -- removing unused imports.
+        if client and client.name == 'biome' then
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            group = vim.api.nvim_create_augroup('BiomeFixAll', { clear = true }),
+            callback = function()
+              vim.lsp.buf.format {
+                filter = function(c)
+                  return c.name == 'biome'
+                end,
+              }
+              vim.lsp.buf.code_action {
+                context = {
+                  only = { 'source.fixAll.biome' },
+                  diagnostics = {},
+                },
+                apply = true,
+              }
+            end,
+          })
+        end
       end,
     })
 
-    -- Change diagnostic symbols in the sign column (gutter)
-    if vim.g.have_nerd_font then
-      local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
-      local diagnostic_signs = {}
-      for type, icon in pairs(signs) do
-        diagnostic_signs[vim.diagnostic.severity[type]] = icon
-      end
-      vim.diagnostic.config { signs = { text = diagnostic_signs } }
-    end
+    vim.diagnostic.config {
+      signs = vim.g.have_nerd_font and {
+        text = {
+          [vim.diagnostic.severity.ERROR] = '󰅚 ',
+          [vim.diagnostic.severity.WARN] = '󰀪 ',
+          [vim.diagnostic.severity.INFO] = '󰋽 ',
+          [vim.diagnostic.severity.HINT] = '󰌶 ',
+        },
+      } or {},
+    }
 
     -- -- LSP servers and clients are able to communicate to each other what features they support.
     -- --  By default, Neovim doesn't support everything that is in the LSP specification.

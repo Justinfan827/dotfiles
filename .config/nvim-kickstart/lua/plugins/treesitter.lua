@@ -5,6 +5,7 @@ return { -- Highlight, edit, and navigate code
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
     ensure_installed = {
+      'gitcommit',
       'regex',
       'bash',
       'c',
@@ -75,4 +76,3 @@ return { -- Highlight, edit, and navigate code
   --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
   --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 }
-
