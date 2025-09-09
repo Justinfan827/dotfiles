@@ -1,89 +1,319 @@
 {
-  "window.commandCenter": true,
-  "workbench.iconTheme": "gruvbox-material-icon-theme",
-  "vim.useSystemClipboard": true,
-  "vim.insertModeKeyBindings": [
-    {
-      "before": ["k", "j"],
-      "after": ["<Esc>"]
-    }
-  ],
-  "vim.normalModeKeyBindings": [
-    {
-      "before": [";"],
-      "after": [":"]
-    },
-    {
-      "before": ["H"],
-      "after": ["^"]
-    },
-    {
-      "before": ["L"],
-      "after": ["$"]
-    },
-    {
-      "before": ["]", "d"],
-      "commands": ["editor.action.marker.nextInFiles"],
-      "silent": true
-    },
-    {
-      "before": ["[", "d"],
-      "commands": ["editor.action.marker.prevInFiles"],
-      "silent": true
-    }
-  ],
-  "editor.cursorBlinking": "solid",
-  "editor.lineNumbers": "relative",
-  "editor.fontFamily": "Geist Mono",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  // https://github.com/getcursor/cursor/issues/1570
-  "workbench.activityBar.orientation": "vertical",
-  "go.toolsManagement.autoUpdate": true,
-  // I use "goimports" instead of "gofmt"
-  // because it does the same thing but also formats imports
-  "go.formatTool": "goimports",
-  // go-specific settings
-  "gopls": {
-    "ui.semanticTokens": false,
-    "build.buildFlags": ["-tags=integration"]
-  },
-  "[typescriptreact]": {
-    "editor.formatOnSave": true
-  },
-  "[typescript]": {
-    "editor.formatOnSave": true
-  },
-  "[go]": {
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "always"
-    },
-    "editor.defaultFormatter": "golang.go"
-  },
-  "[go.mod]": {
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "always"
-    }
-  },
-  // Open in github!
-  "openInGitHub.github.protocol": "https", // Custom URL protocol
-  "openInGitHub.github.domain": "github.com", // Custom GitHub domain
-  "openInGitHub.remote.name": "origin", // Name of the remote repository
-  "openInGitHub.remote.branch": "main", // Name of the remote branch
-  "openInGitHub.useLocalDomain": true, // Use the local domain instead of the fixed github domain
-  "openInGitHub.useLocalBranch": true, // Use the local branch instead of the fixed remote branch
-  "openInGitHub.useLocalRange": true, // Highlight the local selection range, if there's one
-  "openInGitHub.useLocalLine": false,
-  "gruvboxMaterial.italicKeywords": true,
-  "files.autoSave": "afterDelay",
-  "workbench.colorCustomizations": {},
-  "terminal.integrated.gpuAcceleration": "off",
-  "window.systemColorTheme": "dark",
-  "window.autoDetectColorScheme": false,
-  "window.titleBarStyle": "custom",
-  "workbench.colorTheme": "Gruvbox Material Dark" // Highlight the local line if there's no selection range
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"vim.foldfix": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"emmet.showExpandedAbbreviation": "never",
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[go.mod]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "always"
+		},
+		"editor.formatOnSave": true
+	},
+	"[go]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "always"
+		},
+		"editor.defaultFormatter": "golang.go",
+		"editor.formatOnSave": true
+	},
+	"custom-ui-style.electron": {
+		"titleBarStyle": "hiddenInset",
+		"trafficLightPosition": {
+			"x": 20,
+			"y": 16
+		}
+	},
+	"custom-ui-style.stylesheet": {
+		".editor-widget.find-widget": "box-shadow: none; border-radius: 4px",
+		".monaco-action-bar.quick-input-inline-action-bar": "display: none",
+		".monaco-editor .cursors-layer .cursor": "background-image: linear-gradient(135deg, #ffaffc 10%, #DA70D6 100%)",
+		".monaco-editor .scroll-decoration": "display: none",
+		".monaco-list-row.focused": "outline: none !important",
+		".monaco-scrollable-element > .shadow.top": "display: none",
+		".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
+		".monaco-workbench .part.editor > .content .editor-group-container > .title > .label-container > .title-label": "padding-left: 60px",
+		".monaco-workbench .part.editor > .content .editor-group-container > .title.title-border-bottom:after": "display: none",
+		".notification-toast": "box-shadow: none !important",
+		".quick-input-list .scrollbar": "display: none",
+		".quick-input-titlebar": "background: #100B15 !important",
+		".quick-input-widget": "top: 25vh !important",
+		".quick-input-widget.show-file-icons": "box-shadow: none !important",
+		".sidebar": "border: none !important",
+		".sidebar .title-label": "padding: 0 !important",
+		".title .monaco-icon-label.file-icon": "margin: 0 60px",
+		".title .monaco-icon-label:after": "margin-right: 0",
+		".title-actions": "display: none !important",
+		".title.show-file-icons .label-container .monaco-icon-label.file-icon": "justify-content: center; padding: 0 !important"
+	},
+	"debug.disassemblyView.showSourceCode": false, // Highlight the local line if there's no selection range,
+	"editor.cursorBlinking": "solid",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.detectIndentation": false,
+	"editor.fontFamily": "Geist Mono",
+	"editor.fontLigatures": true,
+	"editor.guides.indentation": true,
+	"editor.hideCursorInOverviewRuler": true,
+	"editor.lineNumbers": "relative",
+	"editor.occurrencesHighlight": "off",
+	"editor.overviewRulerBorder": false,
+	"editor.quickSuggestions": {
+		"other": "off"
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+	"editor.renderLineHighlight": "line",
+	"editor.renderWhitespace": "trailing",
+	"editor.scrollbar.horizontal": "hidden",
+	"editor.scrollbar.vertical": "hidden",
+	"editor.selectionHighlight": false,
+	"editor.showFoldingControls": "never",
+	"editor.tabSize": 2,
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": "comment",
+				"settings": {
+					"fontStyle": "italic"
+				}
+			}
+		]
+	},
+	"explorer.compactFolders": false,
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+	"extensions.ignoreRecommendations": true,
+	// I use "goimports" instead of "gofmt"
+	// because it does the same thing but also formats imports
+	"go.formatTool": "goimports",
+	"go.toolsManagement.autoUpdate": true,
+	// go-specific settings
+	"gopls": {
+		"build.buildFlags": ["-tags=integration"],
+		"ui.semanticTokens": false
+	},
+	"gruvboxMaterial.italicKeywords": true,
+	"material-icon-theme.hidesExplorerArrows": true,
+	"openInGitHub.github.domain": "github.com", // Custom GitHub domain
+	// Open in github!
+	"openInGitHub.github.protocol": "https", // Custom URL protocol
+	"openInGitHub.remote.branch": "main", // Name of the remote branch
+	"openInGitHub.remote.name": "origin", // Name of the remote repository
+	"openInGitHub.useLocalBranch": true, // Use the local branch instead of the fixed remote branch
+	"openInGitHub.useLocalDomain": true, // Use the local domain instead of the fixed github domain
+	"openInGitHub.useLocalLine": false,
+	"openInGitHub.useLocalRange": true,
+	"vim.insertModeKeyBindings": [
+		{
+			"after": ["<Esc>"],
+			"before": ["k", "j"]
+		},
+		{
+			"before": ["c", "l", "l"],
+			"commands": ["editor.action.insertSnippet"]
+		}
+	],
+	"vim.leader": "space",
+	"vim.normalModeKeyBindingsNonRecursive": [
+		{
+			"before": ["<leader>", "c", "e"],
+			"commands": ["editor.action.enableCppGlobally"]
+		},
+		{
+			"before": ["<leader>", "c", "d"],
+			"commands": ["editor.cpp.disableenabled"]
+		},
+		{
+			"before": ["<C-m>"],
+			"commands": ["workbench.action.toggleSidebarVisibility"]
+		},
+		{
+			"before": ["r", "n"],
+			"commands": ["editor.action.rename"]
+		},
+		{
+			"before": ["<C-e>"],
+			"commands": ["cursor-harpoon.editEditors"]
+		},
+		{
+			"before": ["<leader>", "1"],
+			"commands": ["cursor-harpoon.gotoEditor1"]
+		},
+		{
+			"before": ["<leader>", "2"],
+			"commands": ["cursor-harpoon.gotoEditor2"]
+		},
+		{
+			"before": ["<leader>", "3"],
+			"commands": ["cursor-harpoon.gotoEditor3"]
+		},
+		{
+			"before": [",", "/"],
+			"commands": [
+				{
+					"command": "find-it-faster.findFiles"
+				}
+			]
+		},
+		{
+			"before": ["<CR>"],
+			"after": ["G"]
+		},
+		{
+			"before": ["<leader>", "b", "d"],
+			"commands": ["workbench.action.closeActiveEditor"]
+		},
+		{
+			"before": ["<leader>", "b", "o"],
+			"commands": ["workbench.action.closeOtherEditors"]
+		},
+		{
+			"before": ["<C-p>"],
+			"commands": ["workbench.action.quickOpen"]
+		},
+		{
+			"before": ["g", "d"],
+			"commands": ["editor.action.revealDefinition"]
+		},
+		{
+			"before": ["g", "r"],
+			"commands": ["editor.action.goToReferences"]
+		},
+		{
+			"before": ["g", "t"],
+			"commands": ["editor.action.goToTypeDefinition"]
+		},
+		{
+			"before": ["g", "i"],
+			"commands": ["editor.action.goToImplementation"]
+		},
+		{
+			"before": ["<leader>", "s", "f"],
+			"commands": ["workbench.action.findInFiles"]
+		},
+		{
+			"before": ["<leader>", "<leader>"],
+			"commands": ["workbench.action.showAllEditors"]
+		},
+		{
+			"before": ["<leader>", "f", "f"],
+			"commands": ["workbench.action.terminal.toggleTerminal"]
+		},
+		{
+			"before": ["s", "s"],
+			"commands": ["workbench.action.splitEditorDown"]
+		},
+		{
+			"before": ["s", "v"],
+			"commands": ["workbench.action.splitEditorRight"]
+		},
+		{
+			"before": ["], c"],
+			"commands": ["workbench.action.editor.nextChange"]
+		},
+		{
+			"before": ["[", "c"],
+			"commands": ["workbench.action.editor.previousChange"]
+		},
+		{
+			"before": ["<leader>", "c", "a"],
+			"commands": ["editor.action.codeAction"]
+		},
+		{
+			"before": ["<leader>", "a"],
+			"commands": ["cursor-harpoon.addEditor"]
+		},
+		{
+			"before": ["<leader>", "e"],
+			"commands": ["cursor-harpoon.editEditors"]
+		},
+		{
+			"before": ["<leader>", "p", "e"],
+			"commands": ["cursor-harpoon.editorQuickPick"]
+		},
+		{
+			"before": ["<leader>", "1"],
+			"commands": ["cursor-harpoon.gotoEditor1"]
+		},
+		{
+			"after": [":"],
+			"before": [";"]
+		},
+		{
+			"after": ["^"],
+			"before": ["H"]
+		},
+		{
+			"after": ["$"],
+			"before": ["L"]
+		},
+		{
+			"before": ["]", "d"],
+			"commands": ["editor.action.marker.next"],
+			"silent": true
+		},
+		{
+			"before": ["[", "d"],
+			"commands": ["editor.action.marker.prev"],
+			"silent": true
+		}
+	],
+	"vim.useSystemClipboard": true,
+	"vim.visualModeKeyBindings": [
+		{
+			"after": ["^"],
+			"before": ["H"]
+		},
+		{
+			"after": ["$"],
+			"before": ["L"]
+		}
+	],
+	"window.titleBarStyle": "native",
+	"window.zoomLevel": 3,
+	"workbench.activityBar.location": "hidden",
+	// https://github.com/getcursor/cursor/issues/1570
+	"workbench.activityBar.orientation": "vertical",
+	"workbench.colorCustomizations": {},
+	"workbench.editor.showTabs": "single",
+	"workbench.statusBar.visible": true,
+	"workbench.tree.enableStickyScroll": false,
+	"workbench.tree.indent": 8,
+	"workbench.tree.renderIndentGuides": "none",
+	"gitlens.mode.active": "zen",
+	"githubPullRequests.remotes": [],
+	"files.autoSave": "afterDelay",
+	"background.windowBackgrounds": [
+		"/Users/justinfan/.config/kitty/gradient.png"
+	],
+	"background.backgroundBlur": ["100", "0", "0", "0"],
+	"background.backgroundOpacity": [0.1, 0.1, 0.1, 0.1],
+	"gruvboxMaterial.highContrast": false,
+	"gruvboxMaterial.darkContrast": "medium",
+	"background.autoInstall": false,
+	"editor.stickyScroll.enabled": false,
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.colorTheme": "Gruvbox Material Dark",
+	"[python]": {
+		"editor.defaultFormatter": "mikoz.black-py"
+	},
+	"tailwind-fold.autoFold": false,
+	"workbench.layoutControl.enabled": false
 }
